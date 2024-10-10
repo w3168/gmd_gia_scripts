@@ -57,7 +57,7 @@ class SpadaCylindrical2d(Weerdesteijn2d):
 
     def setup_bcs(self):
         self.stokes_bcs = {
-            self.top_id: {'normal_stress': self.ice_load, 'free_surface': {'exterior_density': self.rho_ice*self.disc}},
+            self.top_id: {'normal_stress': self.ice_load, 'free_surface': {'delta_rho_fs': self.density - self.rho_ice*self.disc}},
             self.bottom_id: {'un': 0}
         }
 

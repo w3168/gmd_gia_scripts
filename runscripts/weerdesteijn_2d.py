@@ -217,15 +217,18 @@ class Weerdesteijn2d:
         return [1e17, 1e-2, 1e-2, 2e-2, 0]
 
     def initialise_background_field(self, field, background_values):
+        depth = self.initialise_depth()
         if self.vertical_tanh_width is None:
             for i in range(0, len(background_values)-1):
-                field.interpolate(conditional(self.X[self.vertical_component] >= self.radius_values[i+1] - self.radius_values[0],
-                                  conditional(self.X[self.vertical_component] <= self.radius_values[i] - self.radius_values[0],
+                field.interpolate(conditional(depth >= self.radius_values[i+1] - self.radius_values[0],
+                                  conditional(depth <= self.radius_values[i] - self.radius_values[0],
                                   background_values[i], field), field))
+            # Catches cases where mesh just sticking above z=0 surface by 1e-9 and below depth of mantle...
+            field.interpolate(conditional(depth > 0, background_values[0], field))
+            field.interpolate(conditional(depth  < -self.D, background_values[-2], field))
         else:
             profile = background_values[0]
             sharpness = 1 / self.vertical_tanh_width
-            depth = self.initialise_depth()
             for i in range(1, len(background_values)-1):
                 centre = self.radius_values[i] - self.radius_values[0]
                 mag = background_values[i] - background_values[i-1]
