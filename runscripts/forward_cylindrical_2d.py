@@ -5,7 +5,7 @@ from spada_cylindrical_2d import SpadaCylindrical2d
 from gadopt.utility import bivariate_gaussian
 
 class ForwardCylindrical2d(SpadaCylindrical2d):
-    name = "forward-cylindrical-heterogenousviscosity-minvisc1e-3-nz320nx50km"
+    name = "forward-cylindrical-heterogenousviscosity-minvisc1e-3"
     vertical_component = 1
 
     def __init__(self, heterogenous_viscosity=True, **kwargs):
@@ -32,6 +32,9 @@ class ForwardCylindrical2d(SpadaCylindrical2d):
     def viscosity_values(self):
         # Log10(viscosity)
         return [2, -2, -2, -1.698970004, 0]
+    
+    def viscosity_expression(self):
+        return 1e23*10**self.viscosity
     
     def setup_heterogenous_viscosity(self):
         self.heterogenous_viscosity_field = Function(self.viscosity.function_space())
@@ -71,7 +74,7 @@ class ForwardCylindrical2d(SpadaCylindrical2d):
     
     def setup_bcs(self):
         self.stokes_bcs = {
-            self.top_id: {'normal_stress': self.ice_load, 'free_surface': {'exterior_density': self.rho_ice*(self.disc1+self.disc2)}},
+            self.top_id: {'normal_stress': self.ice_load, 'free_surface': {'delta_rho_fs': self.density - self.rho_ice*(self.disc1+self.disc2)}},
             self.bottom_id: {'un': 0}
         }
 

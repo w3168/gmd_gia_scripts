@@ -153,11 +153,12 @@ class Weerdesteijn2d:
 
         self.setup_nullspaces()
 
-        self.stokes_solver = ViscoelasticStokesSolver(m, 1e23*self.viscosity, self.shear_modulus, self.density,
+        self.stokes_solver = ViscoelasticStokesSolver(m, self.viscosity_expression(), self.shear_modulus, self.density,
                                                       self.deviatoric_stress, self.displacement, approximation,
                                                       self.dt, bcs=self.stokes_bcs,
                                                       nullspace=self.Z_nullspace, transpose_nullspace=self.Z_nullspace,
-                                                      near_nullspace=self.Z_near_nullspace)
+                                                      near_nullspace=self.Z_near_nullspace
+                                                      , solver_parameters='direct')
 
         self.prefactor_prestress = Function(W, name='prefactor prestress').interpolate(self.stokes_solver.prefactor_prestress)
         self.effective_viscosity = Function(W, name='effective viscosity').interpolate(self.stokes_solver.effective_viscosity)
@@ -215,6 +216,9 @@ class Weerdesteijn2d:
         # Log10(viscosity) using math log10 function
         # return [17, -2, -2, -1.6989700043360187, 0]
         return [1e17, 1e-2, 1e-2, 2e-2, 0]
+
+    def viscosity_expression(self):
+        return 1e23*self.viscosity
 
     def initialise_background_field(self, field, background_values):
         depth = self.initialise_depth()

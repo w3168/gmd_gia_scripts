@@ -9,9 +9,11 @@ base = Path(__file__).parent.resolve()
 def expected_displacement(benchmark):
     return np.loadtxt(base / f"expected-displacement-{benchmark}.dat")[:, 1]
 
-
+# All cases run with direct solvers 
+# forward-cylindrical-heterogenousvisc.... run with 8 cores
 cases = [("weerdesteijn-2d"),
-         ("spada-cylindrical-2d-dx500km-nz80-dt50years")
+         ("spada-cylindrical-2d-dx500km-nz80-dt50years"),
+         ("forward-cylindrical-heterogenousviscosity-minvisc1e-3-dx250km-nz80-dt50years")
          ]
 
 
