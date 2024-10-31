@@ -1,0 +1,830 @@
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+weerdesteijn-3d-Dale_weak832_assembledschur13
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+Number of Velocity DOF: 3557763
+Number of Pressure DOF: 152561
+Number of Velocity and Pressure DOF: 3710324
+max timesteps 20
+dump_period 200
+dt 1577880000.0
+Simulation start time 0 years
+---------------
+A is symmetric?  False
+---------------
+  0 SNES Function norm 0.000000000000e+00
+tsfc:WARNING Estimated quadrature degree 13 more than tenfold greater than any argument/coefficient degree (max (1, 1))
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_ATOL iterations 0
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 0.000000000000e+00
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_ATOL iterations 0
+  1 SNES Function norm 0.000000000000e+00
+Greatest (-ve) displacement 0.0
+  0 SNES Function norm 5.806421594064e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.901475813878e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 5.821555285672e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.744508093057e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.566953083804e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      4 KSP Residual norm 4.528071761094e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.050460138811e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.424499206116e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.174067059131e-02
+Greatest (-ve) displacement -0.0032430211874915744
+  0 SNES Function norm 6.079668591069e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.861795635587e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 5.843096454060e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.735958289233e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.589673155955e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      4 KSP Residual norm 4.637739833506e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.041046036538e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.476432446892e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.353333075560e-03
+Greatest (-ve) displacement -0.006724896493954609
+  0 SNES Function norm 6.189460014330e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.838292881519e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 5.869591744864e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.731038016285e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.616298346169e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      4 KSP Residual norm 4.744609837722e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.034148533364e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.490642076360e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.399280501256e-03
+Greatest (-ve) displacement -0.010450408550335858
+  0 SNES Function norm 6.259843217155e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.815504145571e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 5.900190114082e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.725800758446e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.655229749439e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      4 KSP Residual norm 4.847161829731e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.028978504394e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.493128830777e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.388529319742e-03
+Greatest (-ve) displacement -0.014418201481231616
+  0 SNES Function norm 6.321168212959e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.793931527793e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 5.934191668260e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.720580042051e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.703368139885e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      4 KSP Residual norm 4.944573631884e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.024882704432e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.491606693665e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.376820896331e-03
+Greatest (-ve) displacement -0.018626330206096345
+  0 SNES Function norm 6.379310916021e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.773577283293e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 5.970911461444e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.715462129407e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.758014034693e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      4 KSP Residual norm 5.034543298050e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.021363017860e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.488738051795e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.364822050964e-03
+Greatest (-ve) displacement -0.02307267581240137
+  0 SNES Function norm 6.435827123068e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.754377389464e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.009745639045e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.710472785223e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.816907397262e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      4 KSP Residual norm 5.115560989379e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.018095846826e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.485603894068e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.352854922839e-03
+Greatest (-ve) displacement -0.027755127442989674
+  0 SNES Function norm 6.491189914953e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.736255701388e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.050180378877e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.705615907137e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.878250813921e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      4 KSP Residual norm 5.187088485923e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.014908882443e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.482647981316e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.341017569937e-03
+Greatest (-ve) displacement -0.03267162416352477
+  0 SNES Function norm 6.545534602326e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.719137506409e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.091783676284e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.700886994725e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 2.940659636018e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.249208431253e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.011696986502e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.480029628432e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.329367603860e-03
+Greatest (-ve) displacement -0.037820156792196746
+  0 SNES Function norm 6.598881673007e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.702953029246e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.134194385258e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.696278425840e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.003093893058e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.302575210351e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.008445027863e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.477834348746e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.317839683314e-03
+Greatest (-ve) displacement -0.04319876181898012
+  0 SNES Function norm 6.651213711895e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.687638076583e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.177111785644e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.691781693029e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.064790804199e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.347927351278e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.005134440660e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.476028146328e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.306507782663e-03
+Greatest (-ve) displacement -0.0488055158338939
+  0 SNES Function norm 6.702503972709e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.673133842657e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.220286123167e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.687388376028e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.125205113350e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.386125179784e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 1.001771662750e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.474571663570e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.295344415471e-03
+Greatest (-ve) displacement -0.05463853147395717
+  0 SNES Function norm 6.752727431104e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.659386481100e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.263510565293e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.683090553682e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.183959313623e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.418023674301e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 9.983691385127e-08
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.473417260405e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.284344773072e-03
+Greatest (-ve) displacement -0.06069595467915709
+  0 SNES Function norm 6.801864775310e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.646346644222e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.306614370080e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.678880959518e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.240803534838e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.444425931575e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 9.949408779353e-08
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.472517249260e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.273503559497e-03
+Greatest (-ve) displacement -0.06697596275830664
+  0 SNES Function norm 6.849903512187e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.633969048292e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.349457124079e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.674753013928e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.295583919785e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.466060969787e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 9.915002533692e-08
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.471827631473e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.262815445993e-03
+Greatest (-ve) displacement -0.07347676291985229
+  0 SNES Function norm 6.896837847156e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.622212079932e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.391923903946e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.670700799691e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.348218059806e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.483576326187e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 9.880590443081e-08
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.471309531443e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.252275281837e-03
+Greatest (-ve) displacement -0.08019659106192392
+  0 SNES Function norm 6.942668065340e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.611037444465e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.433921219094e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.666719013080e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.398676110575e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.497539101860e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 9.846271476146e-08
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.470929477742e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.241878190722e-03
+Greatest (-ve) displacement -0.08713371070973858
+  0 SNES Function norm 6.987399742553e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.600409852776e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.475373609877e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.662802906548e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.446966384781e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.508441432594e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 9.812126207574e-08
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.470659135360e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.231619602619e-03
+Greatest (-ve) displacement -0.09428641204306118
+  0 SNES Function norm 7.031042936827e+02
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      Residual norms for ViscoelasticStokesSolver_fieldsplit_1_ solve.
+      0 KSP Residual norm 6.590296742360e-04
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      1 KSP Residual norm 6.516220793821e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      2 KSP Residual norm 1.658948230852e-05
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      3 KSP Residual norm 3.493124426025e-06
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 22
+      4 KSP Residual norm 5.516707942043e-07
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      5 KSP Residual norm 9.778218739332e-08
+        Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+      6 KSP Residual norm 1.470474804804e-08
+      Linear ViscoelasticStokesSolver_fieldsplit_0_ solve converged due to CONVERGED_RTOL iterations 21
+  1 SNES Function norm 1.221495257287e-03
+Greatest (-ve) displacement -0.10165301098576053
+****************************************************************************************************************************************************************
+***                                WIDEN YOUR WINDOW TO 160 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document                                 ***
+****************************************************************************************************************************************************************
+
+------------------------------------------------------------------ PETSc Performance Summary: ------------------------------------------------------------------
+
+weerdesteijn_3d.py on a default named gadi-cpu-spr-0170.gadi.nci.org.au with 13 processes, by ws9229 on Wed Oct 30 14:07:43 2024
+Using Petsc Release Version 3.22.0, unknown 
+
+                         Max       Max/Min     Avg       Total
+Time (sec):           3.177e+03     1.000   3.177e+03
+Objects:              0.000e+00     0.000   0.000e+00
+Flops:                1.027e+13     1.024   1.014e+13  1.319e+14
+Flops/sec:            3.233e+09     1.024   3.192e+09  4.150e+10
+MPI Msg Count:        6.191e+05     2.974   3.830e+05  4.979e+06
+MPI Msg Len (bytes):  2.300e+10     2.495   4.408e+04  2.195e+11
+MPI Reductions:       2.028e+04     1.000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flop ------  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total    Count   %Total     Avg         %Total    Count   %Total
+ 0:      Main Stage: 3.1716e+01   1.0%  4.6280e+09   0.0%  7.987e+03   0.2%  1.774e+04        0.1%  2.610e+02   1.3%
+ 1:    stokes_solve: 3.1455e+03  99.0%  1.3185e+14 100.0%  4.971e+06  99.8%  4.413e+04       99.9%  2.000e+04  98.6%
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flop: Max - maximum over all processors
+                  Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   AvgLen: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %F - percent flop in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flop over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flop                              --- Global ---  --- Stage ----  Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   AvgLen  Reduct  %T %F %M %L %R  %T %F %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+BuildTwoSided         33 1.0 1.0550e-03 3.3 0.00e+00 0.0 1.0e+03 4.0e+00 3.3e+01  0  0  0  0  0   0  0 13  0 13    -0
+SFSetGraph            37 1.0 4.4430e-04 2.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+SFSetUp               33 1.0 1.5893e-03 1.3 0.00e+00 0.0 2.1e+03 4.0e+02 3.3e+01  0  0  0  0  0   0  0 26  1 13    -0
+SFBcastBegin         134 1.0 2.3954e-02 6.8 0.00e+00 0.0 5.3e+03 2.6e+04 0.0e+00  0  0  0  0  0   0  0 67 99  0    -0
+SFBcastEnd           134 1.0 3.5183e-02 3.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+SFReduceBegin         11 1.0 1.0928e-04 1.8 0.00e+00 0.0 4.4e+02 8.9e+02 0.0e+00  0  0  0  0  0   0  0  5  0  0    -0
+SFReduceEnd           11 1.0 8.5453e-04 4.8 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+SFFetchOpBegin         2 1.0 8.5010e-06 2.9 0.00e+00 0.0 7.5e+01 2.1e+02 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+SFFetchOpEnd           2 1.0 8.0550e-05 3.7 0.00e+00 0.0 7.5e+01 2.1e+02 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+SFCreateEmbed          2 1.0 3.0733e-04 1.1 0.00e+00 0.0 6.2e+01 3.9e+02 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+SFDistSection         19 1.0 1.4651e-03 1.2 0.00e+00 0.0 1.8e+03 6.8e+02 2.2e+01  0  0  0  0  0   0  0 23  1  8    -0
+SFSectionSF           19 1.0 9.6104e-04 1.3 0.00e+00 0.0 9.7e+02 4.0e+02 1.9e+01  0  0  0  0  0   0  0 12  0  7    -0
+SFPack               147 1.0 4.9244e-03 2.7 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+SFUnpack             149 1.0 3.6665e-03 4.5 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+VecDot                30 1.0 2.4836e-02 1.0 1.72e+07 1.1 0.0e+00 0.0e+00 3.0e+01  0  0  0  0  0   0  5  0  0 11  8595
+VecNorm                6 1.0 5.5245e-02 1.0 3.43e+06 1.1 0.0e+00 0.0e+00 6.0e+00  0  0  0  0  0   0  1  0  0  2   773
+VecScale               6 1.0 9.1713e-04 1.1 1.72e+06 1.1 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0 23275
+VecAXPY               14 1.0 8.6371e-03 1.1 8.01e+06 1.1 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  2  0  0  0 11534
+VecNormalize           6 1.0 5.6097e-02 1.0 5.15e+06 1.1 0.0e+00 0.0e+00 6.0e+00  0  0  0  0  0   0  1  0  0  2  1142
+DMPlexBuFrCeLi         1 1.0 7.3985e-04 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 1.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+DMPlexBuCoFrCeLi       1 1.0 2.3639e-04 4.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+Mesh Partition         2 1.0 7.6098e-02 1.0 0.00e+00 0.0 6.4e+02 8.1e+02 2.5e+01  0  0  0  0  0   0  0  8  0 10    -0
+Mesh Migration         2 1.0 5.0868e-03 1.0 0.00e+00 0.0 2.1e+03 1.0e+03 9.2e+01  0  0  0  0  0   0  0 26  1 35    -0
+DMPlexPartSelf         1 1.0 2.0836e-03 1170.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+DMPlexPartLblInv       2 1.0 2.7104e-03 4.8 0.00e+00 0.0 0.0e+00 0.0e+00 6.0e+00  0  0  0  0  0   0  0  0  0  2    -0
+DMPlexPartLblSF        2 1.0 7.1728e-04 1.1 0.00e+00 0.0 1.2e+02 7.8e+02 2.0e+00  0  0  0  0  0   0  0  2  0  1    -0
+DMPlexPartStrtSF       2 1.0 7.4557e-04 1.5 0.00e+00 0.0 6.2e+01 3.1e+03 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+DMPlexPointSF          2 1.0 1.2388e-03 1.2 0.00e+00 0.0 7.4e+01 6.0e+03 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+DMPlexInterp           1 1.0 1.0531e-02 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 2.0e+00  0  0  0  0  0   0  0  0  0  1    -0
+DMPlexDistribute       1 1.0 8.0557e-02 1.0 0.00e+00 0.0 4.8e+02 5.5e+03 5.3e+01  0  0  0  0  0   0  0  6  2 20    -0
+DMPlexDistCones        2 1.0 1.0286e-03 1.0 0.00e+00 0.0 3.7e+02 2.0e+03 4.0e+00  0  0  0  0  0   0  0  5  1  2    -0
+DMPlexDistLabels       2 1.0 2.2474e-03 1.0 0.00e+00 0.0 9.9e+02 1.1e+03 6.2e+01  0  0  0  0  0   0  0 12  1 24    -0
+DMPlexDistOvrlp        1 1.0 2.0853e-03 1.0 0.00e+00 0.0 2.3e+03 1.8e+02 7.0e+01  0  0  0  0  0   0  0 29  0 27    -0
+DMPlexDistField        3 1.0 7.8872e-04 1.1 0.00e+00 0.0 5.6e+02 3.7e+02 8.0e+00  0  0  0  0  0   0  0  7  0  3    -0
+DMPlexStratify         4 1.0 7.6177e-03 15.6 0.00e+00 0.0 0.0e+00 0.0e+00 4.0e+00  0  0  0  0  0   0  0  0  0  2    -0
+DMPlexSymmetrize       4 1.0 8.6044e-04 16.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake              1 1.0 3.1706e+03 1.0 1.03e+13 1.0 5.0e+06 4.4e+04 2.0e+04 100 100 100 100 100 Multiple stages 41586
+firedrake.__init__       1 1.0 5.2439e+00 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0  15  0  0  0  0    -0
+firedrake.utility_meshes.SquareMesh       1 1.0 4.4596e-01 4.3 0.00e+00 0.0 4.8e+02 5.5e+03 6.4e+01  0  0  0  0  0   1  0  6  2 25    -0
+firedrake.utility_meshes.RectangleMesh       1 1.0 4.4595e-01 4.3 0.00e+00 0.0 4.8e+02 5.5e+03 6.4e+01  0  0  0  0  0   1  0  6  2 25    -0
+CreateMesh             5 1.0 9.1090e-02 1.0 0.00e+00 0.0 5.1e+03 6.9e+02 1.6e+02  0  0  0  0  1   0  0 64  3 62    -0
+firedrake.mesh.MeshTopology._set_partitioner       1 1.0 3.2516e-04 25.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.mesh.MeshTopology._get_partitioner       1 1.0 1.4940e-06 1.8 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+CreateExtMesh          1 1.0 1.7206e+00 1.0 0.00e+00 0.0 4.8e+03 2.0e+02 1.1e+02  0  0  0  0  1   5  0 60  1 43    -0
+Mesh: numbering        1 1.0 1.2553e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 4.0e+00  0  0  0  0  0   0  0  0  0  2    -0
+Mesh: reorder          1 1.0 1.7147e-04 1.6 0.00e+00 0.0 0.0e+00 0.0e+00 2.0e+00  0  0  0  0  0   0  0  0  0  1    -0
+CreateFunctionSpace       6 1.0 1.3892e-01 1.0 0.00e+00 0.0 1.0e+02 2.6e+02 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+firedrake.functionspace.make_scalar_element       9 1.0 7.8293e-04 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspaceimpl.FunctionSpace.__init__      14 1.0 1.3926e-01 1.0 0.00e+00 0.0 1.0e+02 2.6e+02 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+firedrake.functionspacedata.get_shared_data      13 1.0 1.3794e-01 1.0 0.00e+00 0.0 1.0e+02 2.6e+02 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+firedrake.functionspacedata.FunctionSpaceData.__init__      13 1.0 1.3788e-01 1.0 0.00e+00 0.0 1.0e+02 2.6e+02 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+FunctionSpaceData: CreateElement      26 1.0 1.2701e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.mesh.MeshTopology._facets       2 1.0 2.2980e-03 1.0 0.00e+00 0.0 1.0e+02 2.6e+02 0.0e+00  0  0  0  0  0   0  0  1  0  0    -0
+firedrake.mesh._Facets.__init__       4 1.0 4.8056e-04 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.dmhooks.set_function_space       2 1.0 1.9308e-05 1.5 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.mesh.ExtrudedMeshTopology.__init__       1 1.0 1.2535e-04 1.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspace.VectorFunctionSpace       2 1.0 8.0327e-03 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.mesh.ExtrudedMeshTopology.node_classes       3 1.0 6.8857e-05 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.extrusion_utils.make_extruded_coords       1 1.0 1.5811e+00 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 3.0e+00  0  0  0  0  0   5  0  0  0  1    -0
+firedrake.functionspacedata.FunctionSpaceData.get_map     276 1.0 1.4326e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+ParLoopExecute        63 1.0 1.8672e+01 1.0 3.29e+08 1.0 1.8e+03 6.0e+04 2.6e+01  1  0  0  0  0  59 92 22 74 10   228
+Parloop_Cells_wrap_pyop2_kernel_uniform_extrusion       2 1.0 1.5480e+00 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   5  0  0  0  0    -0
+pyop2.global_kernel.GlobalKernel.compile     126 1.0 1.8498e+01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0  58  0  0  0  0    -0
+PyOP2 Cache Wrapper     250 1.0 1.8881e+01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0  60  0  0  0  0    -0
+pyop2.compilation.load      24 1.0 1.8484e+01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0  58  0  0  0  0    -0
+pyop2.compilation.make_so      24 1.0 1.2142e+01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0  38  0  0  0  0    -0
+ParLoopRednBegin      63 1.0 4.9668e-04 1.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+ParLoopRednEnd        63 1.0 1.2777e-04 1.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.mesh.make_mesh_from_coordinates       1 1.0 2.7292e-04 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.Function.__init__      85 1.0 6.0368e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 5.0e+00  0  0  0  0  0   0  0  0  0  2    -0
+firedrake.functionspace.MixedFunctionSpace       1 1.0 5.2309e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspace.TensorFunctionSpace       1 1.0 4.9610e-03 1.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.Function.assign      25 1.0 7.0992e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 1.2e+01  0  0  0  0  0   0  0  0  0  5    -0
+firedrake.assign.Assigner.assign      23 1.0 6.1842e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 6.0e+00  0  0  0  0  0   0  0  0  0  2    -0
+firedrake.functionspaceimpl.WithGeometryBase.sub      15 1.0 2.0594e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.Function.interpolate      62 1.0 1.7638e+01 1.0 3.29e+08 1.0 1.8e+03 6.0e+04 2.6e+01  1  0  0  0  0  56 92 22 74 10   241
+firedrake.assemble.assemble      62 1.0 1.7617e+01 1.0 3.29e+08 1.0 1.8e+03 6.0e+04 2.6e+01  1  0  0  0  0  56 92 22 74 10   241
+firedrake.interpolation.make_interpolator     124 1.0 4.4704e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   1  0  0  0  0    -0
+firedrake.interpolation.compile_expression      23 1.0 2.1703e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   1  0  0  0  0    -0
+firedrake.interpolation.SameMeshInterpolator._interpolate      62 1.0 1.7124e+01 1.0 3.29e+08 1.0 1.8e+03 6.0e+04 2.6e+01  1  0  0  0  0  54 92 22 74 10   248
+firedrake.halo.Halo.global_to_local_begin      52 1.0 2.2634e-02 5.3 0.00e+00 0.0 2.8e+03 5.0e+04 1.0e+00  0  0  0  0  0   0  0 34 97  0    -0
+Parloop_Cells_wrap_expression_kernel     124 1.0 1.7089e+01 1.0 3.29e+08 1.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0  54 92  0  0  0   249
+Log_Event_expression_kernel 1381360 1.0 6.5502e-02 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.halo.Halo.global_to_local_end      52 1.0 3.2759e-02 4.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.constant.Constant.evaluate      69 1.0 1.5520e-04 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.constant.Constant.assign      21 1.0 7.6747e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.Function.at      62 1.0 3.6110e-04 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.nullspace.VectorSpaceBasis.orthonormalize       1 1.0 8.9403e-02 1.0 3.03e+07 1.1 0.0e+00 0.0e+00 3.6e+01  0  0  0  0  0   0  8  0  0 14  4218
+firedrake.nullspace.VectorSpaceBasis.check_orthogonality       1 1.0 1.1539e-02 1.0 8.58e+06 1.1 0.0e+00 0.0e+00 1.5e+01  0  0  0  0  0   0  2  0  0  6  9250
+firedrake.ufl_expr.TestFunction       1 1.0 1.1530e-04 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.ufl_expr.FacetNormal       5 1.0 2.7457e-05 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.bcs.BCBase.__init__      25 1.0 1.9242e-04 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspacedata.FunctionSpaceData.boundary_nodes      20 1.0 7.1486e-04 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+
+--- Event Stage 1: stokes_solve
+
+BuildTwoSided        400 1.0 2.6071e+01 3.1 0.00e+00 0.0 6.6e+03 4.0e+00 4.0e+02  1  0  0  0  2   1  0  0  0  2    -0
+BuildTwoSidedF       370 1.0 2.6451e+01 2.9 0.00e+00 0.0 1.0e+04 1.6e+06 3.7e+02  1  0  0  7  2   1  0  0  7  2    -0
+SFSetGraph            30 1.0 5.7753e-03 1.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+SFSetUp               30 1.0 7.8777e-02 1.5 0.00e+00 0.0 3.2e+03 3.5e+03 3.0e+01  0  0  0  0  0   0  0  0  0  0    -0
+SFBcastBegin       17572 1.0 4.9863e+00 2.8 0.00e+00 0.0 8.8e+05 9.9e+04 0.0e+00  0  0 18 40  0   0  0 18 40  0    -0
+SFBcastEnd         17572 1.0 1.5835e+02 63.5 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  2  0  0  0  0   2  0  0  0  0    -0
+SFReduceBegin      17578 1.0 2.8948e+00 6.3 0.00e+00 0.0 8.8e+05 9.9e+04 0.0e+00  0  0 18 39  0   0  0 18 40  0    -0
+SFReduceEnd        17578 1.0 8.8036e+01 41.2 1.29e+09 3.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0   123
+SFPack             84448 1.0 7.2802e+00 3.8 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+SFUnpack           84448 1.0 5.5318e+00 3.7 1.32e+09 2.9 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  2002
+VecDot                21 1.0 1.8958e-02 1.0 1.25e+07 1.1 0.0e+00 0.0e+00 2.1e+01  0  0  0  0  0   0  0  0  0  0  8220
+VecMDot              114 1.0 3.8149e-02 5.5 1.02e+07 1.3 0.0e+00 0.0e+00 1.1e+02  0  0  0  0  1   0  0  0  0  1  3191
+VecTDot            10265 1.0 1.8293e+01 4.5 4.24e+09 1.1 0.0e+00 0.0e+00 1.0e+04  0  0  0  0 51   0  0  0  0 51  2885
+VecNorm             5249 1.0 4.5841e+01 63.8 2.14e+09 1.1 0.0e+00 0.0e+00 5.2e+03  1  0  0  0 26   1  0  0  0 26   581
+VecScale             273 1.0 1.4170e-03 1.1 5.21e+06 1.2 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0 44456
+VecCopy            83618 1.0 3.9386e+01 1.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0    -0
+VecSet             34499 1.0 1.3421e+00 1.5 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+VecAXPY             9728 1.0 8.7804e+00 1.2 4.06e+09 1.1 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  5750
+VecAYPX            65893 1.0 1.8148e+01 1.9 1.01e+10 1.1 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  6888
+VecAXPBYCZ         20484 1.0 6.0581e+00 2.5 1.02e+10 1.1 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0 20894
+VecMAXPY             133 1.0 3.5618e-03 1.3 1.31e+07 1.3 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0 43946
+VecAssemblyBegin     106 1.0 7.2747e-03 6.7 0.00e+00 0.0 0.0e+00 0.0e+00 1.0e+02  0  0  0  0  1   0  0  0  0  1    -0
+VecAssemblyEnd       106 1.0 4.0740e-05 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+VecPointwiseMult      33 1.0 1.3774e-02 1.1 3.28e+06 1.1 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  2961
+VecScatterBegin    49298 1.0 1.9448e+00 2.0 0.00e+00 0.0 3.2e+06 7.0e+03 0.0e+00  0  0 64 10  0   0  0 64 10  0    -0
+VecScatterEnd      49298 1.0 1.1832e+02 29.7 3.05e+07 3.0 0.0e+00 0.0e+00 0.0e+00  2  0  0  0  0   2  0  0  0  0     2
+VecNormalize           7 1.0 2.9221e-03 1.4 5.98e+06 1.1 0.0e+00 0.0e+00 7.0e+00  0  0  0  0  0   0  0  0  0  0 25395
+MatMult            12765 1.0 2.4631e+03 1.0 9.54e+12 1.0 4.7e+06 4.1e+04 1.0e+04 77 93 95 88 50  78 93 95 88 51 49850
+MatMultAdd         10356 1.0 1.0752e+02 1.2 8.21e+10 1.1 4.4e+05 4.5e+03 2.0e+00  3  1  9  1  0   3  1  9  1  0  9447
+MatMultTranspose   10242 1.0 1.2183e+02 1.3 8.21e+10 1.1 4.3e+05 4.5e+03 0.0e+00  3  1  9  1  0   3  1  9  1  0  8339
+MatSolve            3414 0.0 1.1404e-01 0.0 2.49e+08 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  2184
+MatSOR             42622 1.0 1.9046e+03 1.1 1.22e+12 1.2 0.0e+00 0.0e+00 0.0e+00 57 11  0  0  0  58 11  0  0  0  7812
+MatLUFactorSym         1 1.0 4.3995e-04 83.9 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+MatLUFactorNum        20 1.0 1.8042e-02 350.4 9.20e+07 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  5098
+MatScale               9 1.0 1.0620e-01 1.1 3.32e+07 1.1 2.1e+02 7.3e+03 0.0e+00  0  0  0  0  0   0  0  0  0  0  3859
+MatResidual        10242 1.0 2.2988e+02 1.3 1.70e+12 1.0 9.0e+05 4.3e+04 0.0e+00  6 17 18 18  0   6 17 18 18  0 95414
+MatAssemblyBegin     549 1.0 3.1571e+01 2.4 0.00e+00 0.0 1.0e+04 1.7e+06 2.6e+02  1  0  0  8  1   1  0  0  8  1    -0
+MatAssemblyEnd       549 1.0 8.9738e+00 1.9 1.20e+08 3.6 2.5e+03 3.2e+03 1.1e+02  0  0  0  0  1   0  0  0  0  1   106
+MatGetRowIJ            1 0.0 1.5468e-05 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+MatCreateSubMat       81 1.0 1.3369e-01 1.0 0.00e+00 0.0 2.4e+01 2.5e+02 2.3e+01  0  0  0  0  0   0  0  0  0  0    -0
+MatGetOrdering         1 0.0 4.3926e-05 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+MatCoarsen             3 1.0 2.0840e-02 1.6 0.00e+00 0.0 1.9e+03 4.7e+03 2.1e+01  0  0  0  0  0   0  0  0  0  0    -0
+MatZeroEntries       100 1.0 1.8359e+00 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+MatAXPY                3 1.0 6.6225e-02 1.6 1.79e+06 1.1 0.0e+00 0.0e+00 3.0e+00  0  0  0  0  0   0  0  0  0  0   336
+MatTranspose          12 1.0 3.8403e-01 2.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+MatMatMultSym          9 1.0 1.8920e+00 1.1 0.00e+00 0.0 1.1e+03 4.7e+04 3.0e+01  0  0  0  0  0   0  0  0  0  0    -0
+MatMatMultNum        123 1.0 3.2330e+01 1.3 8.24e+10 1.2 2.1e+02 1.5e+05 3.0e+00  1  1  0  0  0   1  1  0  0  0 30366
+MatPtAPSymbolic        3 1.0 5.0719e+00 1.0 0.00e+00 0.0 1.0e+03 5.6e+05 2.1e+01  0  0  0  0  0   0  0  0  0  0    -0
+MatPtAPNumeric        60 1.0 7.6322e+01 1.0 1.79e+11 1.2 9.5e+03 1.6e+06 7.5e+01  2  2  0  7  0   2  2  0  7  0 28070
+MatTrnMatMultSym       3 1.0 1.1401e+00 1.0 0.00e+00 0.0 1.2e+03 2.7e+05 3.9e+01  0  0  0  0  0   0  0  0  0  0    -0
+MatGetLocalMat        69 1.0 1.2650e+00 1.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+MatGetBrAoCol         66 1.0 2.9325e+00 4.1 0.00e+00 0.0 5.6e+03 1.1e+06 0.0e+00  0  0  0  3  0   0  0  0  3  0    -0
+MatCreateGraph         3 1.0 3.3378e-01 1.0 9.15e+06 1.1 6.4e+02 3.6e+03 3.0e+01  0  0  0  0  0   0  0  0  0  0   337
+PCSetUp_GAMG+         20 1.0 1.3045e+02 1.0 3.00e+11 1.1 7.9e+04 2.4e+05 2.5e+03  4  3  2  9 12   4  3  2  9 13 28294
+ PCGAMGCreateG         3 1.0 4.2310e-01 1.0 9.15e+06 1.1 9.7e+02 3.0e+03 5.1e+01  0  0  0  0  0   0  0  0  0  0   266
+ GAMG Coarsen          6 1.0 1.2054e+00 1.0 0.00e+00 0.0 4.1e+03 8.5e+04 7.3e+01  0  0  0  0  0   0  0  0  0  0    -0
+  GAMG MIS/Agg         3 1.0 1.1770e+00 1.0 0.00e+00 0.0 3.2e+03 1.1e+05 6.1e+01  0  0  0  0  0   0  0  0  0  0    -0
+ PCGAMGProl            3 1.0 2.0187e-01 1.0 0.00e+00 0.0 7.1e+03 1.1e+04 1.2e+02  0  0  0  0  1   0  0  0  0  1    -0
+  GAMG Prol-col        3 1.0 6.0362e-02 1.0 0.00e+00 0.0 6.5e+03 9.3e+03 9.3e+01  0  0  0  0  0   0  0  0  0  0    -0
+  GAMG Prol-lift       3 1.0 1.3331e-01 1.0 0.00e+00 0.0 5.6e+02 3.0e+04 1.8e+01  0  0  0  0  0   0  0  0  0  0    -0
+ PCGAMGOptProl         3 1.0 2.3312e+00 1.0 1.58e+09 1.2 3.4e+03 4.0e+04 1.1e+02  0  0  0  0  1   0  0  0  0  1  8245
+  GAMG smooth          3 1.0 1.0598e+00 1.0 5.95e+08 1.2 1.3e+03 6.4e+04 3.7e+01  0  0  0  0  0   0  0  0  0  0  6852
+ PCGAMGCreateL         3 1.0 8.7343e+00 1.0 8.96e+09 1.2 1.7e+03 6.3e+05 7.4e+01  0  0  0  0  0   0  0  0  0  0 12253
+  GAMG PtAP            3 1.0 8.7323e+00 1.0 8.96e+09 1.2 1.6e+03 6.7e+05 4.0e+01  0  0  0  0  0   0  0  0  0  0 12256
+  GAMG Reduce          1 1.0 1.2156e-01 1.0 1.35e+08 2.6 4.9e+02 6.7e+04 4.7e+01  0  0  0  0  0   0  0  0  0  0  8675
+PCGAMG Squ l00         1 1.0 1.1104e+00 1.0 0.00e+00 0.0 3.5e+02 8.9e+05 1.3e+01  0  0  0  0  0   0  0  0  0  0    -0
+PCGAMG Gal l00        20 1.0 5.8609e+01 1.0 1.32e+11 1.1 3.4e+03 3.4e+06 3.3e+01  2  1  0  5  0   2  1  0  5  0 27855
+PCGAMG Opt l00         1 1.0 7.8688e-01 1.0 4.69e+08 1.1 3.0e+02 2.1e+05 1.2e+01  0  0  0  0  0   0  0  0  0  0  7338
+PCGAMG Squ l01         1 1.0 2.6538e-02 1.0 0.00e+00 0.0 3.8e+02 2.9e+04 1.3e+01  0  0  0  0  0   0  0  0  0  0    -0
+PCGAMG Gal l01        20 1.0 2.2838e+01 1.1 4.49e+10 1.5 4.2e+03 1.0e+06 3.2e+01  1  0  0  2  0   1  0  0  2  0 21399
+PCGAMG Opt l01         1 1.0 1.3507e-01 1.0 9.30e+07 1.2 3.4e+02 4.8e+04 1.1e+01  0  0  0  0  0   0  0  0  0  0  8115
+PCGAMG Squ l02         1 1.0 3.1520e-03 1.0 0.00e+00 0.0 5.0e+02 3.3e+03 1.3e+01  0  0  0  0  0   0  0  0  0  0    -0
+PCGAMG Gal l02        20 1.0 1.9499e+00 2.0 2.71e+09 2.6 2.9e+03 1.6e+05 3.2e+01  0  0  0  0  0   0  0  0  0  0 10817
+PCGAMG Opt l02         1 1.0 1.1473e-02 1.0 8.29e+06 2.3 6.5e+02 5.6e+03 1.1e+01  0  0  0  0  0   0  0  0  0  0  6251
+PCSetUp               59 1.0 1.3068e+02 1.0 3.00e+11 1.1 7.9e+04 2.4e+05 2.7e+03  4  3  2  9 13   4  3  2  9 13 28245
+PCSetUpOnBlocks     3434 1.0 3.8312e+01 1.0 1.36e+11 1.0 4.4e+03 1.2e+06 2.1e+02  1  1  0  2  1   1  1  0  2  1 45938
+PCApply               20 1.0 3.0715e+03 1.0 1.01e+13 1.0 5.0e+06 4.3e+04 1.9e+04 97 98 99 96 96  98 98 100 97 97 42151
+KSPSolve_FS_0         20 1.0 3.5982e+02 1.0 1.19e+12 1.0 5.9e+05 4.0e+04 1.7e+03 11 12 12 11  8  11 12 12 11  8 42624
+KSPSolve_FS_Schu      20 1.0 2.2005e+03 1.0 7.34e+12 1.0 3.7e+06 3.9e+04 1.3e+04 69 72 74 66 66  70 72 74 66 67 42849
+KSPSolve_FS_Low       20 1.0 5.0796e+02 1.0 1.55e+12 1.0 6.9e+05 6.3e+04 4.3e+03 16 15 14 20 21  16 15 14 20 21 38840
+KSPSetUp              20 1.0 1.5698e-05 2.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+KSPSolve              20 1.0 3.0715e+03 1.0 1.01e+13 1.0 5.0e+06 4.3e+04 1.9e+04 97 98 99 96 96  98 98 100 97 97 42151
+KSPGMRESOrthog       114 1.0 3.9061e-02 4.9 2.04e+07 1.3 0.0e+00 0.0e+00 1.1e+02  0  0  0  0  1   0  0  0  0  1  6233
+SNESSolve             20 1.0 3.1172e+03 1.0 1.03e+13 1.0 5.0e+06 4.4e+04 2.0e+04 98 100 100 99 98  99 100 100 99 99 42252
+SNESSetUp              1 1.0 3.2046e-05 3.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+SNESFunctionEval      40 1.0 7.0963e+00 1.0 3.73e+10 1.0 1.0e+04 6.5e+04 2.0e+00  0  0  0  0  0   0  0  0  0  0 67861
+SNESJacobianEval      20 1.0 4.0209e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+CreateMesh             8 1.0 7.9920e-06 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+CreateFunctionSpace      29 1.0 1.0736e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspace.make_scalar_element      29 1.0 2.4207e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspaceimpl.FunctionSpace.__init__      53 1.0 8.0495e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspacedata.get_shared_data      53 1.0 5.2186e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspacedata.FunctionSpaceData.__init__      53 1.0 5.0666e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+FunctionSpaceData: CreateElement     106 1.0 1.0325e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.dmhooks.set_function_space      17 1.0 2.1756e-03 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspacedata.FunctionSpaceData.get_map     658 1.0 2.4311e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+ParLoopExecute     34744 1.0 6.4000e+02 1.4 8.49e+12 1.0 8.8e+05 9.9e+04 4.2e+01 16 83 18 40  0  17 83 18 40  0 171379
+pyop2.global_kernel.GlobalKernel.compile   69488 1.0 4.2086e+01 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0    -0
+PyOP2 Cache Wrapper   69616 1.0 4.3643e+01 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0    -0
+pyop2.compilation.load      16 1.0 2.7447e+01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0    -0
+pyop2.compilation.make_so      16 1.0 2.3404e+01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0    -0
+ParLoopRednBegin   34744 1.0 5.6526e-02 1.9 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+ParLoopRednEnd     34744 1.0 6.0896e-02 1.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.Function.__init__     119 1.0 1.0087e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.Function.assign     128 1.0 1.4341e-01 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 9.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.assign.Assigner.assign      28 1.0 1.3065e-01 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspaceimpl.WithGeometryBase.sub      43 1.0 5.3596e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.Function.interpolate      60 1.0 3.1806e+00 1.0 3.39e+09 1.0 2.0e+03 1.7e+05 4.1e+01  0  0  0  0  0   0  0  0  0  0 13782
+firedrake.assemble.assemble      61 1.0 2.7807e+01 1.0 1.09e+10 1.0 2.6e+03 5.5e+05 6.1e+01  1  0  0  1  0   1  0  0  1  0  5064
+firedrake.interpolation.make_interpolator     120 1.0 2.8551e-01 1.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.interpolation.compile_expression       2 1.0 1.8809e-01 3.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.interpolation.SameMeshInterpolator._interpolate      60 1.0 2.8653e+00 1.0 3.39e+09 1.0 2.0e+03 1.7e+05 4.1e+01  0  0  0  0  0   0  0  0  0  0 15298
+firedrake.halo.Halo.global_to_local_begin   17545 1.0 5.7712e+00 2.6 0.00e+00 0.0 8.8e+05 9.9e+04 2.0e+00  0  0 18 40  0   0  0 18 40  0    -0
+Parloop_Cells_wrap_expression_kernel     120 1.0 2.5395e+00 1.0 3.39e+09 1.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0 17261
+Log_Event_expression_kernel 1336800 1.0 1.7755e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.halo.Halo.global_to_local_end   17545 1.0 1.5866e+02 57.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  2  0  0  0  0   2  0  0  0  0    -0
+firedrake.ufl_expr.TestFunction       2 1.0 6.3997e-05 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.bcs.BCBase.__init__      20 1.0 5.0279e-05 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.variational_solver.NonlinearVariationalProblem.__init__       5 1.0 4.2432e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.ufl_expr.derivative       6 1.0 2.9950e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.ufl_expr.TrialFunction       8 1.0 2.7187e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.ufl_expr.adjoint      10 1.0 8.3021e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.variational_solver.NonlinearVariationalSolver.__init__       1 1.0 1.4732e-01 1.0 2.75e+07 1.1 0.0e+00 0.0e+00 5.4e+01  0  0  0  0  0   0  0  0  0  0  2317
+firedrake.solving_utils._SNESContext.__init__       5 1.0 2.0367e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.cofunction.Cofunction.__init__      31 1.0 2.5436e-03 1.5 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.matrix_free.operators.ImplicitMatrixContext.__init__       5 1.0 1.4168e-01 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.ufl_expr.action      12 1.0 6.2446e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.Function.sub   86457 1.0 3.4112e-01 1.7 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.nullspace.VectorSpaceBasis.nullspace      42 1.0 1.0468e-04 1.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.tsfc_interface.compile_form       8 1.0 2.9848e+00 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.formmanipulation.split_form       8 1.0 1.4613e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.formmanipulation.ExtractSubBlock.split      20 1.0 3.1000e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.formmanipulation.ExtractSubBlock.argument     128 1.0 1.0826e-02 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+CreateSparsity         3 1.0 1.2507e+01 1.0 0.00e+00 0.0 4.0e+02 1.0e+06 2.2e+01  0  0  0  0  0   0  0  0  0  0    -0
+MatZeroInitial         3 1.0 2.0781e+00 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.mesh.AbstractMeshTopology.measure_set      14 1.0 8.8500e-05 1.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.mesh.AbstractMeshTopology.cell_subset      14 1.0 1.7818e-05 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.mesh._Facets.measure_set       4 1.0 1.9268e-05 1.5 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+Parloop_Cells_wrap_form00_cell_integral      82 1.0 2.6253e+01 1.1 1.42e+11 1.0 0.0e+00 0.0e+00 0.0e+00  1  1  0  0  0   1  1  0  0  0 70185
+Log_Event_form00_cell_integral  913480 1.0 9.6423e+00 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+Parloop_Cells_wrap_form00_exterior_facet_top_integral      42 1.0 5.5847e+00 1.0 6.83e+07 1.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0   158
+Log_Event_form00_exterior_facet_top_integral   11697 1.0 9.1895e-03 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+Parloop_Cells_wrap_form01_cell_integral       2 1.0 2.5493e+00 1.0 5.06e+08 1.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  2568
+Log_Event_form01_cell_integral   22280 1.0 4.9485e-02 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+Parloop_Cells_wrap_form10_cell_integral       2 1.0 2.1336e+00 1.0 5.06e+08 1.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  3066
+Log_Event_form10_cell_integral   22280 1.0 4.5432e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.variational_solver.NonlinearVariationalSolver.solve      20 1.0 3.1174e+03 1.0 1.03e+13 1.0 5.0e+06 4.4e+04 2.0e+04 98 100 100 99 98  99 100 100 99 99 42249
+ApplyBC              100 1.0 1.8337e-02 1.4 0.00e+00 0.0 0.0e+00 0.0e+00 3.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.function.CoordinatelessFunction.sub       9 1.0 7.5997e-04 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspacedata.FunctionSpaceData.boundary_nodes      20 1.0 5.1804e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 2.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+Parloop_Cells_wrap_form0_cell_integral   34848 1.0 4.1945e+02 1.0 8.31e+12 1.0 0.0e+00 0.0e+00 0.0e+00 13 82  0  0  0  13 82  0  0  0 256205
+Log_Event_form0_cell_integral 388206720 1.0 3.5558e+02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00 11  0  0  0  0  11  0  0  0  0    -0
+Parloop_Cells_wrap_form0_exterior_facet_top_integral   34312 1.0 1.1156e+01 1.3 1.63e+10 1.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0 18840
+Log_Event_form0_exterior_facet_top_integral 9555892 1.0 1.8345e+00 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+Parloop_Cells_wrap_form1_cell_integral      80 1.0 1.4910e+00 1.0 8.40e+09 1.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0 72861
+Log_Event_form1_cell_integral  891200 1.0 2.1930e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.halo.Halo.local_to_global_begin   17578 1.0 3.2554e+00 4.8 0.00e+00 0.0 8.8e+05 9.9e+04 0.0e+00  0  0 18 39  0   0  0 18 40  0    -0
+firedrake.halo.Halo.local_to_global_end   17578 1.0 8.8116e+01 39.0 1.29e+09 3.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0   123
+firedrake.bcs.BCBase.zero  173370 1.0 7.1719e+00 1.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.cofunction.Cofunction.sub  258480 1.0 7.2670e-01 2.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.dmhooks.create_field_decomposition       1 1.0 5.7575e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.dmhooks.get_function_space       3 1.0 4.1893e-03 1.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.solving_utils._SNESContext.split       1 1.0 5.5580e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.bcs.DirichletBC.reconstruct      40 1.0 3.2973e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.bcs.BCBase.as_subspace      40 1.0 2.8132e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.matrix_free.operators.ImplicitMatrixContext.createSubMatrix      80 1.0 1.3165e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.matrix_free.operators.find_sub_block       6 1.0 6.7596e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.functionspaceimpl.FunctionSpace.local_to_global_map       4 1.0 5.3405e-03 2.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.matrix_free.operators.ImplicitMatrixContext.mult   17498 1.0 6.6029e+02 1.2 8.30e+12 1.0 1.7e+06 9.9e+04 9.0e+00 18 81 35 79  0  18 81 35 79  0 162523
+firedrake.bcs.BCBase.set   85580 1.0 8.9796e+00 2.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+firedrake.cofunction.Cofunction.assign   85580 1.0 7.5652e+00 2.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0    -0
+------------------------------------------------------------------------------------------------------------------------
+
+Object Type          Creations   Destructions. Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+           Container     4              3
+           Index Set   209            186
+   IS L to G Mapping     3              3
+             Section    74             50
+   Star Forest Graph    69             54
+              Vector    42              2
+    Distributed Mesh    13              5
+            DM Label    47             32
+    GraphPartitioner     4              2
+     Discrete System    21             13
+           Weak Form    21             13
+
+--- Event Stage 1: stokes_solve
+
+           Container    60             46
+              Viewer     1              0
+         PetscRandom     3              3
+           Index Set   110            106
+   IS L to G Mapping    21             12
+             Section     2              8
+   Star Forest Graph    53             34
+              Vector   628            514
+              Matrix   130             77
+      Matrix Coarsen     3              2
+   Matrix Null Space     3              0
+      Preconditioner    16              4
+       Krylov Solver    17              4
+     DMKSP interface     1              0
+                SNES     1              0
+              DMSNES     1              0
+    Distributed Mesh     8              1
+            DM Label     0              2
+    GraphPartitioner     0              1
+     Discrete System     8              1
+           Weak Form     8              1
+========================================================================================================================
+Average time to get PetscTime(): 2.17e-08
+Average time for MPI_Barrier(): 7.818e-07
+Average time for zero size MPI_Send(): 1.824e-06
+#PETSc Option Table entries:
+--dx 25 # (source: command line)
+--nz 40 # (source: command line)
+--optional_name Dale_weak832_assembledschur13 # (source: command line)
+--Tend 1000 # (source: command line)
+-log_view # (source: environment)
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure options: PETSC_DIR=/g/data/xd2/dr4292/apps/petsc/1c1d65e4821 PETSC_ARCH=default --with-fc=mpif90 COPTFLAGS="-O3 -g -xCASCADELAKE" CXXOPTFLAGS="-O3 -g -xCASCADELAKE" FOPTFLAGS="-O3 -g -xCASCADELAKE" --download-suitesparse --with-cxx=mpicxx --with-hwloc-dir=/usr --with-zlib --download-pastix --with-cc=mpicc --download-mumps --download-hdf5 --with-mpiexec=mpirun --download-hypre --download-netcdf --download-pnetcdf --download-superlu_dist --with-shared-libraries=1 --with-c2html=0 --with-fortran-bindings=0 --download-metis --download-ptscotch --with-debugging=0 --download-bison --with-scalapack-include=/apps/intel-tools/intel-mkl/2024.2.0/include --with-scalapack-lib="-lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_openmpi_lp64 -lpthread -lm -ldl" --with-make-np=12
+-----------------------------------------
+Libraries compiled on 2024-10-10 00:26:30 on gadi-cpu-clx-1570.gadi.nci.org.au 
+Machine characteristics: Linux-4.18.0-553.8.1.el8.nci.x86_64-x86_64-with-glibc2.28
+Using PETSc directory: /g/data/xd2/dr4292/apps/petsc/1c1d65e4821
+Using PETSc arch: default
+-----------------------------------------
+
+Using C compiler: mpicc  -fPIC -Wall -Wwrite-strings -Wno-unknown-pragmas -Wconversion -Wno-sign-conversion -Wno-float-conversion -Wno-implicit-float-conversion -fstack-protector -Qunused-arguments -fvisibility=hidden -Wall -Wwrite-strings -Wno-unknown-pragmas -Wconversion -Wno-sign-conversion -Wno-float-conversion -Wno-implicit-float-conversion -fstack-protector -Qunused-arguments -fvisibility=hidden -O3 -g -xCASCADELAKE  
+Using Fortran compiler: mpif90  -fPIC -O3 -g -xCASCADELAKE    
+-----------------------------------------
+
+Using include paths: -I/g/data/xd2/dr4292/apps/petsc/1c1d65e4821/include -I/g/data/xd2/dr4292/apps/petsc/1c1d65e4821/default/include -I/g/data/xd2/dr4292/apps/petsc/1c1d65e4821/default/include/suitesparse -I/usr/include
+-----------------------------------------
+
+Using C linker: mpicc
+Using Fortran linker: mpif90
+Using libraries: -Wl,-rpath,/g/data/xd2/dr4292/apps/petsc/1c1d65e4821/default/lib -L/g/data/xd2/dr4292/apps/petsc/1c1d65e4821/default/lib -lpetsc -Wl,-rpath,/g/data/xd2/dr4292/apps/petsc/1c1d65e4821/default/lib -L/g/data/xd2/dr4292/apps/petsc/1c1d65e4821/default/lib -Wl,-rpath,/apps/intel-tools/intel-mkl/2024.2.0/lib/intel64 -L/apps/intel-tools/intel-mkl/2024.2.0/lib/intel64 -Wl,-rpath,/apps/openmpi/4.0.7/lib -L/apps/openmpi/4.0.7/lib -Wl,-rpath,/apps/python3/3.11.7/lib -L/apps/python3/3.11.7/lib -Wl,-rpath,/apps/openmpi/4.0.7/lib/Intel -L/apps/openmpi/4.0.7/lib/Intel -Wl,-rpath,/apps/openmpi/4.0.7/lib/profilers -L/apps/openmpi/4.0.7/lib/profilers -Wl,-rpath,/apps/intel-tools/intel-mkl/2024.2.0/lib -L/apps/intel-tools/intel-mkl/2024.2.0/lib -Wl,-rpath,/apps/intel-tools/intel-compiler-llvm/2024.2.0/lib -L/apps/intel-tools/intel-compiler-llvm/2024.2.0/lib -Wl,-rpath,/apps/intel-tools/.packages/2024.2.0/compiler/2024.2/lib -L/apps/intel-tools/.packages/2024.2.0/compiler/2024.2/lib -Wl,-rpath,/apps/intel-tools/.packages/2024.2.0/compiler/2024.2/lib/clang/19/lib/x86_64-unknown-linux-gnu -L/apps/intel-tools/.packages/2024.2.0/compiler/2024.2/lib/clang/19/lib/x86_64-unknown-linux-gnu -Wl,-rpath,/half-root/usr/lib/gcc/x86_64-redhat-linux/8 -L/half-root/usr/lib/gcc/x86_64-redhat-linux/8 -Wl,-rpath,/half-root/usr/lib/gcc -L/half-root/usr/lib/gcc -Wl,-rpath,/half-root/usr/lib64 -L/half-root/usr/lib64 -Wl,-rpath,/half-root/usr/lib -L/half-root/usr/lib -lHYPRE -lspqr -lumfpack -lklu -lcholmod -lamd -lsuperlu_dist -ldmumps -lmumps_common -lpord -lpthread -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lmkl_blacs_openmpi_lp64 -lpthread -lm -ldl -lpastix -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lpthread -lptesmumps -lptscotchparmetisv3 -lptscotch -lptscotcherr -lesmumps -lscotch -lscotcherr -lmetis -lnetcdf -lpnetcdf -lhdf5_hl -lhdf5 -lz -lhwloc -lX11 -lmpi_usempif08 -lmpi_usempi_ignore_tkr -lmpi_mpifh -lmpi -lifport -lifcoremt -limf -lsvml -lm -lipgo -lirc -lpthread -lgcc_s -lirc_s -ldl -lstdc++ -lrt -lm -lrt
+-----------------------------------------
+
+WARNING! There are options you set that were not used!
+WARNING! could be spelling mistake, etc!
+There are 4 unused database options. They are:
+Option left: name:--dx value: 25 source: command line
+Option left: name:--nz value: 40 source: command line
+Option left: name:--optional_name value: Dale_weak832_assembledschur13 source: command line
+Option left: name:--Tend value: 1000 source: command line

@@ -1,0 +1,68 @@
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/lib/python3.11/site-packages/pytools/__init__.py:2452: UserWarning: unable to find git revision
+  warn("unable to find git revision", stacklevel=1)
+weerdesteijn-3d-Dale_weak832_assembledschur13
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+/g/data/xd2/dr4292/apps/firedrake/20241021/venv/src/FInAT/finat/ufl/elementlist.py:460: UserWarning: Discontinuous Lagrange element requested on triangle * interval, creating DQ element.
+  warnings.warn("Discontinuous Lagrange element requested on %s, creating DQ element." % cell.cellname())
+Number of Velocity DOF: 28053123
+Number of Pressure DOF: 1185921
+Number of Velocity and Pressure DOF: 29239044
+max timesteps 20
+dump_period 200
+dt 1577880000.0
+Simulation start time 0 years
+---------------
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpiexec noticed that process rank 7 with PID 0 on node gadi-cpu-spr-0180 exited on signal 9 (Killed).
+--------------------------------------------------------------------------
