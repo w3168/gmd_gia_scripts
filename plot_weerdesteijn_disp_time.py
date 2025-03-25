@@ -49,3 +49,43 @@ ax.set_xlim([-5e2, 20e3])
 ax.set_ylim([-20, 1])
 fig.savefig(f'{figname}_zoom_start.png')
 
+
+# Plot compressible vs incompressible (and burgers)
+gadopt_displacement_bulk2x = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-symmult_nondim-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk2.0-nondim.dat")
+
+
+fig, ax = plt.subplots(1, 1, figsize=(20, 15))
+
+ax.plot(gadopt_displacement[:,0], gadopt_displacement[:,1], 'b-', label='G-ADOPT, incompressible')
+ax.plot(gadopt_displacement_bulk2x[:,0], gadopt_displacement_bulk2x[:,1], 'k-', label='G-ADOPT, compressible')
+
+plt.rcParams.update({'font.size': 30})
+
+font = {'size': 20}
+ 
+# using rc function
+plt.rc('font', **font)
+plt.xticks(fontsize=20)
+plt.yticks(fontsize=20)
+#ax.set_xlim([0, 1000])
+#ax.set_ylim([-0.5, 0])
+ax.set_xlabel('Time (years)', fontsize='30')
+ax.set_ylabel('Maximum vertical displacement (m)', fontsize='30')
+ax.grid(True)
+ax.legend()
+
+figname = "25.03.25_gadopt_3d_weerdesteijn_internalvariable_nondim_dx5_nz10_dt1ka_bulkcomparison"
+fig.savefig(f'{figname}.png')
+#plt.show()
+ax.set_xlim([70e3, 110e3])
+ax.set_ylim([-80, -45])
+fig.savefig(f'{figname}_zoom_peak.png')
+
+ax.set_xlim([85e3, 110e3])
+ax.set_ylim([-70, -5])
+fig.savefig(f'{figname}_zoom_end.png')
+
+ax.set_xlim([-5e2, 20e3])
+ax.set_ylim([-20, 1])
+fig.savefig(f'{figname}_zoom_start.png')
+
