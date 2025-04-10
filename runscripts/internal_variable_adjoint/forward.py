@@ -10,19 +10,16 @@ import numpy as np
 from mpi4py import MPI
 parser = argparse.ArgumentParser()
 parser.add_argument("--ncells", default=180, type=float, help="Number of cells in the horizontal surface mesh", required=False)
-parser.add_argument("--DG0_layers", default=10, type=int, help="Number of cells per layer for DG0 discretisation of background profiles", required=False)
-parser.add_argument("--dt_years", default=1e3, type=float, help="Timestep in years", required=False)
+parser.add_argument("--DG0_layers", default=5, type=int, help="Number of cells per layer for DG0 discretisation of background profiles", required=False)
+parser.add_argument("--dt_years", default=100, type=float, help="Timestep in years", required=False)
 parser.add_argument("--Tend", default=10e3, type=float, help="Simulation end time in years", required=False)
 parser.add_argument("--bulk_shear_ratio", default=1.94, type=float, help="Ratio of Bulk modulus / Shear modulus", required=False)
-parser.add_argument("--load_checkpoint", action='store_true', help="Load simulation data from a checkpoint file")
-parser.add_argument("--checkpoint_file", default=None, type=str, help="Checkpoint file name", required=False)
-parser.add_argument("--Tstart", default=0, type=float, help="Simulation start time in years", required=False)
 parser.add_argument("--write_output", action='store_true', help="Write out Paraview VTK files")
 parser.add_argument("--optional_name", default="", type=str, help="Optional string to add to simulation name for outputs", required=False)
 parser.add_argument("--output_path", default="/data/viscoelastic/internal_variable_adjoint/forward/", type=str, help="Optional output path", required=False)
 args = parser.parse_args()
 
-name = f"forward-cylinder-2d-internalvariable-{args.optional_name}"
+name = f"forward-cylinder-2d-internalvariable-un0bottombulkoff-{args.optional_name}"
 
 # +
 # Set up geometry:
@@ -220,7 +217,7 @@ dt_years = args.dt_years
 dt = Constant(dt_years * year_in_seconds/characteristic_maxwell_time)
 Tend_years = args.Tend
 Tend = Constant(Tend_years * year_in_seconds/characteristic_maxwell_time)
-dt_out_years = 1e3
+dt_out_years = dt_years
 dt_out = Constant(dt_out_years * year_in_seconds/characteristic_maxwell_time)
 
 max_timesteps = round((Tend - Tstart * year_in_seconds/characteristic_maxwell_time) / dt)
@@ -335,10 +332,10 @@ Z_nullspace = create_stokes_nullspace(Z, closed=False, rotational=True)
 Z_near_nullspace = create_stokes_nullspace(Z, closed=True, rotational=True, translations=[0, 1])
 
 coupled_solver = InternalVariableSolver(z, approximation, coupled_dt=dt, bcs=stokes_bcs,
- #                                       solver_parameters=direct_stokes_solver_parameters)
-                                        solver_parameters=iterative_parameters,
-                                        nullspace=Z_nullspace, transpose_nullspace=Z_nullspace,
-                                        near_nullspace=Z_near_nullspace)
+                                       solver_parameters=direct_stokes_solver_parameters,
+#                                        solver_parameters=iterative_parameters,
+                                       nullspace=Z_nullspace, transpose_nullspace=Z_nullspace,
+                                       near_nullspace=Z_near_nullspace)
 
 
 # We next set up our output, in VTK format. This format can be read by programs like pyvista and Paraview.
@@ -349,6 +346,8 @@ OUTPUT = args.write_output
 vertical_displacement = Function(V.sub(1), name="radial displacement")  # Function to store vertical displacement for output
 
 if OUTPUT:
+    visc_file = VTKFile(f"{args.output_path}{name}-visc.pvd")
+    visc_file.write(viscosity)
     output_file = VTKFile(f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.pvd")
     output_file.write(*z.subfunctions, vertical_displacement)
 
@@ -361,9 +360,13 @@ checkpoint_filename = f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{d
 
 displacement_filename = f"{args.output_path}displacement-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
 
+
 # Initial displacement at time zero is zero
 displacement_min_array = [[0.0, 0.0]]
 
+objective_filename = f"{args.output_path}displacement-objective-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.h5"
+objective_checkpoint_file = CheckpointFile(objective_filename, "w")
+objective_checkpoint_file.save_mesh(mesh)
 # -
 
 # Now let's run the simulation! We are going to control the ice thickness using the `ramp` parameter.
@@ -375,6 +378,8 @@ for timestep in range(1, max_timesteps+1):
     # update time first so that ice load begins
     time.assign(time+dt)
     coupled_solver.solve()
+    
+    objective_checkpoint_file.save_function(z.subfunctions[0], name="Displacement", idx=timestep)
 
     # Log diagnostics:
     # Compute diagnostics:
@@ -414,6 +419,7 @@ for timestep in range(1, max_timesteps+1):
                      f"{gd.u_rms()} {gd.u_rms_top()} {gd.ux_max(boundary.top)} "
                      )
 
+objective_checkpoint_file.close()
 # Let's use the python package *PyVista* to plot the magnitude of the displacement field through time.
 # We will use the calculated displacement to artifically scale the mesh. We have exaggerated the stretching
 # by a factor of 1500, **BUT...** it is important to remember this is just for ease of visualisation -
