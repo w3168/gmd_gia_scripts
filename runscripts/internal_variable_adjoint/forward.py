@@ -19,7 +19,7 @@ parser.add_argument("--optional_name", default="", type=str, help="Optional stri
 parser.add_argument("--output_path", default="/data/viscoelastic/internal_variable_adjoint/forward/", type=str, help="Optional output path", required=False)
 args = parser.parse_args()
 
-name = f"forward-cylinder-2d-internalvariable-un0bottombulkoff-{args.optional_name}"
+name = f"forward-cylinder-2d-internalvariable-dispvel-{args.optional_name}"
 
 # +
 # Set up geometry:
@@ -356,6 +356,9 @@ plog.log_str(
     "timestep time dt u_rms u_rms_surf ux_max disp_min disp_max"
 )
 
+velocity = Function(z.subfunctions[0], name="velocity")
+disp_old = Function(z.subfunctions[0], name="old_disp").assign(z.subfunctions[0])
+
 checkpoint_filename = f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulktoshear{args.bulk_shear_ratio}-nondim-chk.h5"
 
 displacement_filename = f"{args.output_path}displacement-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
@@ -378,8 +381,10 @@ for timestep in range(1, max_timesteps+1):
     # update time first so that ice load begins
     time.assign(time+dt)
     coupled_solver.solve()
-    
+    velocity.interpolate((z.subfunctions[0] - disp_old)/dt)
     objective_checkpoint_file.save_function(z.subfunctions[0], name="Displacement", idx=timestep)
+    objective_checkpoint_file.save_function(velocity, name="Velocity", idx=timestep)
+    disp_old.assign(z.subfunctions[0]) 
 
     # Log diagnostics:
     # Compute diagnostics:
