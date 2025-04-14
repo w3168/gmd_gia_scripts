@@ -55,7 +55,7 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
 
     
     # Restart file for optimisation...
-    updated_viscosity_file = VTKFile("updated_viscosity_dt50_dispvel_noreg.pvd")
+    updated_viscosity_file = VTKFile("updated_viscosity_dt50_onlyvel2_noreg_P1controlvisc.pvd")
     updated_out_file = VTKFile("updated_out.pvd")
     functional_values = []
 
@@ -290,10 +290,10 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
     target_viscosity = setup_heterogenous_viscosity(background_viscosity_DG1)
 
-    control_viscosity = Function(background_viscosity, name="control viscosity").interpolate(ln(background_viscosity)/ln(10))
+    control_viscosity = Function(P1, name="control viscosity")
     control = Control(control_viscosity)
 
-    viscosity = Function(control_viscosity, name="viscosity").interpolate(10**control_viscosity)
+    viscosity = background_viscosity * 10**control_viscosity
 
 
     # -
@@ -558,15 +558,16 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     damping = assemble((control_viscosity) ** 2 / area  * dx)
     smoothing = assemble(dot(grad(control_viscosity), grad(control_viscosity)) / area * dx)
 
-    objective = (displacement_misfit + velocity_misfit) / max_timesteps + alpha_damping * damping + alpha_smoothing * smoothing
+    #objective = (displacement_misfit + velocity_misfit) / max_timesteps + alpha_damping * damping + alpha_smoothing * smoothing
+    objective = (velocity_misfit ) / max_timesteps + alpha_damping * damping + alpha_smoothing * smoothing
     log("J = ", objective)
     
     pause_annotation()
     
     # storing adjoint results
 #    updated_ice_thickness = Function(normalised_ice_thickness, name="updated ice thickness")
-    updated_viscosity = Function(viscosity, name="updated viscosity")
-    updated_viscosity_file = VTKFile("updated_viscosity_dt50_dispvel_noreg.pvd")
+    updated_viscosity = Function(target_viscosity, name="updated viscosity")
+    updated_viscosity_file = VTKFile("updated_viscosity_dt50_onlyvel2_noreg_P1controlvisc.pvd")
     updated_displacement = Function(z.subfunctions[0], name="updated displacement")
     updated_velocity = Function(z.subfunctions[0], name="updated velocity")
     updated_out_file = VTKFile("updated_out.pvd")
@@ -604,8 +605,8 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 #        updated_velocity.interpolate(z.subfunctions[0].block_variable.checkpoint / dt)
         '''
         # Write out values of control and final forward model results
-        updated_viscosity.interpolate(10**m)
-        updated_viscosity_file.write(updated_viscosity, target_viscosity)
+        updated_viscosity.interpolate(background_viscosity * 10**m)
+        updated_viscosity_file.write(m, updated_viscosity, target_viscosity)
         updated_displacement.interpolate(z.subfunctions[0].block_variable.checkpoint)
         updated_out_file.write(updated_displacement, final_target_displacement)
     ''' 
