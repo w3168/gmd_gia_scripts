@@ -34,7 +34,7 @@ parser.add_argument("--ice_checkpoint", default=None, type=str, help="Ice checkp
 parser.add_argument("--viscosity_checkpoint", default=None, type=str, help="Viscosity checkpoint", required=False)
 args = parser.parse_args()
 
-name = f"adjoint-cylinder-2d-internalvariable-un0bottombulkoff-{args.optional_name}"
+name = f"adjoint-cylinder-2d-internalvariable-ctype{args.controls}-{args.optional_name}"
 
 
 
@@ -47,7 +47,7 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
     
     minimisation_problem = MinimizationProblem(inverse_problem["reduced_functional"], bounds=inverse_problem["bounds"])
 
-#    minimisation_parameters["Status Test"]["Iteration Limit"] = 15
+    minimisation_parameters["Status Test"]["Iteration Limit"] = 5
 #    minimisation_parameters["Step"]["Trust Region"]["Initial Radius"] = 1e4
 
     optimiser = LinMoreOptimiser(
@@ -58,8 +58,6 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
 
     
     # Restart file for optimisation...
-    updated_solution_file = VTKFile("updated_both_dt1000_test_dispvel_noreg.pvd")
-    updated_out_file = VTKFile("updated_out.pvd")
     functional_values = []
 
     #optimiser.add_callback(inverse_problem["callback"])
@@ -375,6 +373,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     
     # defining the control
     if args.ice_checkpoint:
+        print("hello ice checkpoint")
         with CheckpointFile(args.ice_checkpoint, 'r') as afile:
             control_ice_thickness = afile.load_function(mesh, name="control normalised ice thickness")
     else:
@@ -500,7 +499,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
             target_velocity = afile.load_function(mesh, name="Velocity", idx=timestep)
         circumference = 2 * pi * radius_values[0]
         velocity_error = velocity - target_velocity
-        velocity_scale = 1e-8
+        velocity_scale = 1e-9
         velocity_misfit += assemble(dot(velocity_error, velocity_error) / (circumference * velocity_scale**2) * ds(boundary.top))
 
         displacement_error = z.subfunctions[0] - target_displacement
@@ -582,10 +581,13 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     # storing adjoint results
     updated_ice_thickness = Function(normalised_ice_thickness, name="updated ice thickness")
     updated_viscosity = Function(target_viscosity, name="updated viscosity")
-    updated_solution_file = VTKFile("updated_both_dt1000_test_dispvel_noreg.pvd")
+    updated_log_viscosity = Function(control_viscosity, name="updated control viscosity")
+    updated_solution_file = VTKFile(f"{args.output_path}{name}_noreg.pvd")
     updated_displacement = Function(z.subfunctions[0], name="updated displacement")
     updated_velocity = Function(z.subfunctions[0], name="updated velocity")
     updated_out_file = VTKFile("updated_out.pvd")
+
+    controls_checkpoint_filename = f"{args.output_path}{name}_controls.h5"
 
     functional_values = []
     
@@ -619,11 +621,17 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
         
         # Write out values of control and final forward model results
         updated_viscosity.interpolate(background_viscosity * 10**control_viscosity.block_variable.checkpoint)
+        updated_log_viscosity.assign(control_viscosity.block_variable.checkpoint)
         updated_displacement.interpolate(z.subfunctions[0].block_variable.checkpoint)
         updated_velocity.interpolate(velocity.block_variable.checkpoint)
         updated_solution_file.write(updated_ice_thickness, target_normalised_ice_thickness, updated_viscosity, 
                 target_viscosity, updated_displacement, final_target_displacement, updated_velocity, final_target_velocity)
         updated_out_file.write(updated_displacement, final_target_displacement)
+
+        with CheckpointFile(controls_checkpoint_filename, "w") as checkpoint:
+            checkpoint.save_function(updated_log_viscosity, name="control viscosity")
+            checkpoint.save_function(updated_ice_thickness, name="control normalised ice thickness")
+        
 
     ice_thickness_lb = Function(normalised_ice_thickness.function_space(), name="Lower bound ice thickness")
     ice_thickness_ub = Function(normalised_ice_thickness.function_space(), name="Upper bound ice thickness")
@@ -648,7 +656,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     inverse_problem = {}
 
     if args.controls =="ice":
-        clist = [control_ice]
+        clist = [control_ice_thickness]
         c = [control2]
     elif args.controls =="viscosity":
         clist = [control_viscosity]
