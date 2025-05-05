@@ -35,12 +35,6 @@ bulk_shear_ratio = bulk_modulus/shear_modulus
 lambda_lame = bulk_modulus - 2/3 * shear_modulus
 f_e = (lambda_lame + 2*shear_modulus) / (lambda_lame + shear_modulus)
 
-
-h_elastic2 = F0/(1 + f_e*maxwell_time/tau0)
-h_elastic = F0 - h_elastic2  # Constant(F0/(1 + maxwell_time/tau0))
-h_elastic2_incomp = F0/(1 + maxwell_time/tau0)
-h_elastic_incomp = F0 - h_elastic2_incomp  # Constant(F0/(1 + maxwell_time/tau0))
-
 eta_analytical = [0.]
 eta_analytical_incomp = [0.]
 times = [0.]
@@ -50,8 +44,8 @@ max_timesteps = round(160/dt)
 for i in range(1, max_timesteps):
     time = dt * i * maxwell_time
     times.append(time)
-    eta_analytical.append(((F0 - h_elastic) * (1-np.exp(-(time)/(tau0+f_e*maxwell_time)))+h_elastic) )
-    eta_analytical_incomp.append(((F0 - h_elastic_incomp) * (1-np.exp(-(time)/(tau0+maxwell_time)))+h_elastic_incomp) )
+    eta_analytical.append(F0 * (1 - 1 / (1 + f_e*maxwell_time/tau0) + (1-np.exp(-(time)/(tau0+f_e*maxwell_time)))/ (1 + f_e*maxwell_time/tau0)))
+    eta_analytical_incomp.append(F0 * (1 - 1 / (1 + maxwell_time/tau0) + (1-np.exp(-(time)/(tau0+maxwell_time)))/ (1 + maxwell_time/tau0)))
     
 times = np.array(times)
 
