@@ -8,18 +8,20 @@ from gadopt.utility import vertical_component as vc
 import argparse
 import numpy as np
 from mpi4py import MPI
+import pandas as pd
 parser = argparse.ArgumentParser()
 parser.add_argument("--ncells", default=180, type=float, help="Number of cells in the horizontal surface mesh", required=False)
 parser.add_argument("--DG0_layers", default=5, type=int, help="Number of cells per layer for DG0 discretisation of background profiles", required=False)
 parser.add_argument("--dt_years", default=100, type=float, help="Timestep in years", required=False)
 parser.add_argument("--Tend", default=10e3, type=float, help="Simulation end time in years", required=False)
 parser.add_argument("--bulk_shear_ratio", default=1.94, type=float, help="Ratio of Bulk modulus / Shear modulus", required=False)
+parser.add_argument("--radial_visc", action='store_true', help="Use 1D viscosity profile")
 parser.add_argument("--write_output", action='store_true', help="Write out Paraview VTK files")
 parser.add_argument("--optional_name", default="", type=str, help="Optional string to add to simulation name for outputs", required=False)
 parser.add_argument("--output_path", default="/data/viscoelastic/internal_variable_adjoint/forward/", type=str, help="Optional output path", required=False)
 args = parser.parse_args()
 
-name = f"forward-cylinder-2d-internalvariable-dispvel-{args.optional_name}"
+name = f"forward-cylinder-2d-internalvariable-dispvel-{args.optional_name}-1dvisc{args.radial_visc}"
 
 # +
 # Set up geometry:
@@ -190,8 +192,10 @@ def setup_heterogenous_viscosity(viscosity):
 
     return heterogenous_viscosity_field
 
-
-viscosity = setup_heterogenous_viscosity(background_viscosity)
+if args.radial_visc:
+    viscosity = Function(background_viscosity, name='viscosity').assign(background_viscosity)
+else:
+    viscosity = setup_heterogenous_viscosity(background_viscosity)
 
 # -
 
@@ -344,8 +348,24 @@ coupled_solver = InternalVariableSolver(z, approximation, coupled_dt=dt, bcs=sto
 # Create output file
 OUTPUT = args.write_output
 vertical_displacement = Function(V.sub(1), name="radial displacement")  # Function to store vertical displacement for output
+f = Function(V).interpolate(as_vector([X[0], X[1]]))
+bc_displacement = DirichletBC(vertical_displacement.function_space(), 0, boundary.top)
+
+surface_x = f.sub(0).dat.data_ro_with_halos[bc_displacement.nodes]
+
+surface_x_all = f.sub(0).comm.gather(surface_x)
+surface_y = f.sub(1).dat.data_ro_with_halos[bc_displacement.nodes]
+surface_y_all = f.sub(1).comm.gather(surface_y)
+displacement_df = pd.DataFrame()
+
+if MPI.COMM_WORLD.rank == 0:
+    surface_x_concat = np.concatenate(surface_x_all)
+    displacement_df['surface_x'] = surface_x_concat
+    surface_y_concat = np.concatenate(surface_y_all)
+    displacement_df['surface_y'] = surface_y_concat
 
 if OUTPUT:
+    log("hello visco output")
     visc_file = VTKFile(f"{args.output_path}{name}-visc.pvd")
     visc_file.write(viscosity)
     output_file = VTKFile(f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.pvd")
@@ -361,7 +381,8 @@ disp_old = Function(z.subfunctions[0], name="old_disp").assign(z.subfunctions[0]
 
 checkpoint_filename = f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulktoshear{args.bulk_shear_ratio}-nondim-chk.h5"
 
-displacement_filename = f"{args.output_path}displacement-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
+displacement_filename = f"{args.output_path}min-displacement-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
+surface_displacement_filename = f"{args.output_path}surface-displacement-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
 
 
 # Initial displacement at time zero is zero
@@ -390,7 +411,6 @@ for timestep in range(1, max_timesteps+1):
     # Compute diagnostics:
     # output dimensional vertical displacement
     vertical_displacement.interpolate(vc(z.subfunctions[0])*D)
-    bc_displacement = DirichletBC(vertical_displacement.function_space(), 0, boundary.top)
     displacement_z_min = vertical_displacement.dat.data_ro_with_halos[bc_displacement.nodes].min(initial=0)
     displacement_min = vertical_displacement.comm.allreduce(displacement_z_min, MPI.MIN)  # Minimum displacement at surface (should be top left corner with greatest (-ve) deflection due to ice loading
     log("Greatest (-ve) displacement", displacement_min)
@@ -398,6 +418,13 @@ for timestep in range(1, max_timesteps+1):
     displacement_max = vertical_displacement.comm.allreduce(displacement_z_max, MPI.MAX)  # Minimum displacement at surface (should be top left corner with greatest (-ve) deflection due to ice loading
     log("Greatest (+ve) displacement", displacement_max)
     displacement_min_array.append([float(characteristic_maxwell_time*time/year_in_seconds), displacement_min])
+
+    surface_disp = vertical_displacement.dat.data_ro_with_halos[bc_displacement.nodes]
+    surface_disp_all = vertical_displacement.comm.gather(surface_disp)
+
+    if MPI.COMM_WORLD.rank == 0:
+        surface_disp_concat = np.concatenate(surface_disp_all)
+        displacement_df[f'surface_disp_step{timestep}'] = surface_disp_concat
 
 #    disp_norm_L2surf = assemble((z.subfunctions[0][vertical_component])**2 * ds(boundary.top))
  #   log("L2 surface norm displacement", disp_norm_L2surf)
@@ -410,6 +437,7 @@ for timestep in range(1, max_timesteps+1):
 
     if timestep % output_frequency == 0:
         log("timestep", timestep)
+        displacement_df.to_csv(surface_displacement_filename)
 
         if OUTPUT:
             output_file.write(*z.subfunctions, vertical_displacement)
