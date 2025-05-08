@@ -7,14 +7,13 @@ fs = 8
 
 fig, axd = plt.subplot_mosaic([["a", "c"],
                                ["b", "d"]],
-                               figsize=(7,9), dpi=300)
+                               figsize=(6.75,6), dpi=300)
 visc1d = plt.imread('visc1d.png')
 axd["a"].imshow(visc1d)
 axd["a"].axis('off') 
 visc3d = plt.imread('visc3d.png')
 axd["b"].imshow(visc3d)
 axd["b"].axis('off') 
-
 
 
 steps = [1, 10, 20, 30, 40, 50,]
@@ -56,9 +55,14 @@ for i in range(nsteps):
     axd['d'].plot(theta_1d, diff, color=colors[i], linestyle='-', linewidth=0.75)
 
 axd['c'].set_xlabel(r'Theta ($^\circ$)', fontsize=fs)
-axd['c'].set_ylabel('Vertical displacement (m)', fontsize=fs)
+axd['c'].set_ylabel('Radial displacement (m)', fontsize=fs)
 axd['c'].grid(True)
 axd['c'].tick_params(axis='both', which='major', labelsize=fs)
+
+axd['d'].set_xlabel(r'Theta ($^\circ$)', fontsize=fs)
+axd['d'].set_ylabel(r'Displacement difference (m)', fontsize=fs)
+axd['d'].grid(True)
+axd['d'].tick_params(axis='both', which='major', labelsize=fs)
 #ax.annotate(
 #        "Analytical solution",
 #        xy=(0.0375, 1), xycoords='axes fraction',
@@ -98,4 +102,4 @@ axd['d'].tick_params(axis='both', which='major', labelsize=fs)
 #        fontsize=30, verticalalignment='top',
 #        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
 '''
-plt.show()
+plt.savefig('08.05.25_Figure8_1dvs3dvisc_draft.png')
