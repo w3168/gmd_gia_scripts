@@ -18,91 +18,56 @@ parser.add_argument("--bulk_shear_ratio", default=1.94, type=float, help="Ratio 
 parser.add_argument("--radial_visc", action='store_true', help="Use 1D viscosity profile")
 parser.add_argument("--write_output", action='store_true', help="Write out Paraview VTK files")
 parser.add_argument("--optional_name", default="", type=str, help="Optional string to add to simulation name for outputs", required=False)
-parser.add_argument("--output_path", default="/data/viscoelastic/internal_variable_adjoint/forward/", type=str, help="Optional output path", required=False)
+parser.add_argument("--output_path", default="/data/viscoelastic/gravity_coupling/", type=str, help="Optional output path", required=False)
 args = parser.parse_args()
 
-name = f"forward-cylinder-2d-internalvariable-dispvel-{args.optional_name}-1dvisc{args.radial_visc}"
+name = f"submesh-justmanlte-2d-internalvariable-dispvel-{args.optional_name}-1dvisc{args.radial_visc}"
 
-# +
-# Set up geometry:
-radius_values = [6371e3, 6301e3, 5951e3, 5701e3, 3480e3]
-radius_values_grav = [6371e4, 6371e3, 6301e3, 5951e3, 5701e3, 3480e3]
-D = radius_values[0]-radius_values[-1]
-radius_values_tilde = np.array(radius_values)/D
-radius_values_tilde_grav = np.array(radius_values_grav)/D
- 
-layer_height_list = []
-layer_height_list_grav = []
-DG0_layers = args.DG0_layers
-nz_layers = [DG0_layers, DG0_layers, DG0_layers, DG0_layers]
-nz_layers_grav = [DG0_layers, DG0_layers, DG0_layers, DG0_layers, DG0_layers]
-
-for j in range(len(radius_values_tilde)-1):
-    i = len(radius_values_tilde)-2 - j  # want to start at the bottom
-    r = radius_values_tilde[i]
-    h = r - radius_values_tilde[i+1]
-    nz = nz_layers[i]
-    dz = h / nz
-
-    for i in range(nz):
-        layer_height_list.append(dz)
-
-for j in range(len(radius_values_tilde_grav)-1):
-    i = len(radius_values_tilde_grav)-2 - j  # want to start at the bottom
-    r = radius_values_tilde_grav[i]
-    h = r - radius_values_tilde_grav[i+1]
-    nz = nz_layers_grav[i]
-    dz = h / nz
-
-    for i in range(nz):
-        layer_height_list_grav.append(dz)
+full_mesh = Mesh("unstructured_annulus_refined_surface_gravity.msh")
+full_mesh.cartesian = False
+DG0 = FunctionSpace(full_mesh, "DG", 0)
+mantle_id = 101
+exterior_grav_id = 102
+# Heaviside step function in mantle
+I_mantle = Function(DG0)
+par_loop(("{[i] : 0 <= i < f.dofs}", "f[i, 0] = 1.0"),
+         dx(mantle_id),
+         {"f": (I_mantle, WRITE)})
 
 
-# Construct a circle mesh and then extrude into a cylinder:
-ncells = args.ncells
-rmin = radius_values_tilde[-1]
-surface_mesh = CircleManifoldMesh(ncells, radius=rmin, degree=1, name='surface_mesh')
-surface_mesh_grav = CircleManifoldMesh(ncells, radius=rmin, degree=1, name='surface_mesh_grav')
-
-mesh = ExtrudedMesh(
-    surface_mesh,
-    layers=len(layer_height_list),
-    layer_height=layer_height_list,
-    extrusion_type='radial'
-)
-
-mesh_grav = ExtrudedMesh(
-    surface_mesh_grav,
-    layers=len(layer_height_list_grav),
-    layer_height=layer_height_list_grav,
-    extrusion_type='radial'
-)
-
+mantle_indicator_file = VTKFile("mantle_indicator.pvd").write(I_mantle)
+dim = 2
+full_mesh.mark_entities(I_mantle, 999)
+full_mesh = RelabeledMesh(full_mesh, [I_mantle], [999])
+mesh = Submesh(full_mesh, dim, 999)
 mesh.cartesian = False
-mesh_grav.cartesian = False
-boundary = get_boundary_ids(mesh)
-boundary_grav = get_boundary_ids(mesh_grav)
-nz = f"{DG0_layers}perlayer"
 
-ds = CombinedSurfaceMeasure(mesh, degree=6)
-ds_grav = CombinedSurfaceMeasure(mesh, degree=6)
+Rg = 31855e3
+Re = 6371e3
+grav_mesh_depth = Rg-Re
+Rc = 3480e3
+D = Re-Rc
+
+
+Rc_id = 1
+Re_id = 2
+Rg_id = 3
 
 log("Area of annulus: ", assemble(Constant(1) * dx(domain=mesh)))
-log("Length of top: ", assemble(Constant(1) * ds(boundary.top, domain=mesh)))
-log("Length of bottom: ", assemble(Constant(1) * ds(boundary.bottom, domain=mesh)))
+log("Length of top: ", assemble(Constant(1) * ds(Re_id, domain=mesh)))
+log("Length of bottom: ", assemble(Constant(1) * ds(Rc_id, domain=mesh)))
 
-log("Area of annulus gravity mesh: ", assemble(Constant(1) * dx(domain=mesh_grav)))
-log("Length of top gravity mesh: ", assemble(Constant(1) * ds_grav(boundary_grav.top, domain=mesh_grav)))
-log("Length of bottom gravity mesh: ", assemble(Constant(1) * ds_grav(boundary_grav.bottom, domain=mesh_grav)))
-
+log("Area of annulus gravity mesh: ", assemble(Constant(1) * dx(domain=full_mesh)))
+log("Length of top gravity mesh: ", assemble(Constant(1) * ds(Rg_id, domain=full_mesh)))
+log("Length of bottom gravity mesh: ", assemble(Constant(1) * ds(Rc_id, domain=full_mesh)))
 # -
 
 # Set up function spaces:
 V = VectorFunctionSpace(mesh, "CG", 2)  # Displacement function space (vector)
-V_grav = FunctionSpace(mesh_grav, "CG", 2)  # Displacement function space (vector)
-S = TensorFunctionSpace(mesh, "DQ", 1)  # (Discontinuous) Stress tensor function space (tensor)
+V_grav = FunctionSpace(full_mesh, "CG", 2)  # Displacement function space (vector)
+S = TensorFunctionSpace(mesh, "DG", 1)  # (Discontinuous) Stress tensor function space (tensor)
 DG0 = FunctionSpace(mesh, "DG", 0)  # (Discontinuous) Stress tensor function space (tensor)
-DG0_grav = FunctionSpace(mesh_grav, "DG", 0)  # (Discontinuous) Stress tensor function space (tensor)
+DG0_grav = FunctionSpace(full_mesh, "DG", 0)  # (Discontinuous) Stress tensor function space (tensor)
 DG1 = FunctionSpace(mesh, "DG", 1)  # (Discontinuous) Stress tensor function space (tensor)
 R = FunctionSpace(mesh, "R", 0)  # Real function space (for constants)
 
@@ -139,7 +104,7 @@ log("Number of Velocity and internal variable DOF:", V.dim()+S.dim())
 # Let's start initialising some parameters. First of all Firedrake has a helpful function to give a symbolic representation of the mesh coordinates.
 
 X = SpatialCoordinate(mesh)
-X_grav = SpatialCoordinate(mesh_grav)
+X_grav = SpatialCoordinate(full_mesh)
 
 # Now we can set up the background profiles for the material properties.
 # In this case the density, shear modulus and viscosity only vary in the vertical direction.
@@ -150,9 +115,9 @@ X_grav = SpatialCoordinate(mesh_grav)
 
 
 # +
-density_values = [3037, 3438, 3871, 4978]
-shear_modulus_values = [0.50605e11, 0.70363e11, 1.05490e11, 2.28340e11]
-viscosity_values = [1e25, 1e21, 1e21, 2e21]
+density_values = [3037] #, 3438, 3871, 4978]
+shear_modulus_values = [0.50605e11],# 0.70363e11, 1.05490e11, 2.28340e11]
+viscosity_values = [1e21] #[1e25, 1e21, 1e21, 2e21]
 
 density_scale = 4500
 shear_modulus_scale = 1e11
@@ -171,20 +136,20 @@ def initialise_background_field(field, background_values):
 
 
 
-density = Function(DG0, name="density")
-initialise_background_field(density, density_values_tilde)
+density = Function(DG0, name="density").assign(1)
+#initialise_background_field(density, density_values_tilde)
 
-shear_modulus = Function(DG0, name="shear modulus")
-initialise_background_field(shear_modulus, shear_modulus_values_tilde)
+shear_modulus = Function(DG0, name="shear modulus").assign(1)
+#initialise_background_field(shear_modulus, shear_modulus_values_tilde)
 
 # if Pseudo incompressible set bulk modulus to a constant...
 # Otherwise use same jumps from shear modulus multiplied by a factor
 
-bulk_modulus = Function(DG0, name="bulk modulus")
-initialise_background_field(bulk_modulus, shear_modulus_values_tilde)
+bulk_modulus = Function(DG0, name="bulk modulus").assign(1)
+#initialise_background_field(bulk_modulus, shear_modulus_values_tilde)
 
-background_viscosity = Function(DG1, name="background viscosity")
-initialise_background_field(background_viscosity, viscosity_values_tilde)
+background_viscosity = Function(DG1, name="background viscosity").assign(1)
+#initialise_background_field(background_viscosity, viscosity_values_tilde)
 
 # Defined lateral viscosity regions
 def bivariate_gaussian(x, y, mu_x, mu_y, sigma_x, sigma_y, rho, normalised_area=False):
@@ -240,9 +205,9 @@ else:
 
 year_in_seconds = 8.64e4 * 365.25
 characteristic_maxwell_time = viscosity_scale / shear_modulus_scale
-for layer_visc, layer_mu in zip(viscosity_values, shear_modulus_values):
-    log(f"Maxwell time: {float(layer_visc/layer_mu/year_in_seconds):.0f} years")
-    log(f"Ratio to characteristic maxwell time: {float(layer_visc/layer_mu/characteristic_maxwell_time)}")
+#for layer_visc, layer_mu in zip(viscosity_values, shear_modulus_values):
+#    log(f"Maxwell time: {float(layer_visc/layer_mu/year_in_seconds):.0f} years")
+#    log(f"Ratio to characteristic maxwell time: {float(layer_visc/layer_mu/characteristic_maxwell_time)}")
 
 
 # +
@@ -281,7 +246,8 @@ Hice2 = 2000 / D
 disc_halfwidth1 = (2*pi/360) * 10  # Disk half width in radians
 disc_halfwidth2 = (2*pi/360) * 20  # Disk half width in radians
 surface_dx_smooth = 200*1e3
-ncells_smooth = 2*pi*radius_values[0] / surface_dx_smooth
+#ncells_smooth = 2*pi*radius_values[0] / surface_dx_smooth
+ncells_smooth = 20
 surface_resolution_radians_smooth = 2*pi / ncells_smooth
 colatitude = atan2(X[0], X[1])
 disc1_centre = (2*pi/360) * 25  # centre of disc1
@@ -307,11 +273,11 @@ ice_load = Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
 # +
 # Setup boundary conditions
 stokes_bcs = {
-    boundary.bottom: {'un': 0},
-    boundary.top: {'normal_stress': ice_load, 'free_surface': {}},
+    Rc_id: {'un': 0},
+    Re_id: {'normal_stress': ice_load, 'free_surface': {}},
 }
 
-gd = GeodynamicalDiagnostics(z, density, boundary.bottom, boundary.top)
+gd = GeodynamicalDiagnostics(z, density, Rc_id, Re_id)
 # -
 
 
@@ -369,10 +335,10 @@ Z_nullspace = create_stokes_nullspace(Z, closed=False, rotational=True)
 Z_near_nullspace = create_stokes_nullspace(Z, closed=True, rotational=True, translations=[0, 1])
 
 coupled_solver = InternalVariableSolver(z, approximation, coupled_dt=dt, bcs=stokes_bcs,
-                                       solver_parameters=direct_stokes_solver_parameters,
+                                       solver_parameters=direct_stokes_solver_parameters,)
 #                                        solver_parameters=iterative_parameters,
-                                       nullspace=Z_nullspace, transpose_nullspace=Z_nullspace,
-                                       near_nullspace=Z_near_nullspace)
+                                       #nullspace=Z_nullspace, transpose_nullspace=Z_nullspace,
+                                       #near_nullspace=Z_near_nullspace)
 
 
 # We next set up our output, in VTK format. This format can be read by programs like pyvista and Paraview.
@@ -382,7 +348,7 @@ coupled_solver = InternalVariableSolver(z, approximation, coupled_dt=dt, bcs=sto
 OUTPUT = args.write_output
 vertical_displacement = Function(V.sub(1), name="radial displacement")  # Function to store vertical displacement for output
 f = Function(V).interpolate(as_vector([X[0], X[1]]))
-bc_displacement = DirichletBC(vertical_displacement.function_space(), 0, boundary.top)
+bc_displacement = DirichletBC(vertical_displacement.function_space(), 0, Re_id)
 
 surface_x = f.sub(0).dat.data_ro_with_halos[bc_displacement.nodes]
 
@@ -401,7 +367,7 @@ if OUTPUT:
     log("hello visco output")
     visc_file = VTKFile(f"{args.output_path}{name}-visc.pvd")
     visc_file.write(viscosity)
-    output_file = VTKFile(f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.pvd")
+    output_file = VTKFile(f"{args.output_path}{name}-unstructured-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.pvd")
     output_file.write(*z.subfunctions, vertical_displacement)
 
 plog = ParameterLog(args.output_path+"params.log", mesh)
@@ -412,16 +378,16 @@ plog.log_str(
 velocity = Function(z.subfunctions[0], name="velocity")
 disp_old = Function(z.subfunctions[0], name="old_disp").assign(z.subfunctions[0])
 
-checkpoint_filename = f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulktoshear{args.bulk_shear_ratio}-nondim-chk.h5"
+checkpoint_filename = f"{args.output_path}{name}-unstructured-dt{dt_years}years-bulktoshear{args.bulk_shear_ratio}-nondim-chk.h5"
 
-displacement_filename = f"{args.output_path}min-displacement-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
-surface_displacement_filename = f"{args.output_path}surface-displacement-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
+displacement_filename = f"{args.output_path}min-displacement-{name}-unstructured-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
+surface_displacement_filename = f"{args.output_path}surface-displacement-{name}-unstructured-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.dat"
 
 
 # Initial displacement at time zero is zero
 displacement_min_array = [[0.0, 0.0]]
 
-objective_filename = f"{args.output_path}displacement-objective-{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.h5"
+objective_filename = f"{args.output_path}displacement-objective-{name}-unstructured-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.h5"
 objective_checkpoint_file = CheckpointFile(objective_filename, "w")
 objective_checkpoint_file.save_mesh(mesh)
 # -
@@ -436,20 +402,18 @@ objective_checkpoint_file.save_mesh(mesh)
 # Define the function space, trial and test functions
 phi = TrialFunction(V_grav)
 v = TestFunction(V_grav)
-grav_solution = Function(V, name="phi")
+grav_solution = Function(V_grav, name="phi")
 # For the forcing term we use DG to capture the density jump
 rho1_grav = Function(DG0_grav, name="rho1")
 rho1_grav.interpolate(dot(z.subfunctions[0], grad(density))+density*div(z.subfunctions[0]))
 
-grav_bcs = [DirichletBC(V_grav, 0.0, boundary_grav.top)]
+grav_bcs = [DirichletBC(V_grav, 0.0, Rg_id)]
 
 a = inner(grad(v), grad(phi)) * dx  # - v * dot(grad(phi), FacetNormal(mesh)) * ds(4)
 L = 4 * pi * rho1_grav * v * dx
 grav_problem = LinearVariationalProblem(a, L, grav_solution, bcs=grav_bcs)
 
 grav_solver = LinearVariationalSolver(grav_problem)
-# solve(L == R, solution, bcs=bcs)
-solve(L == R, solution, bcs=bcs)
 
 
 
@@ -505,7 +469,7 @@ for timestep in range(1, max_timesteps+1):
             np.savetxt(displacement_filename, displacement_min_array)
 
         plog.log_str(f"{timestep} {float(time)} {float(dt)} "
-                     f"{gd.u_rms()} {gd.u_rms_top()} {gd.ux_max(boundary.top)} "
+                     f"{gd.u_rms()} {gd.u_rms_top()} {gd.ux_max(Re_id)} "
                      )
 
 objective_checkpoint_file.close()
