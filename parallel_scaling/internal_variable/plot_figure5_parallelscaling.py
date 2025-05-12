@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import matplotlib
+import matplotlib.ticker as ticker
 import numpy as np
 
 
@@ -47,9 +47,10 @@ ax[1].semilogx(strong_unstructured[:, 0], total_cpu_time_unstructured_norm, colo
 ax[1].set_xlabel('No. of CPUs', fontsize=fs_lab)
 ax[1].set_ylabel('Normalised total CPU time', fontsize=fs_lab)
 ax[1].set_xlim((500,10000))
-#ax[1].set_ylim((0,220))
-ax[1].grid(True, axis='y', linestyle='dotted', linewidth=1)
-ax[1].tick_params(axis='both', which='major', labelsize=fs)
+ax[1].set_ylim((0,1.05))
+ax[1].yaxis.set_major_locator(ticker.MultipleLocator(0.1))
+ax[1].grid(True, axis='y', which='both', linestyle='dotted', linewidth=1)
+ax[1].tick_params(axis='both', which='both', labelsize=fs)
 ax[1].annotate('b)', (500, 1.1), fontsize=fs_lab, annotation_clip=False)
 
 figname = "Figure_5_parallelscaling_12.05.25"
