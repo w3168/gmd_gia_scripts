@@ -348,6 +348,8 @@ coupled_solver = InternalVariableSolver(z, approximation, coupled_dt=dt, bcs=sto
 # Create output file
 OUTPUT = args.write_output
 vertical_displacement = Function(V.sub(1), name="radial displacement")  # Function to store vertical displacement for output
+disp_x = Function(V.sub(0), name="displacement x")  # Function to store x displacement for output
+disp_y = Function(V.sub(1), name="displacement y")  # Function to store y displacement for output
 f = Function(V).interpolate(as_vector([X[0], X[1]]))
 bc_displacement = DirichletBC(vertical_displacement.function_space(), 0, boundary.top)
 
@@ -419,12 +421,19 @@ for timestep in range(1, max_timesteps+1):
     log("Greatest (+ve) displacement", displacement_max)
     displacement_min_array.append([float(characteristic_maxwell_time*time/year_in_seconds), displacement_min])
 
-    surface_disp = vertical_displacement.dat.data_ro_with_halos[bc_displacement.nodes]
-    surface_disp_all = vertical_displacement.comm.gather(surface_disp)
+    disp_x.interpolate(z.subfunctions[0][0]*D)
+    surface_disp_x = disp_x.dat.data_ro_with_halos[bc_displacement.nodes]
+    surface_disp_x_all = disp_x.comm.gather(surface_disp_x)
+    disp_y.interpolate(z.subfunctions[0][1]*D)
+    surface_disp_y = disp_y.dat.data_ro_with_halos[bc_displacement.nodes]
+    surface_disp_y_all = disp_y.comm.gather(surface_disp_y)
 
     if MPI.COMM_WORLD.rank == 0:
-        surface_disp_concat = np.concatenate(surface_disp_all)
-        displacement_df[f'surface_disp_step{timestep}'] = surface_disp_concat
+        surface_disp_x_concat = np.concatenate(surface_disp_x_all)
+        displacement_df[f'surface_disp_x_step{timestep}'] = surface_disp_x_concat
+        
+        surface_disp_y_concat = np.concatenate(surface_disp_y_all)
+        displacement_df[f'surface_disp_y_step{timestep}'] = surface_disp_y_concat
 
 #    disp_norm_L2surf = assemble((z.subfunctions[0][vertical_component])**2 * ds(boundary.top))
  #   log("L2 surface norm displacement", disp_norm_L2surf)
