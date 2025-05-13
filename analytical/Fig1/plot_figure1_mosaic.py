@@ -175,6 +175,9 @@ elastic_incomp = np.loadtxt("error_convergence/errors-elastic-incompressible-vis
 elastic_incomp_1000x = np.loadtxt("error_convergence/errors-elastic-incompressible-visc1e21-shear1e11-bulk1e14-lam8-compahpFalse-internalvariable-coupled-320cells_nondimensional_direct_T2tau-free-surface.dat")
 viscoelastic_comp = np.loadtxt("error_convergence/errors-viscoelastic-compressible-visc1e21-shear1e11-bulk2e11-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-320cells_nondimensional_direct_T2tau-free-surface.dat")
 viscoelastic_incomp = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e15-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
+viscoelastic_incomp_1000x = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e14-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
+viscoelastic_incomp_100x = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e13-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
+viscoelastic_incomp_10x = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e12-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
 
 
 dt_elastic = [0.1*0.5**i for i in range(7)]
@@ -203,11 +206,14 @@ axd["d"].annotate(
 for pos in np.linspace(-2, 10, 60):
     axd["e"].axline((pos, 0), slope=1, color='grey', transform=axd["e"].transAxes, alpha=0.8)
 axd["e"].loglog(dt_viscoelastic, viscoelastic_comp, color='k', linestyle='dotted', marker='x', label='Compressible')
-axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp, color='b', linestyle='dotted', marker='+', label='Incompressible')
+axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp, color='b', linestyle='dotted', marker='+', label='Incompressible (bulk/mu = 10000x)')
+axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp_1000x, color='r', linestyle='dotted', marker='+', label='Incompressible (bulk/mu = 1000x)')
+axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp_100x, color='orange', linestyle='dotted', marker='+', label='Incompressible (bulk/mu = 100x)')
+axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp_10x, color='green', linestyle='dotted', marker='+', label='Incompressible (bulk/mu = 10x)')
 axd["e"].set_xlabel(r'$\Delta t$ ($\alpha$)', fontsize='25')
 axd["e"].set_ylabel('L2 error', fontsize=25)
 axd["e"].tick_params(axis='both', which='both', labelsize=20)
-#axd["e"].legend(fontsize='15')
+axd["e"].legend(fontsize='15')
 axd["e"].grid(True)
 axd["e"].annotate(
         r"T$_\mathrm{end}$ = 160 $\alpha$",
@@ -231,6 +237,6 @@ for label, ax in axd.items():
 
 
 
-figname = "13.05.25_Figure1_analytical_compressibleincompressible_mosaic_bulk1000"
+figname = "14.05.25_Figure1_analytical_compressibleincompressible_mosaic_bulkcheck"
 fig.savefig(f'{figname}.png')
 
