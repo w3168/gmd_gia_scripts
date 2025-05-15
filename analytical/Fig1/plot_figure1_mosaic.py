@@ -12,7 +12,13 @@ fig, axd = plt.subplot_mosaic(
             [["a", "a"],
              ["b", "c"],
              ["d", "e"],],
-            figsize=(24,24))
+            figsize=(7,8), dpi=300, layout='tight')
+
+# fonts and linewidths etc
+fs = 8
+fs_lab = 9
+ms = 5
+lw = 0.5
 
 # timestepping
 rho0 = 4500  # density in kg/m^3
@@ -50,38 +56,38 @@ for i in range(1, max_timesteps):
 times = np.array(times)
 
 # Plot analytical solution for 1a and 1b
-axd["a"].plot(times/maxwell_time, eta_analytical, color='orange', linestyle='solid', label='Compressible')
-axd["a"].plot(times/maxwell_time, eta_analytical_incomp, color='b', linestyle='solid', label='Incompressible')
-axd["b"].plot(times/maxwell_time, eta_analytical, color='orange', linestyle='solid', label='Analytical (compressible)')
-axd["b"].plot(times/maxwell_time, eta_analytical_incomp, color='b', linestyle='solid', label='Analytical (incompressible)')
-axd["c"].plot(times/maxwell_time, eta_analytical, color='orange', linestyle='solid', label='Analytical (compressible)')
-axd["c"].plot(times/maxwell_time, eta_analytical_incomp, color='b', linestyle='solid', label='Analytical (incompressible)')
+axd["a"].plot(times/maxwell_time, eta_analytical, color='orange', lw=lw, linestyle='solid', label='Compressible')
+axd["a"].plot(times/maxwell_time, eta_analytical_incomp, color='b', lw=lw, linestyle='solid', label='Incompressible')
+axd["b"].plot(times/maxwell_time, eta_analytical, color='orange', lw=lw, linestyle='solid', label='Analytical (compressible)')
+axd["b"].plot(times/maxwell_time, eta_analytical_incomp, color='b', lw=lw, linestyle='solid', label='Analytical (incompressible)')
+axd["c"].plot(times/maxwell_time, eta_analytical, color='orange', lw=lw, linestyle='solid', label='Analytical (compressible)')
+axd["c"].plot(times/maxwell_time, eta_analytical_incomp, color='b', lw=lw, linestyle='solid', label='Analytical (incompressible)')
 
-axd["a"].set_xlabel(r'Time ($\alpha$)', fontsize='25')
-axd["a"].set_ylabel('Vertical displacement (m)', fontsize=25)
-axd["a"].grid(True)
-axd["a"].tick_params(axis='both', which='major', labelsize=20)
-axd["a"].legend(fontsize='30')
+axd["a"].set_xlabel(r'Time ($\alpha$)', fontsize=fs_lab)
+axd["a"].set_ylabel('Vertical displacement (m)', fontsize=fs_lab)
+axd["a"].grid(True, lw=lw)
+axd["a"].tick_params(axis='both', which='major', labelsize=fs)
+axd["a"].legend(fontsize=fs_lab)
 axd["a"].annotate(
         "Analytical solution",
-        xy=(0.0375, 1), xycoords='axes fraction',
-        xytext=(+0.5, -0.5), textcoords='offset fontsize',
-        fontsize=30, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
-axd["a"].add_patch(plt.Rectangle((-1, -5), 2, 40, ls="--", lw=2, ec="black", fc="none"))
+        xy=(0.045, 1), xycoords='axes fraction',
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+axd["a"].add_patch(plt.Rectangle((-1, -5), 2, 40, ls="--", lw=1.25*lw, ec="black", fc="none"))
 axd["a"].annotate(
         "b",
-        xy=(-7, 110), 
-        xytext=(+0.5, -0.5), textcoords='offset fontsize',
-        fontsize=30, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
-axd["a"].add_patch(plt.Rectangle((100, 700), 60, 190, ls="--", lw=2, ec="black", fc="none"))
+        xy=(-9, 200), 
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black',lw=lw, pad=5.0))
+axd["a"].add_patch(plt.Rectangle((99, 700), 62, 190, ls="--", lw=1.5*lw, ec="black", fc="none"))
 axd["a"].annotate(
         "c",
-        xy=(154, 850), 
-        xytext=(+0.5, -0.5), textcoords='offset fontsize',
-        fontsize=30, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
+        xy=(152, 870), 
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black',lw=lw, pad=4.5))
 
 
 ls = [(0, (1, 10)), (0, (1, 5)), (0, (5, 10)), 
@@ -89,8 +95,6 @@ ls = [(0, (1, 10)), (0, (1, 5)), (0, (5, 10)),
      ]
 # plot figure 1a elastic disp through time
 
-ms = 10
-lw = 2
 
 for j in range(3):
     disp_time_series = [0.]
@@ -109,19 +113,19 @@ for j in range(3):
     disp_time_series.append(disp_max)
     axd["b"].plot(times, disp_time_series, color='b', linestyle='dashed', marker='x',markersize=ms,linewidth=lw, label=rf'dt = {dt} $\alpha$ (incompressible, bulk/mu = 10000)')
     
-axd["b"].set_xlabel(r'Time ($\alpha$)', fontsize='25')
-axd["b"].set_ylabel('Vertical displacement (m)', fontsize=25)
-axd["b"].grid(True)
-axd["b"].tick_params(axis='both', which='major', labelsize=18)
+axd["b"].set_xlabel(r'Time ($\alpha$)', fontsize=fs_lab)
+axd["b"].set_ylabel('Vertical displacement (m)', fontsize=fs_lab)
+axd["b"].grid(True, lw=lw)
+axd["b"].tick_params(axis='both', which='major', labelsize=fs)
 #axd["b"].legend(fontsize='15')
 axd["b"].set_xlim(0, 0.11)
 axd["b"].set_ylim(0, 25)
 axd["b"].annotate(
         r"T$_\mathrm{end}$ = $\Delta$t",
-        xy=(0.075, 1), xycoords='axes fraction',
-        xytext=(+0.5, -0.5), textcoords='offset fontsize',
-        fontsize=30, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
+        xy=(0.1, 1), xycoords='axes fraction',
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=4.5))
 
 # plot figure 1c viscoelastic disp through time
 for j in range(3):
@@ -151,19 +155,19 @@ for j in range(3):
         disp_time_series.append(disp_max)
     axd["c"].plot(times, disp_time_series, color='blue', linestyle='dashed', marker='x',markersize=ms,linewidth=lw, label=rf'dt = {dt} $\alpha$ (incompressible)')
 
-axd["c"].set_xlabel(r'Time ($\alpha$)', fontsize='25')
-axd["c"].set_ylabel('Vertical displacement (m)', fontsize=25)
-axd["c"].grid(True)
-axd["c"].tick_params(axis='both', which='major', labelsize=18)
+axd["c"].set_xlabel(r'Time ($\alpha$)', fontsize=fs_lab)
+axd["c"].set_ylabel('Vertical displacement (m)', fontsize=fs_lab)
+axd["c"].grid(True, lw=lw)
+axd["c"].tick_params(axis='both', which='major', labelsize=fs)
 #axd["c"].legend(fontsize='15')
 axd["c"].set_xlim(100, 160)
 axd["c"].set_ylim(700, 890)
 axd["c"].annotate(
         r"T$_\mathrm{end}$ = 160 $\alpha$",
-        xy=(0.075, 1), xycoords='axes fraction',
-        xytext=(+0.5, -0.5), textcoords='offset fontsize',
-        fontsize=30, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
+        xy=(0.1, 1), xycoords='axes fraction',
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=4.5))
 
 
 # Figure 1d and 1e
@@ -179,53 +183,53 @@ dt_viscoelastic = [16*0.5**i for i in range(6)]
 print(dt_elastic)
 
 for pos in np.linspace(-2, 1, 20):
-    axd["d"].axline((pos, 0), slope=1, color='grey', transform=axd["d"].transAxes, alpha=0.8)
+    axd["d"].axline((pos, 0), slope=1, color='grey', transform=axd["d"].transAxes,lw=lw, alpha=0.8)
 axd["d"].loglog(dt_elastic, elastic_comp, color='orange', linestyle='dashed', marker='o',markersize=ms,linewidth=lw, label='Compressible')
 axd["d"].loglog(dt_elastic, elastic_incomp, color='b', linestyle='dashed', marker='x',markersize=ms, linewidth=lw, label='Incompressible')
-axd["d"].set_xlabel(r'$\Delta t$ ($\alpha$)', fontsize='25')
-axd["d"].set_ylabel('L2 error', fontsize=25)
-axd["d"].tick_params(axis='both', which='both', labelsize=20)
+axd["d"].set_xlabel(r'$\Delta t$ ($\alpha$)', fontsize=fs_lab)
+axd["d"].set_ylabel('L2 error', fontsize=fs_lab)
+axd["d"].tick_params(axis='both', which='both', labelsize=fs)
 #axd["d"].legend(fontsize='15')
-axd["d"].grid(True)
+axd["d"].grid(True, lw=lw)
 axd["d"].annotate(
         r"T$_\mathrm{end}$ = $\Delta$t",
-        xy=(0.075, 1), xycoords='axes fraction',
-        xytext=(+0.5, -0.5), textcoords='offset fontsize',
-        fontsize=30, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
+        xy=(0.1, 1), xycoords='axes fraction',
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black',lw=lw, pad=4.5))
 
 # Viscoelastic error convergence
 for pos in np.linspace(-2, 10, 60):
-    axd["e"].axline((pos, 0), slope=1, color='grey', transform=axd["e"].transAxes, alpha=0.8)
+    axd["e"].axline((pos, 0), slope=1, color='grey', transform=axd["e"].transAxes, lw=lw, alpha=0.8)
 axd["e"].loglog(dt_viscoelastic, viscoelastic_comp, color='orange', linestyle='dashed', marker='o',markersize=ms, linewidth=lw, label='Compressible')
 axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp, color='b', linestyle='dashed', linewidth=lw, marker='x',markersize=ms, label='Incompressible')
-axd["e"].set_xlabel(r'$\Delta t$ ($\alpha$)', fontsize='25')
-axd["e"].set_ylabel('L2 error', fontsize=25)
-axd["e"].tick_params(axis='both', which='both', labelsize=20)
+axd["e"].set_xlabel(r'$\Delta t$ ($\alpha$)', fontsize=fs_lab)
+axd["e"].set_ylabel('L2 error', fontsize=fs_lab)
+axd["e"].tick_params(axis='both', which='both', labelsize=fs)
 #axd["e"].legend(fontsize='15')
-axd["e"].grid(True)
+axd["e"].grid(True, lw=lw)
 axd["e"].annotate(
         r"T$_\mathrm{end}$ = 160 $\alpha$",
-        xy=(0.075, 1), xycoords='axes fraction',
-        xytext=(+0.5, -0.5), textcoords='offset fontsize',
-        fontsize=30, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
+        xy=(0.1, 1), xycoords='axes fraction',
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=4.5))
 
 for label, ax in axd.items():
     # Use Axes.annotate to put the label
     # - at the top left corner (axes fraction (0, 1)),
     # - offset half-a-fontsize right and half-a-fontsize down
-    #   (offset fontsize (+0.5, -0.5)),
+    #   (offset fontsize (1, -1)),
     # i.e. just inside the axes.
     ax.annotate(
         label,
         xy=(0, 1), xycoords='axes fraction',
-        xytext=(+0.5, -0.5), textcoords='offset fontsize',
-        fontsize=30, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black', pad=5.0, lw=lw))
 
 
 
-figname = "14.05.25_Figure1_analytical_compressibleincompressible_mosaic_bulkdiff_simplify"
+figname = "15.05.25_Figure1_analytical_compressibleincompressible_mosaic_resize"
 fig.savefig(f'{figname}.png')
 
