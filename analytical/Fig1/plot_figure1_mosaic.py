@@ -50,11 +50,11 @@ for i in range(1, max_timesteps):
 times = np.array(times)
 
 # Plot analytical solution for 1a and 1b
-axd["a"].plot(times/maxwell_time, eta_analytical, color='k', linestyle='solid', label='Compressible')
+axd["a"].plot(times/maxwell_time, eta_analytical, color='orange', linestyle='solid', label='Compressible')
 axd["a"].plot(times/maxwell_time, eta_analytical_incomp, color='b', linestyle='solid', label='Incompressible')
-axd["b"].plot(times/maxwell_time, eta_analytical, color='k', linestyle='solid', label='Analytical (compressible)')
+axd["b"].plot(times/maxwell_time, eta_analytical, color='orange', linestyle='solid', label='Analytical (compressible)')
 axd["b"].plot(times/maxwell_time, eta_analytical_incomp, color='b', linestyle='solid', label='Analytical (incompressible)')
-axd["c"].plot(times/maxwell_time, eta_analytical, color='k', linestyle='solid', label='Analytical (compressible)')
+axd["c"].plot(times/maxwell_time, eta_analytical, color='orange', linestyle='solid', label='Analytical (compressible)')
 axd["c"].plot(times/maxwell_time, eta_analytical_incomp, color='b', linestyle='solid', label='Analytical (incompressible)')
 
 axd["a"].set_xlabel(r'Time ($\alpha$)', fontsize='25')
@@ -68,13 +68,14 @@ axd["a"].annotate(
         xytext=(+0.5, -0.5), textcoords='offset fontsize',
         fontsize=30, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
+axd["a"].add_patch(plt.Rectangle((-1, -5), 2, 40, ls="--", lw=2, ec="black", fc="none"))
 axd["a"].annotate(
         "b",
         xy=(-7, 110), 
         xytext=(+0.5, -0.5), textcoords='offset fontsize',
         fontsize=30, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
-axd["a"].add_patch(plt.Rectangle((100, 700), 60, 180, ls="--", lw=2, ec="black", fc="none"))
+axd["a"].add_patch(plt.Rectangle((100, 700), 60, 190, ls="--", lw=2, ec="black", fc="none"))
 axd["a"].annotate(
         "c",
         xy=(154, 850), 
@@ -88,7 +89,10 @@ ls = [(0, (1, 10)), (0, (1, 5)), (0, (5, 10)),
      ]
 # plot figure 1a elastic disp through time
 
-for j in range(6):
+ms = 10
+lw = 2
+
+for j in range(3):
     disp_time_series = [0.]
     dt = 0.1*0.5**j
     times = [0., dt]
@@ -97,21 +101,14 @@ for j in range(6):
     disp_max = disp_df[f"surface_disp_step1"].max()
     disp_time_series.append(disp_max)
     times = np.array(times)
-    axd["b"].plot(times, disp_time_series, color='k', linestyle='dashed', marker='x', label=rf'dt = {dt} $\alpha$ (compressible)')
+    axd["b"].plot(times, disp_time_series, color='orange', linestyle='dashed', marker='o', markersize=ms,linewidth=lw, label=rf'dt = {dt} $\alpha$ (compressible)')
     # Incompressible
     disp_time_series = [0.]
     disp_df = pd.read_csv(f"surface_disp/surface_displacement_dt{dt}_nx320arrays_bulktoshear10000.0.csv")
     disp_max = disp_df[f"surface_disp_step1"].max()
     disp_time_series.append(disp_max)
-    axd["b"].plot(times, disp_time_series, color='b', linestyle='dashed', marker='x', label=rf'dt = {dt} $\alpha$ (incompressible, bulk/mu = 10000)')
+    axd["b"].plot(times, disp_time_series, color='b', linestyle='dashed', marker='x',markersize=ms,linewidth=lw, label=rf'dt = {dt} $\alpha$ (incompressible, bulk/mu = 10000)')
     
-    # Incompressible 1000x
-    disp_time_series = [0.]
-    disp_df = pd.read_csv(f"surface_disp/surface_displacement_dt{dt}_nx320arrays_bulktoshear1000.0.csv")
-    disp_max = disp_df[f"surface_disp_step1"].max()
-    disp_time_series.append(disp_max)
-    axd["b"].plot(times, disp_time_series, color='r', linestyle='dashed', marker='x', label=rf'dt = {dt} $\alpha$ (incompressible bulk/mu= 1000x)')
-
 axd["b"].set_xlabel(r'Time ($\alpha$)', fontsize='25')
 axd["b"].set_ylabel('Vertical displacement (m)', fontsize=25)
 axd["b"].grid(True)
@@ -127,7 +124,7 @@ axd["b"].annotate(
         bbox=dict(facecolor='white', edgecolor='black', pad=5.0))
 
 # plot figure 1c viscoelastic disp through time
-for j in range(5):
+for j in range(3):
     disp_time_series = [0.]
     times = [0.]
     dt = 16*0.5**j
@@ -141,18 +138,18 @@ for j in range(5):
         disp_time_series.append(disp_max)
 
     times = np.array(times)
-    axd["c"].plot(times, disp_time_series, color='k', linestyle='dotted', marker='x', label=rf'dt = {dt} $\alpha$ (compressible)')
+    axd["c"].plot(times, disp_time_series, color='orange', linestyle='dashed', marker='o',markersize=ms,linewidth=lw, label=rf'dt = {dt} $\alpha$ (compressible)')
     
     # Plot incompressible
     disp_time_series = [0.]
-    disp_df = pd.read_csv(f"surface_disp/surface_displacement_dt{dt}_nx640arrays_bulktoshear10000.0.csv")
+    disp_df = pd.read_csv(f"surface_disp/surface_displacement_dt{dt}_nx640arrays_bulktoshear100.0.csv")
     surf_x = disp_df['surface_points']
     xunique, unique_i = np.unique(surf_x, return_index=True)
 
     for i in range(1, max_timesteps+1):
         disp_max = disp_df[f"surface_disp_step{i}"].max()
         disp_time_series.append(disp_max)
-    axd["c"].plot(times, disp_time_series, color='blue', linestyle='dotted', marker='x', label=rf'dt = {dt} $\alpha$ (incompressible)')
+    axd["c"].plot(times, disp_time_series, color='blue', linestyle='dashed', marker='x',markersize=ms,linewidth=lw, label=rf'dt = {dt} $\alpha$ (incompressible)')
 
 axd["c"].set_xlabel(r'Time ($\alpha$)', fontsize='25')
 axd["c"].set_ylabel('Vertical displacement (m)', fontsize=25)
@@ -160,7 +157,7 @@ axd["c"].grid(True)
 axd["c"].tick_params(axis='both', which='major', labelsize=18)
 #axd["c"].legend(fontsize='15')
 axd["c"].set_xlim(100, 160)
-axd["c"].set_ylim(700, 880)
+axd["c"].set_ylim(700, 890)
 axd["c"].annotate(
         r"T$_\mathrm{end}$ = 160 $\alpha$",
         xy=(0.075, 1), xycoords='axes fraction',
@@ -172,12 +169,8 @@ axd["c"].annotate(
 # Figure 1d and 1e
 elastic_comp = np.loadtxt("error_convergence/errors-elastic-compressible-visc1e21-shear1e11-bulk2e11-lam8-compahpFalse-internalvariable-coupled-320cells_nondimensional_direct_T2tau-free-surface.dat")
 elastic_incomp = np.loadtxt("error_convergence/errors-elastic-incompressible-visc1e21-shear1e11-bulk1e15-lam8-compahpFalse-internalvariable-coupled-320cells_nondimensional_direct_T2tau-free-surface.dat")
-elastic_incomp_1000x = np.loadtxt("error_convergence/errors-elastic-incompressible-visc1e21-shear1e11-bulk1e14-lam8-compahpFalse-internalvariable-coupled-320cells_nondimensional_direct_T2tau-free-surface.dat")
 viscoelastic_comp = np.loadtxt("error_convergence/errors-viscoelastic-compressible-visc1e21-shear1e11-bulk2e11-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-320cells_nondimensional_direct_T2tau-free-surface.dat")
-viscoelastic_incomp = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e15-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
-viscoelastic_incomp_1000x = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e14-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
-viscoelastic_incomp_100x = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e13-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
-viscoelastic_incomp_10x = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e12-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
+viscoelastic_incomp = np.loadtxt("error_convergence/errors-viscoelastic-incompressible-visc1e21-shear1e11-bulk1e13-lam8-dtfstart16alpha-compahpFalse_160alpha-internalvariable-coupled-640cells_nondimensional_direct_T2tau-free-surface.dat")
 
 
 dt_elastic = [0.1*0.5**i for i in range(7)]
@@ -187,13 +180,12 @@ print(dt_elastic)
 
 for pos in np.linspace(-2, 1, 20):
     axd["d"].axline((pos, 0), slope=1, color='grey', transform=axd["d"].transAxes, alpha=0.8)
-axd["d"].loglog(dt_elastic, elastic_comp, color='k', linestyle='dashed', marker='x', label='Compressible')
-axd["d"].loglog(dt_elastic, elastic_incomp, color='b', linestyle='dashed', marker='+', label='Incompressible (bulk/mu = 10000)')
-axd["d"].loglog(dt_elastic, elastic_incomp_1000x, color='r', linestyle='dashed', marker='^', label='Incompressible (bulk/mu = 1000x)')
+axd["d"].loglog(dt_elastic, elastic_comp, color='orange', linestyle='dashed', marker='o',markersize=ms,linewidth=lw, label='Compressible')
+axd["d"].loglog(dt_elastic, elastic_incomp, color='b', linestyle='dashed', marker='x',markersize=ms, linewidth=lw, label='Incompressible')
 axd["d"].set_xlabel(r'$\Delta t$ ($\alpha$)', fontsize='25')
 axd["d"].set_ylabel('L2 error', fontsize=25)
 axd["d"].tick_params(axis='both', which='both', labelsize=20)
-axd["d"].legend(fontsize='15')
+#axd["d"].legend(fontsize='15')
 axd["d"].grid(True)
 axd["d"].annotate(
         r"T$_\mathrm{end}$ = $\Delta$t",
@@ -205,15 +197,12 @@ axd["d"].annotate(
 # Viscoelastic error convergence
 for pos in np.linspace(-2, 10, 60):
     axd["e"].axline((pos, 0), slope=1, color='grey', transform=axd["e"].transAxes, alpha=0.8)
-axd["e"].loglog(dt_viscoelastic, viscoelastic_comp, color='k', linestyle='dotted', marker='x', label='Compressible')
-axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp, color='b', linestyle='dotted', marker='+', label='Incompressible (bulk/mu = 10000x)')
-axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp_1000x, color='r', linestyle='dotted', marker='+', label='Incompressible (bulk/mu = 1000x)')
-axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp_100x, color='orange', linestyle='dotted', marker='+', label='Incompressible (bulk/mu = 100x)')
-axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp_10x, color='green', linestyle='dotted', marker='+', label='Incompressible (bulk/mu = 10x)')
+axd["e"].loglog(dt_viscoelastic, viscoelastic_comp, color='orange', linestyle='dashed', marker='o',markersize=ms, linewidth=lw, label='Compressible')
+axd["e"].loglog(dt_viscoelastic, viscoelastic_incomp, color='b', linestyle='dashed', linewidth=lw, marker='x',markersize=ms, label='Incompressible')
 axd["e"].set_xlabel(r'$\Delta t$ ($\alpha$)', fontsize='25')
 axd["e"].set_ylabel('L2 error', fontsize=25)
 axd["e"].tick_params(axis='both', which='both', labelsize=20)
-axd["e"].legend(fontsize='15')
+#axd["e"].legend(fontsize='15')
 axd["e"].grid(True)
 axd["e"].annotate(
         r"T$_\mathrm{end}$ = 160 $\alpha$",
@@ -237,6 +226,6 @@ for label, ax in axd.items():
 
 
 
-figname = "14.05.25_Figure1_analytical_compressibleincompressible_mosaic_bulkcheck"
+figname = "14.05.25_Figure1_analytical_compressibleincompressible_mosaic_bulkdiff_simplify"
 fig.savefig(f'{figname}.png')
 
