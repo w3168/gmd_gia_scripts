@@ -44,8 +44,9 @@ taboo_displacement_short = np.loadtxt(f"{folder}taboo_short_picks_fig3b.csv", de
 taboo_displacement_long = np.loadtxt(f"{folder}taboo_picks_fig4b.csv", delimiter=',')
 
 
-fig, ax = plt.subplots(2, 2, figsize=(8, 7), dpi=300, sharex='col', layout='tight')
-#plt.tight_layout(w_pad = 0, h_pad=0.1)
+fig, ax = plt.subplots(2, 2, figsize=(8, 7), dpi=300, sharex='col', layout='constrained')
+fig.get_layout_engine().set(w_pad=4 / 72, h_pad=1 / 72, hspace=1/144,
+                            wspace=0)
 plt.xticks(fontsize=fs)
 plt.yticks(fontsize=fs)
 # Plot short, 1D
@@ -74,7 +75,7 @@ ax[0,0].annotate(
 # Add inset
 x1, x2, y1, y2 = 95, 105, -0.67, -0.61  # subregion of the original image
 axins = ax[0,0].inset_axes(
-    [0.575, 0.45, 0.36, 0.36],
+    [0.575, 0.45, 0.34, 0.355],
     xlim=(x1, x2), ylim=(y1, y2),) #yticklabels=[])
 
 axins.plot(abaqus_displacement_short[:,0],abaqus_displacement_short[:,1], color=abaqus_colour, linestyle='dotted', label='Abaqus', lw=lw_zoom)
@@ -177,7 +178,7 @@ ax[1,0].annotate(
 # Add inset
 x1, x2, y1, y2 = 95, 105, -1.08, -0.935  # subregion of the original image
 axins = ax[1,0].inset_axes(
-    [0.575, 0.45, 0.36, 0.36],
+    [0.575, 0.45, 0.34, 0.355],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
 
 axins.plot(abaqus_displacement_short_lowvisc[:,0],abaqus_displacement_short_lowvisc[:,1], color=abaqus_colour, linestyle='dotted', label='Abaqus', lw=lw_zoom)
