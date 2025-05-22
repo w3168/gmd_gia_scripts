@@ -58,6 +58,7 @@ ax[0, 0].plot(gadopt_displacement_short[:,0], gadopt_displacement_short[:,1], co
 ax[0, 0].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[0, 0].grid(True, linestyle='dotted')
 ax[0, 0].tick_params(axis='both', which='major', labelsize=fs)
+ax[0, 0].xaxis.tick_top()
 ax[0,0].legend(fontsize=fs_lab, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 ax[0,0].annotate(
         "a",
@@ -109,6 +110,7 @@ ax[0, 1].plot(gadopt_displacement[:,0]/1e3, gadopt_displacement[:,1], color=gado
 #ax[0, 1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[0, 1].grid(True, linestyle='dotted')
 ax[0, 1].tick_params(axis='both', which='major', labelsize=fs)
+ax[0, 1].xaxis.tick_top()
 #ax[0, 1].legend(fontsize)
 ax[0,1].annotate(
         "b",
@@ -245,6 +247,6 @@ w2 = x2-x1
 h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
-figname = "Figure_3_incompressible_weerdesteijn_20.05.25"
+figname = "Figure_3_incompressible_weerdesteijn_21.05.25"
 fig.savefig(f'{figname}.png')
 
