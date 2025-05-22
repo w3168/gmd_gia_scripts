@@ -75,7 +75,7 @@ axd["a"].set_xlabel(r'Time ($\alpha$)', fontsize=fs_lab)
 axd["a"].set_ylabel('Vertical displacement (m)', fontsize=fs_lab)
 axd["a"].grid(True, lw=lw, linestyle='dotted')
 axd["a"].tick_params(axis='both', which='major', labelsize=fs)
-axd["a"].legend(fontsize=fs_lab, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
+axd["a"].legend(fontsize=fs_lab, facecolor='white', framealpha=1, edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 axd["a"].annotate(
         "Analytical solution",
         xy=(0.045, 1), xycoords='axes fraction',
@@ -238,6 +238,6 @@ for label, ax in axd.items():
 
 
 
-figname = "19.05.25_Figure1_analytical_compressibleincompressible_mosaic_resize"
+figname = "20.05.25_Figure1_analytical_compressibleincompressible_mosaic_resize"
 fig.savefig(f'{figname}.png')
 
