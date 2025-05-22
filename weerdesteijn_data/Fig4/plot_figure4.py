@@ -8,7 +8,7 @@ folder_gadopt = "./"
 
 cmap = colormaps['Set1']
 colours = cmap.colors
-gadopt_colour = colours[1]
+default_colour = colours[1]
 
 # fonts and linewidths etc
 fs = 9
@@ -45,7 +45,7 @@ fig.get_layout_engine().set(w_pad=1 / 72, h_pad=1 / 72, hspace=1/144, wspace=1/1
 #plt.rcParams.update({'font.size': 30})
 
 # Plot dx sensitivity
-ax[0, 0].plot(gadopt_displacement_dx5[:,0]/1e3, gadopt_displacement_dx5[:,1], 'b-', label='5 km', lw=lw)
+ax[0, 0].plot(gadopt_displacement_dx5[:,0]/1e3, gadopt_displacement_dx5[:,1], color=default_colour, linestyle='-', label='5 km', lw=lw)
 ax[0, 0].plot(gadopt_displacement_dx10[:,0]/1e3, gadopt_displacement_dx10[:,1], color='k', linestyle='--',marker='x',markevery=10, label='10 km',alpha=0.5, lw=lw)
 ax[0, 0].plot(gadopt_displacement_dx20[:,0]/1e3, gadopt_displacement_dx20[:,1], color='k', linestyle='--', marker='o', markevery=10, label='20 km',alpha=0.5, lw=lw)
 #ax[0, 0].set_xlabel('Time (ka)', fontsize=fs_lab)
@@ -73,7 +73,7 @@ x1, x2, y1, y2 = 87, 93, -64.75, -62  # subregion of the original image
 axins = ax[0,0].inset_axes(
     [0.14, 0.11, 0.325, 0.325],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
-axins.plot(gadopt_displacement_dx5[:,0]/1e3, gadopt_displacement_dx5[:,1], 'b-', label='dx = 5 km', lw=lw_zoom)
+axins.plot(gadopt_displacement_dx5[:,0]/1e3, gadopt_displacement_dx5[:,1], color=default_colour, linestyle='-', label='dx = 5 km', lw=lw_zoom)
 axins.plot(gadopt_displacement_dx10[:,0]/1e3, gadopt_displacement_dx10[:,1], color='k', linestyle='--',marker='x',markevery=10, label='dx = 10 km',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_dx20[:,0]/1e3, gadopt_displacement_dx20[:,1], color='k', linestyle='--', marker='o', markevery=10, label='dx = 20 km',alpha=0.5, lw=lw_zoom)
 
@@ -95,7 +95,7 @@ h2 = y2-y1
 ax[0,0].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 # Plot nz sensitivity
-ax[0, 1].plot(gadopt_displacement_nz10[:,0]/1e3, gadopt_displacement_nz10[:,1], 'b-', label='40 cells', lw=lw)
+ax[0, 1].plot(gadopt_displacement_nz10[:,0]/1e3, gadopt_displacement_nz10[:,1], color=default_colour, linestyle='-', label='40 cells', lw=lw)
 ax[0, 1].plot(gadopt_displacement_nz5[:,0]/1e3, gadopt_displacement_nz5[:,1], color='k', linestyle='--',marker='x',markevery=10, label='20 cells',alpha=0.5, lw=lw)
 ax[0, 1].plot(gadopt_displacement_nz2[:,0]/1e3, gadopt_displacement_nz2[:,1], color='k', linestyle='--', marker='o', markevery=10, label='8 cells',alpha=0.5, lw=lw)
 ax[0, 1].plot(gadopt_displacement_nz1[:,0]/1e3, gadopt_displacement_nz1[:,1], color='k', linestyle='--', marker='^', markevery=10, label='4 cells',alpha=0.5, lw=lw)
@@ -124,7 +124,7 @@ x1, x2, y1, y2 = 86, 94, -66, -58  # subregion of the original image
 axins = ax[0,1].inset_axes(
     [0.14, 0.11, 0.325, 0.325],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
-axins.plot(gadopt_displacement_nz10[:,0]/1e3, gadopt_displacement_nz10[:,1], 'b-', label='10 cells per layer', lw=lw)
+axins.plot(gadopt_displacement_nz10[:,0]/1e3, gadopt_displacement_nz10[:,1], color=default_colour, linestyle='-', label='10 cells per layer', lw=lw)
 axins.plot(gadopt_displacement_nz5[:,0]/1e3, gadopt_displacement_nz5[:,1], color='k', linestyle='--',marker='x',markevery=10, label='5 cells per layer',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_nz2[:,0]/1e3, gadopt_displacement_nz2[:,1], color='k', linestyle='--', marker='o', markevery=10, label='2 cells per layer',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_nz1[:,0]/1e3, gadopt_displacement_nz1[:,1], color='k', linestyle='--', marker='^', markevery=10, label='1 cell per layer',alpha=0.5, lw=lw_zoom)
@@ -146,7 +146,7 @@ h2 = y2-y1
 ax[0,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 # Plot dt sensitivity
-ax[1, 0].plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], 'b-', label='1 ka', lw=lw)
+ax[1, 0].plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], color=default_colour, linestyle='-', label='1 ka', lw=lw)
 ax[1, 0].plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='2 ka',alpha=0.5, lw=lw)
 ax[1, 0].plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label=r'5 ka',alpha=0.5, lw=lw)
 ax[1, 0].plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='--', marker='^', markevery=1, label='10 ka',alpha=0.5, lw=lw)
@@ -173,7 +173,7 @@ x1, x2, y1, y2 = 87, 93, -64.75, -62  # subregion of the original image
 axins = ax[1,0].inset_axes(
     [0.14, 0.11, 0.325, 0.325],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
-axins.plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], 'b-', label='dt = 1 ka', lw=lw)
+axins.plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], color=default_colour, linestyle='-', label='dt = 1 ka', lw=lw)
 axins.plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='dt = 2 ka',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label='dt = 5 ka',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='--', marker='^', markevery=1, label='dt = 10 ka',alpha=0.5, lw=lw_zoom)
@@ -196,7 +196,7 @@ ax[1,0].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec=
 
 # Plot bulk
 ax[1, 1].plot(gadopt_displacement_bulk2[:,0]/1e3, gadopt_displacement_bulk2[:,1], color='k', linestyle='--',marker='x',markevery=10, label='2',alpha=1, lw=lw)
-ax[1, 1].plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], 'b-', label='100', lw=lw)
+ax[1, 1].plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color=default_colour, linestyle='-', label='100', lw=lw)
 ax[1, 1].plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color='k', linestyle='--', marker='o', markevery=10, label='1000',alpha=0.5, lw=lw)
 ax[1, 1].set_xlabel('Time (ka)', fontsize=fs_lab)
 #ax[1, 1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
@@ -224,7 +224,7 @@ axins = ax[1,1].inset_axes(
     [0.14, 0.11, 0.3, 0.3],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
 axins.plot(gadopt_displacement_bulk2[:,0]/1e3, gadopt_displacement_bulk2[:,1], color='k', linestyle='--',marker='x',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=1, lw=lw_zoom)
-axins.plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], 'b-', label=r'$\kappa / \mu$ = 100', lw=lw_zoom)
+axins.plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color=default_colour, linestyle='-', label=r'$\kappa / \mu$ = 100', lw=lw_zoom)
 axins.plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color='k', linestyle='--', marker='o', markevery=10, label=r'$\kappa / \mu$ = 1000',alpha=0.5, lw=lw_zoom)
 
 axins.grid(True, linestyle='dotted')
