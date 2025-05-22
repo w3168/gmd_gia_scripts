@@ -57,13 +57,13 @@ ax[0,0].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, fra
 ax[0, 0].set_ylim((-77, 5))  # sharing y axis so need to account for k/mu = 2
 ax[0,0].annotate(
         "a",
-        xy=(0.265, 1), xycoords='axes fraction',
+        xy=(0.46, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 ax[0,0].annotate(
         r"Horizontal resolution",
-        xy=(0.34, 1), xycoords='axes fraction',
+        xy=(0.535, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
@@ -108,13 +108,13 @@ ax[0, 1].yaxis.tick_right()
 ax[0,1].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 ax[0,1].annotate(
         "b",
-        xy=(0.265, 1), xycoords='axes fraction',
+        xy=(0.51, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 ax[0,1].annotate(
         r"Vertical resolution",
-        xy=(0.34, 1), xycoords='axes fraction',
+        xy=(0.585, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
@@ -157,13 +157,13 @@ ax[1, 0].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, fr
 ax[1, 0].tick_params(axis='both', which='major', labelsize=fs)
 ax[1,0].annotate(
         "c",
-        xy=(0.265, 1), xycoords='axes fraction',
+        xy=(0.55, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 ax[1,0].annotate(
         r"Timestep length",
-        xy=(0.34, 1), xycoords='axes fraction',
+        xy=(0.62, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
