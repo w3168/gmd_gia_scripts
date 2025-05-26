@@ -21,7 +21,7 @@ ms = 5
 lw = 0.75
 lw_zoom = 1
 
-gadopt_displacement = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-symmult_nondim-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk100.0-nondim.dat")
+gadopt_displacement = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-rerun_outer1e-2-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1000.0-compbuoyFalse-nondim.dat")
 gadopt_displacement_short = np.loadtxt("displacement-weerdesteijn-3d-internalvariable-prestressadv-short-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt10.0years-bulk1000.0-compbuoyFalse-nondim.dat")
 
 gadopt_displacement_short_lowvisc = np.loadtxt("displacement-weerdesteijn-3d-internalvariable-prestressadv-short_lateralvisc-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt10.0years-bulk1000.0-compbuoyFalse-nondim.dat")
@@ -30,6 +30,11 @@ gadopt_displacement_short_lowvisc_dt5 = np.loadtxt("displacement-weerdesteijn-3d
 
 gadopt_displacement_long_lowvisc_nz5 = np.loadtxt("displacement-weerdesteijn-3d-internalvariable-prestressadv-long_lateralvisc-refinedsurfaceTrue-dx5.0km-nz5perlayer-dt1000.0years-bulk100.0-compbuoyFalse-nondim.dat")
 gadopt_displacement_long_lowvisc = np.loadtxt("displacement-weerdesteijn-3d-internalvariable-prestressadv-long_lateralvisc-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk100.0-compbuoyFalse-nondim.dat")
+
+gadopt_longlowvisc_dx10 = np.loadtxt("longlow_res/displacement-weerdesteijn-3d-internalvariable-long_3dvisc-refinedsurfaceTrue-dx10.0km-nz10perlayer-dt500.0years-bulk1000.0-compbuoyFalse-nondim.dat")
+gadopt_longlowvisc_nz5 = np.loadtxt("longlow_res/displacement-weerdesteijn-3d-internalvariable-long_3dvisc-refinedsurfaceTrue-dx5.0km-nz5perlayer-dt500.0years-bulk1000.0-compbuoyFalse-nondim.dat")
+gadopt_longlowvisc_dt1000 = np.loadtxt("longlow_res/displacement-weerdesteijn-3d-internalvariable-long_3dvisc-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1000.0-compbuoyFalse-nondim.dat")
+gadopt_longlowvisc_bulk100 = np.loadtxt("longlow_res/displacement-weerdesteijn-3d-internalvariable-long_3dvisc-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt500.0years-bulk100.0-compbuoyFalse-nondim.dat")
 
 aspect_displacement_short_old = np.loadtxt(f"{folder}aspect_fig_3b.csv", delimiter=',')
 aspect_displacement_short = np.loadtxt(f"{folder}aspect_short_picks_fig3b.csv", delimiter=',')
@@ -204,7 +209,8 @@ h2 = y2-y1
 ax[1,0].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 # Plot long, 3d
-ax[1, 1].plot(gadopt_displacement_long_lowvisc_nz5[:,0]/1e3, gadopt_displacement_long_lowvisc_nz5[:,1], color=gadopt_colour, label='G-ADOPT', lw=lw)
+ax[1, 1].plot(gadopt_longlowvisc_dx10[:,0]/1e3, gadopt_longlowvisc_dx10[:,1], color=gadopt_colour,  label='G-ADOPT', lw=lw)
+ax[1, 1].plot(gadopt_displacement[:,0]/1e3, gadopt_displacement[:,1], color='grey', label='G-ADOPT', linestyle='dashed',lw=lw)
 ax[1, 1].set_xlabel('Time (ka)', fontsize=fs_lab)
 #ax[1, 1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1, 1].grid(True, linestyle='dotted')
@@ -224,12 +230,12 @@ ax[1,1].annotate(
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 
 # Add inset
-x1, x2, y1, y2 = 86, 94, -65, -57  # subregion of the original image
+x1, x2, y1, y2 = 86, 94, -66, -57  # subregion of the original image
 axins = ax[1,1].inset_axes(
     [0.14, 0.11, 0.325, 0.325],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
-axins.plot(gadopt_displacement_long_lowvisc_nz5[:,0]/1e3, gadopt_displacement_long_lowvisc_nz5[:,1], color=gadopt_colour, label='G-ADOPT', lw=lw_zoom)
-
+axins.plot(gadopt_longlowvisc_dx10[:,0]/1e3, gadopt_longlowvisc_dx10[:,1],  label='G-ADOPT', lw=lw)
+axins.plot(gadopt_displacement[:,0]/1e3, gadopt_displacement[:,1], color='grey', label='G-ADOPT', linestyle='dashed',lw=lw)
 axins.grid(True, linestyle='dotted')
 for pos in ['bottom', 'left']:
     axins.spines[pos].set_edgecolor('grey')
@@ -247,6 +253,7 @@ w2 = x2-x1
 h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
-figname = "Figure_3_incompressible_weerdesteijn_21.05.25"
+figname = "Figure_3_incompressible_weerdesteijn_26.05.25_longlowwith1d"
+plt.show()
 fig.savefig(f'{figname}.png')
 
