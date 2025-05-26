@@ -37,8 +37,10 @@ gadopt_displacement_dt10000 = np.loadtxt(f"{folder_gadopt}displacement-weerdeste
 
 # compressibility
 gadopt_displacement_bulk100 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-symmult_nondim-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk100.0-nondim.dat")
-gadopt_displacement_bulk1000 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-symmult_nondim-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1000.0-nondim.dat")
+gadopt_displacement_bulk1000 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-rerun_outer1e-2-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1000.0-compbuoyFalse-nondim.dat")
 gadopt_displacement_bulk2 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-symmult_nondim-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk2.0-nondim.dat")
+gadopt_displacement_bulk1pt94 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-rerun_outer1e-2-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1.94-compbuoyTrue-nondim.dat")
+gadopt_displacement_bulk10 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-rerun_outer1e-2-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk10.0-compbuoyTrue-nondim.dat")
 
 fig, ax = plt.subplots(2, 2, figsize=(8, 7), dpi=300, sharex='col', sharey='row', layout='constrained')
 fig.get_layout_engine().set(w_pad=1 / 72, h_pad=1 / 72, hspace=1/144, wspace=1/144)
@@ -54,7 +56,7 @@ ax[0, 0].grid(True, linestyle='dotted')
 ax[0, 0].tick_params(axis='both', which='major', labelsize=fs)
 ax[0, 0].xaxis.tick_top()
 ax[0,0].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
-ax[0, 0].set_ylim((-77, 5))  # sharing y axis so need to account for k/mu = 2
+ax[0, 0].set_ylim((-80, 5))  # sharing y axis so need to account for k/mu = 2
 ax[0,0].annotate(
         "a",
         xy=(0.46, 1), xycoords='axes fraction',
@@ -195,15 +197,16 @@ h2 = y2-y1
 ax[1,0].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 # Plot bulk
-ax[1, 1].plot(gadopt_displacement_bulk2[:,0]/1e3, gadopt_displacement_bulk2[:,1], color='k', linestyle='--',marker='x',markevery=10, label='2',alpha=1, lw=lw)
-ax[1, 1].plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color=default_colour, linestyle='-', label='100', lw=lw)
-ax[1, 1].plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color='k', linestyle='--', marker='o', markevery=10, label='1000',alpha=0.5, lw=lw)
+ax[1, 1].plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1pt94[:,1], color='k', linestyle='--',marker='^',markevery=10, label='1.94',alpha=0.5, lw=lw)
+ax[1, 1].plot(gadopt_displacement_bulk10[:,0]/1e3, gadopt_displacement_bulk10[:,1], color='k', linestyle='--', marker='o', markevery=10, label='10', lw=lw, alpha=0.5)
+ax[1, 1].plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color='k', linestyle='--', marker='x', markevery=10, label='100', lw=lw, alpha=0.5)
+ax[1, 1].plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color=default_colour, linestyle='-', label='1000',alpha=1, lw=lw)
 ax[1, 1].set_xlabel('Time (ka)', fontsize=fs_lab)
 #ax[1, 1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1, 1].grid(True, linestyle='dotted')
 ax[1, 1].tick_params(axis='both', which='major', labelsize=fs)
 ax[1, 1].yaxis.tick_right()
-ax[1, 1].set_ylim((-77, 5))  # sharing y axis so need to account for k/mu = 2
+ax[1, 1].set_ylim((-80, 5))  # sharing y axis so need to account for k/mu = 2
 ax[1, 1].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 ax[1,1].annotate(
         "d",
@@ -219,13 +222,14 @@ ax[1,1].annotate(
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 #ax[1, 1].annotate('d)', (-5, 7), fontsize='25', annotation_clip=False)
 # Add inset
-x1, x2, y1, y2 = 87, 93, -76, -62  # subregion of the original image
+x1, x2, y1, y2 = 87, 93, -79, -62  # subregion of the original image
 axins = ax[1,1].inset_axes(
     [0.14, 0.11, 0.3, 0.3],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
-axins.plot(gadopt_displacement_bulk2[:,0]/1e3, gadopt_displacement_bulk2[:,1], color='k', linestyle='--',marker='x',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=1, lw=lw_zoom)
-axins.plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color=default_colour, linestyle='-', label=r'$\kappa / \mu$ = 100', lw=lw_zoom)
-axins.plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color='k', linestyle='--', marker='o', markevery=10, label=r'$\kappa / \mu$ = 1000',alpha=0.5, lw=lw_zoom)
+axins.plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1pt94[:,1], color='k', linestyle='--',marker='^',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=0.5, lw=lw_zoom)
+axins.plot(gadopt_displacement_bulk10[:,0]/1e3, gadopt_displacement_bulk10[:,1], color='k', linestyle='--',marker='o',markevery=10, label=r'$\kappa / \mu$ = 10',alpha=0.5, lw=lw_zoom)
+axins.plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color='k', linestyle='--', markevery=10, marker='x', label=r'$\kappa / \mu$ = 100', lw=lw_zoom, alpha=0.5)
+axins.plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color=default_colour, linestyle='-', label=r'$\kappa / \mu$ = 1000',alpha=1, lw=lw_zoom)
 
 axins.grid(True, linestyle='dotted')
 for pos in ['bottom', 'left']:
@@ -244,6 +248,6 @@ h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 
-figname = "Figure_4_incompressible_weerdesteijn_long_res_22.05.25"
+figname = "Figure_4_incompressible_weerdesteijn_long_res_26.05.25"
 fig.savefig(f'{figname}.png')
 
