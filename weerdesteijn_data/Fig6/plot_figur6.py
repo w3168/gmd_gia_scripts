@@ -72,13 +72,13 @@ ax[0].annotate(
 # Plot long, 1D burgers
 ax[1].plot(incomp[:,0]/1e3, incomp[:,1], color=colour_incomp, linewidth=lw, linestyle='-', label=r'Maxwell (incompressible)')
 ax[1].plot(comp[:,0]/1e3, comp[:,1], color=colour_comp, linewidth=lw, linestyle='-', label=r'Maxwell (compressible)')
-ax[1].plot(comp_burgers_viscratio0pt5[:,0]/1e3, comp_burgers_viscratio0pt5[:,1], color=colour_burgers_2, linewidth=lw, linestyle='-', label=r'Burgers ($\eta_1 / \eta_2 = 2$)')
-ax[1].plot(comp_burgers_viscratio0pt1[:,0]/1e3, comp_burgers_viscratio0pt1[:,1], color=colour_burgers_10, linewidth=lw, linestyle='-', label=r'Burgers ($\eta_1 / \eta_2 = 10$)')
+ax[1].plot(comp_burgers_viscratio0pt5[:,0]/1e3, comp_burgers_viscratio0pt5[:,1], color=colour_burgers_2, linewidth=lw, linestyle='-', label=r'Burgers (comp., $\eta_1 / \eta_2 = 2$)')
+ax[1].plot(comp_burgers_viscratio0pt1[:,0]/1e3, comp_burgers_viscratio0pt1[:,1], color=colour_burgers_10, linewidth=lw, linestyle='-', label=r'Burgers (comp., $\eta_1 / \eta_2 = 10$)')
 ax[1].set_xlabel('Time (ka)', fontsize=fs_lab)
 #ax[1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1].grid(True, linestyle='dotted')
 ax[1].tick_params(axis='both', which='major', labelsize=fs)
-ax[1].legend(loc='lower left', fontsize=fs-0.5, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
+ax[1].legend(loc='lower left', fontsize=fs-0.75, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 ax[1].annotate(
         "b",
         xy=(0.425, 1), xycoords='axes fraction',
