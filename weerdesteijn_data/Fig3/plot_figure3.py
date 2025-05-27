@@ -230,7 +230,7 @@ ax[1,1].annotate(
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 
 # Add inset
-x1, x2, y1, y2 = 86, 94, -66, -57  # subregion of the original image
+x1, x2, y1, y2 = 86, 94, -65.5, -57.5  # subregion of the original image
 axins = ax[1,1].inset_axes(
     [0.14, 0.11, 0.325, 0.325],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
@@ -244,7 +244,7 @@ for pos in ['right', 'top']:
 axins.tick_params(axis='both', which='major', labelsize=fs_ticks_zoom, color='grey')
 #ax[0,0].indicate_inset_zoom(axins, edgecolor="black", lw=lw, linestyle='dotted', alpha=0.5)
 coords = ax[1,1].transAxes.inverted().transform(axins.get_tightbbox())
-border = 0.01
+border = 0.005
 w, h = coords[1] - coords[0] + 2*border
 ax[1,1].add_patch(plt.Rectangle(coords[0]-border, w, h, lw=lw, linestyle='solid', ec='grey', fc="white",
                            transform=ax[1,1].transAxes, zorder=2))
