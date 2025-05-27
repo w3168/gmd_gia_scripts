@@ -148,11 +148,11 @@ h2 = y2-y1
 ax[0,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 # Plot dt sensitivity
-ax[1, 0].plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], color=default_colour, linestyle='-', label='1 ka', lw=lw)
-ax[1, 0].plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='2 ka',alpha=0.5, lw=lw)
-ax[1, 0].plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label=r'5 ka',alpha=0.5, lw=lw)
-ax[1, 0].plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='--', marker='^', markevery=1, label='10 ka',alpha=0.5, lw=lw)
-ax[1, 0].set_xlabel('Time (ka)', fontsize=fs_lab)
+ax[1, 0].plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], color=default_colour, linestyle='-', label='1 kyr', lw=lw)
+ax[1, 0].plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='2 kyr',alpha=0.5, lw=lw)
+ax[1, 0].plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label=r'5 kyr',alpha=0.5, lw=lw)
+ax[1, 0].plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='--', marker='^', markevery=1, label='10 kyr',alpha=0.5, lw=lw)
+ax[1, 0].set_xlabel('Time (kyr)', fontsize=fs_lab)
 ax[1, 0].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1, 0].grid(True, linestyle='dotted')
 ax[1, 0].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
@@ -175,10 +175,10 @@ x1, x2, y1, y2 = 87, 93, -64.75, -62  # subregion of the original image
 axins = ax[1,0].inset_axes(
     [0.14, 0.11, 0.325, 0.325],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
-axins.plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], color=default_colour, linestyle='-', label='dt = 1 ka', lw=lw)
-axins.plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='dt = 2 ka',alpha=0.5, lw=lw_zoom)
-axins.plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label='dt = 5 ka',alpha=0.5, lw=lw_zoom)
-axins.plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='--', marker='^', markevery=1, label='dt = 10 ka',alpha=0.5, lw=lw_zoom)
+axins.plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], color=default_colour, linestyle='-', label='dt = 1 kyr', lw=lw)
+axins.plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='dt = 2 kyr',alpha=0.5, lw=lw_zoom)
+axins.plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label='dt = 5 kyr',alpha=0.5, lw=lw_zoom)
+axins.plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='--', marker='^', markevery=1, label='dt = 10 kyr',alpha=0.5, lw=lw_zoom)
 
 axins.grid(True, linestyle='dotted')
 for pos in ['bottom', 'left']:
@@ -201,7 +201,7 @@ ax[1, 1].plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1p
 ax[1, 1].plot(gadopt_displacement_bulk10[:,0]/1e3, gadopt_displacement_bulk10[:,1], color='k', linestyle='--', marker='o', markevery=10, label='10', lw=lw, alpha=0.5)
 ax[1, 1].plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color='k', linestyle='--', marker='x', markevery=10, label='100', lw=lw, alpha=0.5)
 ax[1, 1].plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color=default_colour, linestyle='-', label='1000',alpha=1, lw=lw)
-ax[1, 1].set_xlabel('Time (ka)', fontsize=fs_lab)
+ax[1, 1].set_xlabel('Time (kyr)', fontsize=fs_lab)
 #ax[1, 1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1, 1].grid(True, linestyle='dotted')
 ax[1, 1].tick_params(axis='both', which='major', labelsize=fs)
@@ -248,6 +248,6 @@ h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 
-figname = "Figure_4_incompressible_weerdesteijn_long_res_26.05.25"
+figname = "Figure_4_incompressible_weerdesteijn_long_res_27.05.25"
 fig.savefig(f'{figname}.png')
 

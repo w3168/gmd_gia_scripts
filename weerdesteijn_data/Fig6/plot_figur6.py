@@ -74,7 +74,7 @@ ax[1].plot(incomp[:,0]/1e3, incomp[:,1], color=colour_incomp, linewidth=lw, line
 ax[1].plot(comp[:,0]/1e3, comp[:,1], color=colour_comp, linewidth=lw, linestyle='-', label=r'Maxwell (compressible)')
 ax[1].plot(comp_burgers_viscratio0pt5[:,0]/1e3, comp_burgers_viscratio0pt5[:,1], color=colour_burgers_2, linewidth=lw, linestyle='-', label=r'Burgers (comp., $\eta_1 / \eta_2 = 2$)')
 ax[1].plot(comp_burgers_viscratio0pt1[:,0]/1e3, comp_burgers_viscratio0pt1[:,1], color=colour_burgers_10, linewidth=lw, linestyle='-', label=r'Burgers (comp., $\eta_1 / \eta_2 = 10$)')
-ax[1].set_xlabel('Time (ka)', fontsize=fs_lab)
+ax[1].set_xlabel('Time (kyr)', fontsize=fs_lab)
 #ax[1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1].grid(True, linestyle='dotted')
 ax[1].tick_params(axis='both', which='major', labelsize=fs)
@@ -92,6 +92,6 @@ ax[1].annotate(
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 #plt.show()
-figname = "Figure_6_compressible_burgers_26.05.25"
+figname = "Figure_6_compressible_burgers_27.05.25"
 fig.savefig(f'{figname}.png')
 
