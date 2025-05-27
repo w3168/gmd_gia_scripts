@@ -163,7 +163,7 @@ ax[0,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec=
 ax[1, 0].plot(abaqus_displacement_short_lowvisc[:,0],abaqus_displacement_short_lowvisc[:,1], color=abaqus_colour, linestyle='dotted', label='Abaqus', lw=lw)
 ax[1, 0].plot(aspect_displacement_short_lowvisc[:,0],aspect_displacement_short_lowvisc[:,1], color=aspect_colour, linestyle='dashdot', label='Aspect', lw=lw)
 ax[1, 0].plot(gadopt_displacement_short_lowvisc[:,0], gadopt_displacement_short_lowvisc[:,1], color=gadopt_colour, label='G-ADOPT', lw=lw)
-ax[1, 0].set_xlabel('Time (a)', fontsize=fs_lab)
+ax[1, 0].set_xlabel('Time (yr)', fontsize=fs_lab)
 ax[1, 0].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1, 0].grid(True, linestyle='dotted')
 ax[1, 0].tick_params(axis='both', which='major', labelsize=fs)
@@ -211,7 +211,7 @@ ax[1,0].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec=
 # Plot long, 3d
 ax[1, 1].plot(gadopt_longlowvisc_dx10[:,0]/1e3, gadopt_longlowvisc_dx10[:,1], color=gadopt_colour,  label='G-ADOPT', lw=lw)
 ax[1, 1].plot(gadopt_displacement[:,0]/1e3, gadopt_displacement[:,1], color='grey', label='G-ADOPT', linestyle='dashed',lw=lw)
-ax[1, 1].set_xlabel('Time (ka)', fontsize=fs_lab)
+ax[1, 1].set_xlabel('Time (kyr)', fontsize=fs_lab)
 #ax[1, 1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1, 1].grid(True, linestyle='dotted')
 ax[1, 1].tick_params(axis='both', which='major', labelsize=fs)
@@ -253,7 +253,7 @@ w2 = x2-x1
 h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
-figname = "Figure_3_incompressible_weerdesteijn_26.05.25_longlowwith1d"
-plt.show()
+figname = "Figure_3_incompressible_weerdesteijn_27.05.25_kyr"
 fig.savefig(f'{figname}.png')
+
 
