@@ -14,6 +14,7 @@ annulus_taylor_test is also added to this script for testing the correctness of 
 from gadopt import *
 from gadopt.inverse import *
 import numpy as np
+import pandas as pd
 # from checkpoint_schedules import SingleDiskStorageSchedule
 import sys
 from mpi4py import MPI
@@ -166,6 +167,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     DG0 = FunctionSpace(mesh, "DG", 0)  # (Discontinuous) Stress tensor function space (tensor)
     DG1 = FunctionSpace(mesh, "DG", 1)  # (Discontinuous) Stress tensor function space (tensor)
     P1 = FunctionSpace(mesh, "CG", 1)  
+    P1_vec = VectorFunctionSpace(mesh, "CG", 1)  
     R = FunctionSpace(mesh, "R", 0)  # Real function space (for constants)
 
     # Function spaces can be combined in the natural way to create mixed
@@ -595,44 +597,124 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
         final_target_displacement = afile.load_function(mesh, name="Displacement", idx=max_timesteps)
         final_target_velocity = afile.load_function(mesh, name="Velocity", idx=max_timesteps)
     
-    def eval_cb(J, m):
-        if functional_values:
-            functional_values.append(min(J, min(functional_values)))
-        else:
-            functional_values.append(J)
+    # surface displacement outputs
+    surface_displacement_filename = f"{args.output_path}{name}_surface_final_disp.csv"
+    disp_x = Function(V.sub(0), name="displacement x")  # Function to store x displacement for output
+    disp_y = Function(V.sub(1), name="displacement y")  # Function to store y displacement for output
+    f = Function(V).interpolate(as_vector([X[0], X[1]]))
+    bc_displacement = DirichletBC(vertical_displacement.function_space(), 0, boundary.top)
 
-        circumference = 2 * pi * radius_values[0]
-        area =  assemble(Constant(1) * dx(domain=mesh))
-        # Define the component terms of the overall objective functional
-        log("displacement misfit", displacement_misfit.block_variable.checkpoint / max_timesteps)
-        log("velocity misfit", velocity_misfit.block_variable.checkpoint / max_timesteps)
-        damping = alpha_damping * assemble((control_viscosity.block_variable.checkpoint) ** 2 / circumference /area * dx)
-        smoothing = alpha_smoothing * assemble(dot(grad(control_viscosity.block_variable.checkpoint), grad(control_viscosity.block_variable.checkpoint)) / area * dx)
-        log("damping", damping)
-        log("smoothing", smoothing)
-        '''
-        damping = alpha_damping * assemble((normalised_ice_thickness.block_variable.checkpoint) ** 2 / circumference * ds(boundary.top))
-        smoothing = alpha_smoothing * assemble(dot(grad(normalised_ice_thickness.block_variable.checkpoint), grad(normalised_ice_thickness.block_variable.checkpoint)) / circumference * ds(boundary.top))
-        log("damping", damping)
-        log("smoothing", smoothing)
-        '''
-             # Write out values of control and final forward model results
-        updated_ice_thickness.assign(control_ice_thickness.block_variable.checkpoint)
+    surface_x = f.sub(0).dat.data_ro_with_halos[bc_displacement.nodes]
+
+    surface_x_all = f.sub(0).comm.gather(surface_x)
+    surface_y = f.sub(1).dat.data_ro_with_halos[bc_displacement.nodes]
+    surface_y_all = f.sub(1).comm.gather(surface_y)
+    displacement_df = pd.DataFrame()
+
+    if MPI.COMM_WORLD.rank == 0:
+        surface_x_concat = np.concatenate(surface_x_all)
+        displacement_df['surface_x'] = surface_x_concat
+        surface_y_concat = np.concatenate(surface_y_all)
+        displacement_df['surface_y'] = surface_y_concat
+    
+    # surface ice outputs
+    surface_ice_filename = f"{args.output_path}{name}_surface_ice.csv"
+    f_ice = Function(P1_vec).interpolate(as_vector([X[0], X[1]]))
+    bc_ice = DirichletBC(normalised_ice_thickness.function_space(), 0, boundary.top)
+
+    surface_x_ice = f_ice.sub(0).dat.data_ro_with_halos[bc_ice.nodes]
+    surface_x_all_ice = f_ice.sub(0).comm.gather(surface_x_ice)
+    surface_y_ice = f_ice.sub(1).dat.data_ro_with_halos[bc_ice.nodes]
+    surface_y_all_ice = f_ice.sub(1).comm.gather(surface_y_ice)
+    ice_df = pd.DataFrame()
+
+    if MPI.COMM_WORLD.rank == 0:
+        surface_x_concat_ice = np.concatenate(surface_x_all_ice)
+        ice_df['surface_x'] = surface_x_concat_ice
+        surface_y_concat_ice = np.concatenate(surface_y_all_ice)
+        ice_df['surface_y'] = surface_y_concat_ice
+    
+    class eval_cb_class(object):
+        def __init__(self):
+            self.counter = 0
+
+        def __call__(self, J, m):
+            if functional_values:
+                functional_values.append(min(J, min(functional_values)))
+            else:
+                functional_values.append(J)
+
+            circumference = 2 * pi * radius_values[0]
+            area =  assemble(Constant(1) * dx(domain=mesh))
+            # Define the component terms of the overall objective functional
+            log("displacement misfit", displacement_misfit.block_variable.checkpoint / max_timesteps)
+            log("velocity misfit", velocity_misfit.block_variable.checkpoint / max_timesteps)
+            damping = alpha_damping * assemble((control_viscosity.block_variable.checkpoint) ** 2 / circumference /area * dx)
+            smoothing = alpha_smoothing * assemble(dot(grad(control_viscosity.block_variable.checkpoint), grad(control_viscosity.block_variable.checkpoint)) / area * dx)
+            log("damping", damping)
+            log("smoothing", smoothing)
+            '''
+            damping = alpha_damping * assemble((normalised_ice_thickness.block_variable.checkpoint) ** 2 / circumference * ds(boundary.top))
+            smoothing = alpha_smoothing * assemble(dot(grad(normalised_ice_thickness.block_variable.checkpoint), grad(normalised_ice_thickness.block_variable.checkpoint)) / circumference * ds(boundary.top))
+            log("damping", damping)
+            log("smoothing", smoothing)
+            '''
+                 # Write out values of control and final forward model results
+            updated_ice_thickness.assign(control_ice_thickness.block_variable.checkpoint)
+            
+            # Write out values of control and final forward model results
+            updated_viscosity.interpolate(background_viscosity * 10**control_viscosity.block_variable.checkpoint)
+            updated_log_viscosity.assign(control_viscosity.block_variable.checkpoint)
+            updated_displacement.interpolate(z.subfunctions[0].block_variable.checkpoint)
+            updated_velocity.interpolate(velocity.block_variable.checkpoint)
+            updated_solution_file.write(updated_ice_thickness, target_normalised_ice_thickness, updated_viscosity, 
+                    target_viscosity, updated_displacement, final_target_displacement, updated_velocity, final_target_velocity)
+            updated_out_file.write(updated_displacement, final_target_displacement)
+
+            with CheckpointFile(controls_checkpoint_filename, "w") as checkpoint:
+                checkpoint.save_function(updated_log_viscosity, name="control viscosity")
+                checkpoint.save_function(updated_ice_thickness, name="control normalised ice thickness")
+            
+            # write out surface displacement 
+            disp_x.interpolate(z.subfunctions[0].block_variable.checkpoint[0]*D)
+            surface_disp_x = disp_x.dat.data_ro_with_halos[bc_displacement.nodes]
+            surface_disp_x_all = disp_x.comm.gather(surface_disp_x)
+            disp_y.interpolate(z.subfunctions[0].block_variable.checkpoint[1]*D)
+            surface_disp_y = disp_y.dat.data_ro_with_halos[bc_displacement.nodes]
+            surface_disp_y_all = disp_y.comm.gather(surface_disp_y)
+
+            if MPI.COMM_WORLD.rank == 0:
+                surface_disp_x_concat = np.concatenate(surface_disp_x_all)
+                displacement_df[f'surface_disp_x_step{self.counter}'] = surface_disp_x_concat
+                
+                surface_disp_y_concat = np.concatenate(surface_disp_y_all)
+                displacement_df[f'surface_disp_y_step{self.counter}'] = surface_disp_y_concat
+            
+                displacement_df.to_csv(surface_displacement_filename)
+            
+            # write out surface ice 
+            if self.counter ==0:
+                # write out target ice on first iteration
+                surface_ice_target = target_normalised_ice_thickness.dat.data_ro_with_halos[bc_ice.nodes]
+                surface_ice_all_target = target_normalised_ice_thickness.comm.gather(surface_ice_target)
+
+                if MPI.COMM_WORLD.rank == 0:
+                    surface_ice_concat_target = np.concatenate(surface_ice_all_target)
+                    ice_df[f'surface_ice_target'] = surface_ice_concat_target
+
+            # updated surface ice
+            surface_ice = updated_ice_thickness.dat.data_ro_with_halos[bc_ice.nodes]
+            surface_ice_all = updated_ice_thickness.comm.gather(surface_ice)
+
+            if MPI.COMM_WORLD.rank == 0:
+                surface_ice_concat = np.concatenate(surface_ice_all)
+                ice_df[f'surface_ice_step{self.counter}'] = surface_ice_concat
+                ice_df.to_csv(surface_ice_filename)
+
+
+            self.counter += 1
         
-        # Write out values of control and final forward model results
-        updated_viscosity.interpolate(background_viscosity * 10**control_viscosity.block_variable.checkpoint)
-        updated_log_viscosity.assign(control_viscosity.block_variable.checkpoint)
-        updated_displacement.interpolate(z.subfunctions[0].block_variable.checkpoint)
-        updated_velocity.interpolate(velocity.block_variable.checkpoint)
-        updated_solution_file.write(updated_ice_thickness, target_normalised_ice_thickness, updated_viscosity, 
-                target_viscosity, updated_displacement, final_target_displacement, updated_velocity, final_target_velocity)
-        updated_out_file.write(updated_displacement, final_target_displacement)
-
-        with CheckpointFile(controls_checkpoint_filename, "w") as checkpoint:
-            checkpoint.save_function(updated_log_viscosity, name="control viscosity")
-            checkpoint.save_function(updated_ice_thickness, name="control normalised ice thickness")
-        
-
+    eval_cb = eval_cb_class()
     ice_thickness_lb = Function(normalised_ice_thickness.function_space(), name="Lower bound ice thickness")
     ice_thickness_ub = Function(normalised_ice_thickness.function_space(), name="Upper bound ice thickness")
     ice_thickness_lb.assign(0.0)
