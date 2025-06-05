@@ -583,7 +583,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     circumference = 2 * pi * radius_values_tilde[0]
     area =  assemble(Constant(1) * dx(domain=mesh))
 
-    ice_damping = args.ice_damping * assemble((control_viscosity) ** 2 / circumference  * ds(boundary.top))
+    ice_damping = args.ice_damping * assemble((control_ice_thickness) ** 2 / circumference  * ds(boundary.top))
     ice_smoothing = args.ice_smoothing * assemble(dot(grad(control_ice_thickness), grad(control_ice_thickness)) / circumference * ds(boundary.top))
     
     visc_damping = args.visc_damping * assemble((control_viscosity) ** 2 / area  * dx)
