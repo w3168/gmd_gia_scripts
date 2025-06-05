@@ -33,6 +33,13 @@ parser.add_argument("--output_path", default="/data/viscoelastic/internal_variab
 parser.add_argument("--controls", default="ice", type=str, help="Specify which control, ice/viscosity/both", required=False)
 parser.add_argument("--ice_checkpoint", default=None, type=str, help="Ice checkpoint", required=False)
 parser.add_argument("--viscosity_checkpoint", default=None, type=str, help="Viscosity checkpoint", required=False)
+parser.add_argument("--ice_smoothing", default=0.0, type=float, help="ice smoothing factor", required=False)
+parser.add_argument("--ice_damping", default=0.0, type=float, help="ice_damping factor", required=False)
+parser.add_argument("--visc_smoothing", default=0.0, type=float, help="viscosity smoothing factor", required=False)
+parser.add_argument("--visc_damping", default=0.0, type=float, help="viscosity damping factor", required=False)
+parser.add_argument("--true_ice", action='store_true', help="use actual ice")
+parser.add_argument("--true_visc", action='store_true', help="use actual viscosity")
+parser.add_argument("--opt_its", default=5, type=int, help="Number of optimisation iterations", required=False)
 args = parser.parse_args()
 
 name = f"adjoint-cylinder-2d-internalvariable-ctype{args.controls}-{args.optional_name}"
@@ -48,7 +55,7 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
     
     minimisation_problem = MinimizationProblem(inverse_problem["reduced_functional"], bounds=inverse_problem["bounds"])
 
-    minimisation_parameters["Status Test"]["Iteration Limit"] = 5
+    minimisation_parameters["Status Test"]["Iteration Limit"] = args.opt_its
 #    minimisation_parameters["Step"]["Trust Region"]["Initial Radius"] = 1e4
 
     optimiser = LinMoreOptimiser(
@@ -64,7 +71,7 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
     #optimiser.add_callback(inverse_problem["callback"])
     optimiser.run()
     
-    with open("functional.txt", "w") as f:
+    with open(f"{args.output_path}{name}_functional.txt", "w") as f:
         f.write("\n".join(str(x) for x in functional_values))
 
     # If we're performing multiple successive optimisations, we want
@@ -303,8 +310,10 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     if args.controls == "viscosity" or "both":
         control1 = Control(control_viscosity)
 
-    viscosity = background_viscosity * 10**control_viscosity
-
+    if args.true_visc:
+        viscosity = target_viscosity
+    else:
+        viscosity = background_viscosity * 10**control_viscosity
 
     # -
 
@@ -386,7 +395,11 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
     # the ice thickness that will be actually used in simulation
     normalised_ice_thickness = Function(P1, name="normalised ice thickness")
-    normalised_ice_thickness.project(control_ice_thickness, bcs=[InteriorBC(P1, 0, boundary.top)])
+    if args.true_ice:
+        normalised_ice_thickness.assign(target_normalised_ice_thickness) 
+    else:
+        normalised_ice_thickness.project(control_ice_thickness, bcs=[InteriorBC(P1, 0, boundary.top)])
+    
     ice_load = Vi * rho_ice * Hice1 * normalised_ice_thickness 
     
 #    ice_load = Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
@@ -499,13 +512,13 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
         with CheckpointFile(checkpoint_file, 'r') as afile:
             target_displacement = afile.load_function(mesh, name="Displacement", idx=timestep)
             target_velocity = afile.load_function(mesh, name="Velocity", idx=timestep)
-        circumference = 2 * pi * radius_values[0]
+        circumference = 2 * pi * radius_values_tilde[0]
         velocity_error = velocity - target_velocity
-        velocity_scale = 1e-9
+        velocity_scale = 1e-5
         velocity_misfit += assemble(dot(velocity_error, velocity_error) / (circumference * velocity_scale**2) * ds(boundary.top))
 
         displacement_error = z.subfunctions[0] - target_displacement
-        displacement_scale = 1e-8
+        displacement_scale = 1e-4
         displacement_misfit += assemble(dot(displacement_error, displacement_error) / (circumference * displacement_scale**2) * ds(boundary.top))
         return velocity_misfit, displacement_misfit
     
@@ -567,15 +580,19 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
                          f"{gd.u_rms()} {gd.u_rms_top()} {gd.ux_max(boundary.top)} "
                          )
 
-    circumference = 2 * pi * radius_values[0]
+    circumference = 2 * pi * radius_values_tilde[0]
     area =  assemble(Constant(1) * dx(domain=mesh))
 
-    alpha_smoothing = 0
-    alpha_damping = 0
-    damping = assemble((control_viscosity) ** 2 / area  * dx)
-    smoothing = assemble(dot(grad(control_viscosity), grad(control_viscosity)) / area * dx)
+    ice_damping = args.ice_damping * assemble((control_viscosity) ** 2 / circumference  * ds(boundary.top))
+    ice_smoothing = args.ice_smoothing * assemble(dot(grad(control_ice_thickness), grad(control_ice_thickness)) / circumference * ds(boundary.top))
+    
+    visc_damping = args.visc_damping * assemble((control_viscosity) ** 2 / area  * dx)
+    visc_smoothing = args.visc_smoothing * assemble(dot(grad(control_viscosity), grad(control_viscosity)) / area * dx)
 
-    objective = (displacement_misfit + velocity_misfit) / max_timesteps + alpha_damping * damping + alpha_smoothing * smoothing
+    objective = (displacement_misfit + velocity_misfit) / max_timesteps 
+    objective += ice_damping + ice_smoothing
+    objective += visc_damping + visc_smoothing
+
     log("J = ", objective)
     
     pause_annotation()
@@ -643,23 +660,16 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
                 functional_values.append(min(J, min(functional_values)))
             else:
                 functional_values.append(J)
-
-            circumference = 2 * pi * radius_values[0]
-            area =  assemble(Constant(1) * dx(domain=mesh))
-            # Define the component terms of the overall objective functional
+            
+            # log components of objective
             log("displacement misfit", displacement_misfit.block_variable.checkpoint / max_timesteps)
             log("velocity misfit", velocity_misfit.block_variable.checkpoint / max_timesteps)
-            damping = alpha_damping * assemble((control_viscosity.block_variable.checkpoint) ** 2 / circumference /area * dx)
-            smoothing = alpha_smoothing * assemble(dot(grad(control_viscosity.block_variable.checkpoint), grad(control_viscosity.block_variable.checkpoint)) / area * dx)
-            log("damping", damping)
-            log("smoothing", smoothing)
-            '''
-            damping = alpha_damping * assemble((normalised_ice_thickness.block_variable.checkpoint) ** 2 / circumference * ds(boundary.top))
-            smoothing = alpha_smoothing * assemble(dot(grad(normalised_ice_thickness.block_variable.checkpoint), grad(normalised_ice_thickness.block_variable.checkpoint)) / circumference * ds(boundary.top))
-            log("damping", damping)
-            log("smoothing", smoothing)
-            '''
-                 # Write out values of control and final forward model results
+            log("ice smoothing", ice_smoothing.block_variable.checkpoint)
+            log("ice damping", ice_damping.block_variable.checkpoint)
+            log("viscosity smoothing", visc_smoothing.block_variable.checkpoint)
+            log("viscosity damping", visc_damping.block_variable.checkpoint)
+
+            # Write out values of control and final forward model results
             updated_ice_thickness.assign(control_ice_thickness.block_variable.checkpoint)
             
             # Write out values of control and final forward model results
