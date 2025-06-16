@@ -99,6 +99,6 @@ ax[1].annotate(
 #ax[1].legend(loc='upper right', fontsize=fs-0.75, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 
 
-figname = "Figure_8_ice_inversion_10.06.25"
+figname = "Figure_9_ice_inversion_10.06.25"
 fig.savefig(f'{figname}.png')
 
