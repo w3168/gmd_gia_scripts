@@ -61,7 +61,7 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
     optimiser = LinMoreOptimiser(
         minimisation_problem,
         minimisation_parameters,
-        checkpoint_dir="optimisation_checkpoint",
+        checkpoint_dir=f"{args.output_path}{name}optimisation_checkpoint",
     )
 
     
@@ -71,8 +71,6 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
     #optimiser.add_callback(inverse_problem["callback"])
     optimiser.run()
     
-    with open(f"{args.output_path}{name}_functional.txt", "w") as f:
-        f.write("\n".join(str(x) for x in functional_values))
 
     # If we're performing multiple successive optimisations, we want
     # to ensure the annotations are switched back on for the next code
@@ -309,6 +307,8 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
     if args.controls == "viscosity" or "both":
         control1 = Control(control_viscosity)
+        adj_visc_file = File(f"{args.output_path}{name}_adjvisc.pvd")
+        tape.add_block(DiagnosticBlock(adj_visc_file, control_viscosity))
 
     if args.true_visc:
         viscosity = target_viscosity
@@ -595,16 +595,24 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
     log("J = ", objective)
     
+    # calculate ice error cf target
+    #ice_error = control_ice_thickness - target_normalised_ice_thickness
+    #ice_error_L2 = assemble(dot(ice_error, ice_error) / (circumference * dot(target_normalised_ice_thickness, target_normalised_ice_thickness) + 1e-16 ) * ds(boundary.top))
+    # calculate viscosity error cf target
+    #target_log_viscosity = ln(target_viscosity/background_viscosity) / ln(10)
+    #visc_error = updated_log_viscosity - target_log_viscosity
+    #visc_error_L2 = assemble(dot(visc_error, visc_error) / (area * dot(target_log_viscosity, target_log_viscosity) + 1e-16 ) * dx)
+    
     pause_annotation()
     
     # storing adjoint results
     updated_ice_thickness = Function(normalised_ice_thickness, name="updated ice thickness")
     updated_viscosity = Function(target_viscosity, name="updated viscosity")
     updated_log_viscosity = Function(control_viscosity, name="updated control viscosity")
-    updated_solution_file = VTKFile(f"{args.output_path}{name}_noreg.pvd")
+    updated_solution_file = VTKFile(f"{args.output_path}{name}_sol.pvd")
     updated_displacement = Function(z.subfunctions[0], name="updated displacement")
     updated_velocity = Function(z.subfunctions[0], name="updated velocity")
-    updated_out_file = VTKFile("updated_out.pvd")
+    updated_out_file = VTKFile(f"{args.output_path}{name}_updated_out.pvd")
 
     controls_checkpoint_filename = f"{args.output_path}{name}_controls.h5"
 
@@ -654,12 +662,18 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     class eval_cb_class(object):
         def __init__(self):
             self.counter = 0
+            self.functional_values = []
+            self.ice_misfit = []
+            self.viscosity_misfit = []
+            self.ice_change = []
+            self.viscosity_change = []
+
 
         def __call__(self, J, m):
-            if functional_values:
-                functional_values.append(min(J, min(functional_values)))
+            if self.functional_values:
+                self.functional_values.append(min(J, min(self.functional_values)))
             else:
-                functional_values.append(J)
+                self.functional_values.append(J)
             
             # log components of objective
             log("displacement misfit", displacement_misfit.block_variable.checkpoint / max_timesteps)
@@ -669,8 +683,24 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
             log("viscosity smoothing", visc_smoothing.block_variable.checkpoint)
             log("viscosity damping", visc_damping.block_variable.checkpoint)
 
+
+            
+           # if args.controls =="ice" or "both":
+                # calculate relative change of ice from previous timestep
+                #ice_change = control_ice_thickness.block_variable.checkpoint - updated_ice_thickness.block_variable.checkpoint
+                #ice_change_L2 = assemble(dot(ice_change, ice_change) / (circumference * dot(updated_ice_thickness.block_variable.checkpoint, updated_ice_thickness.block_variable.checkpoint) + 1e-16 ) * ds(boundary.top))
+                #self.ice_change.append(ice_change_L2)
+                #log("ice change", ice_change_L2)
+            #if args.controls == "viscosity" or "both":
+                # calculate relative change of viscosity from previous timestep
+             #   visc_change = control_viscosity.block_variable.checkpoint - updated_log_viscosity.block_variable.checkpoint
+              #  visc_change_L2 = assemble(dot(visc_change, visc_change) / (area * dot(updated_log_viscosity.block_variable.checkpoint, updated_log_viscosity.block_variable.checkpoint) + 1e-16 ) * dx)
+              #  self.viscosity_change.append(visc_change_L2)
+              #  log("viscosity change", visc_change_L2)
+
             # Write out values of control and final forward model results
             updated_ice_thickness.assign(control_ice_thickness.block_variable.checkpoint)
+
             
             # Write out values of control and final forward model results
             updated_viscosity.interpolate(background_viscosity * 10**control_viscosity.block_variable.checkpoint)
@@ -684,6 +714,15 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
             with CheckpointFile(controls_checkpoint_filename, "w") as checkpoint:
                 checkpoint.save_function(updated_log_viscosity, name="control viscosity")
                 checkpoint.save_function(updated_ice_thickness, name="control normalised ice thickness")
+            
+           # if args.controls =="ice" or "both":
+                # calculate ice error cf target
+           #     self.ice_misfit.append(ice_error_L2.block_variable.checkpoint)
+           #     log("ice error", ice_error_L2.block_variable.checkpoint)
+           # if args.controls == "viscosity" or "both":
+           #     # calculate viscosity error cf target
+           #     self.viscosity_misfit.append(visc_error_L2.block_variable.checkpoint)
+           #     log("viscosity error", visc_error_L2.block_variable.checkpoint)
             
             # write out surface displacement 
             disp_x.interpolate(z.subfunctions[0].block_variable.checkpoint[0]*D)
@@ -720,7 +759,20 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
                 surface_ice_concat = np.concatenate(surface_ice_all)
                 ice_df[f'surface_ice_step{self.counter}'] = surface_ice_concat
                 ice_df.to_csv(surface_ice_filename)
-
+            
+            if MPI.COMM_WORLD.rank == 0:
+                with open(f"{args.output_path}{name}_functional.txt", "w") as f:
+                    f.write("\n".join(str(x) for x in self.functional_values))
+                if args.controls =="ice" or "both":
+           #         with open(f"{args.output_path}{name}_ice_misfit.txt", "w") as f:
+           #             f.write("\n".join(str(x) for x in self.ice_misfit))
+                    with open(f"{args.output_path}{name}_ice_change.txt", "w") as f:
+                        f.write("\n".join(str(x) for x in self.ice_change))
+                if args.controls =="viscosity" or "both":
+            #        with open(f"{args.output_path}{name}_viscosity_misfit.txt", "w") as f:
+            #            f.write("\n".join(str(x) for x in self.viscosity_misfit))
+                    with open(f"{args.output_path}{name}_viscosity_change.txt", "w") as f:
+                        f.write("\n".join(str(x) for x in self.viscosity_change))
 
             self.counter += 1
         
