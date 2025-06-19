@@ -256,11 +256,9 @@ disc2_centre = pi  # centre of disc2
 disc1 = 0.5*(1-tanh((abs(colatitude-disc1_centre) - disc_halfwidth1) / (2*surface_resolution_radians_smooth)))
 disc2 = 0.5*(1-tanh((abs(abs(colatitude)-disc2_centre) - disc_halfwidth2) / (2*surface_resolution_radians_smooth)))
 
-#P1 = FunctionSpace(mesh, "CG", 1)
-
-#discfunc = Function(P1).interpolate(disc)
-
-#discfile = VTKFile(f"{args.output_path}discfile.pvd").write(discfunc)
+P1 = FunctionSpace(mesh, "CG", 1)
+discfunc = Function(P1).interpolate(D*(Hice1*disc1+Hice2*disc2))
+discfile = VTKFile(f"{args.output_path}discfile.pvd").write(discfunc)
 
 ice_load = Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
 
