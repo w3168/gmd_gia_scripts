@@ -16,7 +16,7 @@ visc_3d_file = "forward-cylinder-2d-internalvariable-dispvel--1dviscFalse-visc/f
 ice_file = 'discfile_0.vtu'
 
 radius = 2.2
-zoom =4.2
+zoom =4.25
 reader_1d = pv.get_reader(visc_1d_file)
 reader_3d = pv.get_reader(visc_3d_file)
 data_1d = reader_1d.read()  # MultiBlock mesh with only 1 block
