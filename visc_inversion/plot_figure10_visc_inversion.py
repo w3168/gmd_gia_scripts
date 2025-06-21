@@ -26,7 +26,7 @@ for i in range(len(steps)):
 
     
     # viscosity relative misfit
-    visc_misfit = plt.imread(f'visc_misfit/visc3d_relative_misfit_step{steps[i]}.png')
+    visc_misfit = plt.imread(f'visc_misfit/visc3d_relative_misfit_loguovert_cs1_step_{steps[i]}.png')
     ax[i,1].imshow(visc_misfit)
     ax[i,1].axis('off') 
     
@@ -60,10 +60,12 @@ fig.colorbar(visc_cbar,
              ax=ax[4,0], orientation='horizontal', label='Viscosity (Pa s)',shrink=0.8) # ticks=[1e20, 1e21, 1e22, 1e23,1e24,1e25])
 
 # visc misfit cbar
-visc_misfit_cmap = plt.get_cmap("Reds", 25)
-visc_misfit_cbar = ScalarMappable(norm=colors.Normalize(vmin=0, vmax=1), cmap=visc_misfit_cmap)
+visc_misfit_cmap = plt.get_cmap("coolwarm", 25)
+visc_misfit_cbar = ScalarMappable(norm=colors.Normalize(vmin=-1, vmax=1), cmap=visc_misfit_cmap)
+#visc_misfit_cbar = ScalarMappable(norm=colors.LogNorm(vmin=1e19, vmax=1e25), cmap=visc_misfit_cmap)
 fig.colorbar(visc_misfit_cbar,
-             ax=ax[4,1], orientation='horizontal', label='Relative misfit',shrink=0.8)
+             ax=ax[4,1], orientation='horizontal', label='log(Viscosity / Target viscosity)',shrink=0.8)
+             #ax=ax[4,1], orientation='horizontal', label='Absolute misfit',shrink=0.8)
 
 # adj visc cbar
 visc_adj_cmap = plt.get_cmap("coolwarm", 25)
@@ -71,6 +73,6 @@ visc_adj_cmap = plt.get_cmap("coolwarm", 25)
 visc_adj_cbar = ScalarMappable(norm=colors.Normalize(vmin=-0.01, vmax=0.01), cmap=visc_adj_cmap)
 fig.colorbar(visc_adj_cbar,
              ax=ax[4,2], orientation='horizontal', label='Adjoint viscosity ', shrink=0.8)
-figname = "Figure_10_visc_inversion_19.06.25"
+figname = "Figure_10_visc_inversion_20.06.25_log_uovertarg"
 fig.savefig(f'{figname}.png')
 

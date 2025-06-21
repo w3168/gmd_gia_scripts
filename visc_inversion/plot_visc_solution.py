@@ -64,10 +64,16 @@ for s in steps:
     # Plot misfit
     data['viscosity'] *= 1e21
     
-    data['viscosity misfit'] = np.sqrt((data['updated viscosity']-data['viscosity'])**2/data['viscosity']**2)
+    #data['viscosity misfit'] = np.sqrt((data['updated viscosity']-data['viscosity'])**2/data['viscosity']**2)
+    #data['viscosity misfit'] = (data['updated viscosity']-data['viscosity'])/data['viscosity']
+#    data['viscosity misfit'] = np.abs(data['updated viscosity']-data['viscosity'])
+#    data['viscosity misfit'] = np.log(data['updated viscosity'])-np.log(data['viscosity'])
+#    data['viscosity misfit'] = np.log(np.abs(data['updated viscosity']-data['viscosity'])/data['viscosity'])
+    data['viscosity misfit'] = np.log10(data['updated viscosity']/data['viscosity'])
 
+    
     # Make a colour map
-    reds_cmap = plt.get_cmap("Reds", 25)
+    reds_cmap = plt.get_cmap("coolwarm", 25)
 
     plotter = pv.Plotter(window_size=(width, height),  border=False, notebook=False, off_screen=True)
 
@@ -82,14 +88,15 @@ for s in steps:
         lighting=False,
         show_edges=False,
         cmap=reds_cmap,
-        clim=[0, 1],
+        clim=[-1, 1],
         show_scalar_bar=False,
+        log_scale=False,
     )
     plotter.camera_position = [(0, 0, radius*zoom),
                                      (0.0, 0.0, 0.0),
                                      (0.0, 1.0, 0.0)]
 
-    plotter.screenshot(f"visc_misfit/visc3d_relative_misfit_step{s}.png")
+    plotter.screenshot(f"visc_misfit/visc3d_relative_misfit_loguovert_cs1_step_{s}.png")
    
 
     # Plot adjoints
