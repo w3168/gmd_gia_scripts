@@ -150,7 +150,8 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     #checkpoint_file = "displacement-objective-forward-cylinder-2d-internalvariable-un0bottombulkoff--ncells180-nz5perlayer-dt200.0years-bulk1.94-nondim.h5"
     #checkpoint_file = "displacement-objective-forward-cylinder-2d-internalvariable-un0bottombulkoff-direct_rotnull-ncells90.0-nz5perlayer-dt1000.0years-bulk1.94-nondim.h5"
     #checkpoint_file = "displacement-objective-forward-cylinder-2d-internalvariable-un0bottombulkoff--ncells180-nz10perlayer-dt100.0years-bulk1.94-nondim.h5"
-    checkpoint_file = "displacement-objective-forward-cylinder-2d-internalvariable-dispvel--ncells360.0-nz20perlayer-dt50.0years-bulk1.94-nondim.h5"
+#    checkpoint_file = "displacement-objective-forward-cylinder-2d-internalvariable-dispvel--ncells360.0-nz20perlayer-dt50.0years-bulk1.94-nondim.h5"
+    checkpoint_file = "displacement-objective-forward-cylinder-2d-internalvariable-dispvel-lithvisc-1dviscFalse-ncells360.0-nz20perlayer-dt50.0years-bulk1.94-nondim.h5"
     with CheckpointFile(checkpoint_file, 'r') as afile:
         mesh = afile.load_mesh(name='surface_mesh_extruded')
 
