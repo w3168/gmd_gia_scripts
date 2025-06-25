@@ -190,6 +190,8 @@ def setup_heterogenous_viscosity(viscosity):
     high_viscosity_craton = bivariate_gaussian(X[0], X[1], high_viscosity_craton_x, high_viscosity_craton_y, 1.5e6/D, 0.5e6/D, 0.2)
     heterogenous_viscosity_field.interpolate(high_visc*high_viscosity_craton + heterogenous_viscosity_field * (1-high_viscosity_craton))
 
+    heterogenous_viscosity_field.interpolate(conditional(vc(X)>radius_values_tilde[1], viscosity, heterogenous_viscosity_field))
+
     return heterogenous_viscosity_field
 
 if args.radial_visc:
