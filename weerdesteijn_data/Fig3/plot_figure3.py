@@ -36,6 +36,12 @@ gadopt_longlowvisc_nz5 = np.loadtxt("longlow_res/displacement-weerdesteijn-3d-in
 gadopt_longlowvisc_dt1000 = np.loadtxt("longlow_res/displacement-weerdesteijn-3d-internalvariable-long_3dvisc-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1000.0-compbuoyFalse-nondim.dat")
 gadopt_longlowvisc_bulk100 = np.loadtxt("longlow_res/displacement-weerdesteijn-3d-internalvariable-long_3dvisc-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt500.0years-bulk100.0-compbuoyFalse-nondim.dat")
 
+
+iv_sub = np.loadtxt("iv_sub/displacement-weerdesteijn-3d-internalvariable-iv_sub-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk100.0-compbuoyFalse-nondim.dat")
+old_bulk100 = np.loadtxt("displacement-weerdesteijn-3d-internalvariable-symmult_nondim-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk100.0-nondim.dat")
+
+fgmres 
+
 aspect_displacement_short_old = np.loadtxt(f"{folder}aspect_fig_3b.csv", delimiter=',')
 aspect_displacement_short = np.loadtxt(f"{folder}aspect_short_picks_fig3b.csv", delimiter=',')
 aspect_displacement_long = np.loadtxt(f"{folder}aspect_fig_4b_file.csv", delimiter=',')
@@ -111,6 +117,8 @@ ax[0, 1].plot(abaqus_displacement_long[:,0],abaqus_displacement_long[:,1], color
 ax[0, 1].plot(aspect_displacement_long[:,0]/1e3,aspect_displacement_long[:,1], color=aspect_colour, linestyle='dashdot', label='Aspect', lw=lw)
 ax[0, 1].plot(taboo_displacement_long[:,0],taboo_displacement_long[:,1], color=taboo_colour, linestyle='dashed', label='Taboo', lw=lw)
 ax[0, 1].plot(gadopt_displacement[:,0]/1e3, gadopt_displacement[:,1], color=gadopt_colour, label='G-ADOPT', lw=lw)
+ax[0, 1].plot(old_bulk100[:,0]/1e3, old_bulk100[:,1], color='black', label='Substitute', lw=lw)
+ax[0, 1].plot(iv_sub[:,0]/1e3, iv_sub[:,1], color='red', linestyle='dashed', label='Substitute', lw=lw)
 #ax[0, 1].set_xlabel('Time (ka)', fontsize=fs_lab)
 #ax[0, 1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[0, 1].grid(True, linestyle='dotted')
@@ -140,6 +148,8 @@ axins.plot(abaqus_displacement_long[:,0],abaqus_displacement_long[:,1], color=ab
 axins.plot(aspect_displacement_long[:,0]/1e3,aspect_displacement_long[:,1], color=aspect_colour, linestyle='dashdot', label='Aspect', lw=lw_zoom)
 axins.plot(taboo_displacement_long[:,0],taboo_displacement_long[:,1], color=taboo_colour, linestyle='dashed', label='Taboo', lw=lw_zoom)
 axins.plot(gadopt_displacement[:,0]/1e3, gadopt_displacement[:,1], color=gadopt_colour, label='G-ADOPT', lw=lw_zoom)
+axins.plot(old_bulk100[:,0]/1e3, old_bulk100[:,1], color='black', label='Substitute', lw=lw_zoom)
+axins.plot(iv_sub[:,0]/1e3, iv_sub[:,1], color='red', linestyle='dashed', label='Substitute', lw=lw_zoom)
 
 axins.grid(True, linestyle='dotted')
 for pos in ['bottom', 'left']:
@@ -253,7 +263,7 @@ w2 = x2-x1
 h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
-figname = "Figure_3_incompressible_weerdesteijn_27.05.25_kyr"
+figname = "Figure_3_incompressible_weerdesteijn_24.06.25_kyr_checkivsub"
 fig.savefig(f'{figname}.png')
 
 

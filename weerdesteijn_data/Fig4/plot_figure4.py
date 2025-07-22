@@ -42,6 +42,11 @@ gadopt_displacement_bulk2 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteij
 gadopt_displacement_bulk1pt94 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-rerun_outer1e-2-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1.94-compbuoyTrue-nondim.dat")
 gadopt_displacement_bulk10 = np.loadtxt(f"{folder_gadopt}displacement-weerdesteijn-3d-internalvariable-rerun_outer1e-2-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk10.0-compbuoyTrue-nondim.dat")
 
+iv_sub_comp = np.loadtxt('iv_sub/displacement-weerdesteijn-3d-internalvariable-iv_sub_comphydpre-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1.94-compbuoyTrue-nondim.dat')
+iv_sub_dt10kyr = np.loadtxt('iv_sub/displacement-weerdesteijn-3d-internalvariable-iv_sub-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt10000.0years-bulk100.0-compbuoyFalse-nondim.dat')
+
+fgmres_dt10kyr = np.loadtxt('fgmres_check/displacement-weerdesteijn-3d-internalvariable-rerun_outer1e-2_fgmres-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt10000.0years-bulk100.0-compbuoyFalse-nondim.dat')
+
 fig, ax = plt.subplots(2, 2, figsize=(8, 7), dpi=300, sharex='col', sharey='row', layout='constrained')
 fig.get_layout_engine().set(w_pad=1 / 72, h_pad=1 / 72, hspace=1/144, wspace=1/144)
 #plt.rcParams.update({'font.size': 30})
@@ -151,7 +156,8 @@ ax[0,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec=
 ax[1, 0].plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], color=default_colour, linestyle='-', label='1 kyr', lw=lw)
 ax[1, 0].plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='2 kyr',alpha=0.5, lw=lw)
 ax[1, 0].plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label=r'5 kyr',alpha=0.5, lw=lw)
-ax[1, 0].plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='--', marker='^', markevery=1, label='10 kyr',alpha=0.5, lw=lw)
+ax[1, 0].plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='-', marker='^', markevery=1, label='10 kyr',alpha=0.5, lw=lw)
+ax[1, 0].plot(fgmres_dt10kyr[:,0]/1e3, fgmres_dt10kyr[:,1], color='orange', linestyle='--', marker='^', markevery=1, label='fgmres, 10 kyr',alpha=0.5, lw=lw)
 ax[1, 0].set_xlabel('Time (kyr)', fontsize=fs_lab)
 ax[1, 0].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1, 0].grid(True, linestyle='dotted')
@@ -178,7 +184,9 @@ axins = ax[1,0].inset_axes(
 axins.plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1], color=default_colour, linestyle='-', label='dt = 1 kyr', lw=lw)
 axins.plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='dt = 2 kyr',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label='dt = 5 kyr',alpha=0.5, lw=lw_zoom)
-axins.plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='--', marker='^', markevery=1, label='dt = 10 kyr',alpha=0.5, lw=lw_zoom)
+axins.plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='-', marker='^', markevery=1, label='dt = 10 kyr',alpha=0.5, lw=lw_zoom)
+axins.plot(iv_sub_dt10kyr[:,0]/1e3, iv_sub_dt10kyr[:,1], color='r', linestyle='--', marker='^', markevery=1, label='Sub, dt = 10 kyr',alpha=0.5, lw=lw_zoom)
+axins.plot(fgmres_dt10kyr[:,0]/1e3, fgmres_dt10kyr[:,1], color='orange', linestyle='--', marker='^', markevery=1, label='fgmres, dt = 10 kyr',alpha=0.5, lw=lw_zoom)
 
 axins.grid(True, linestyle='dotted')
 for pos in ['bottom', 'left']:
@@ -197,7 +205,8 @@ h2 = y2-y1
 ax[1,0].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 # Plot bulk
-ax[1, 1].plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1pt94[:,1], color='k', linestyle='--',marker='^',markevery=10, label='1.94',alpha=0.5, lw=lw)
+ax[1, 1].plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1pt94[:,1], color='k', linestyle='-',marker='^',markevery=10, label='1.94',alpha=0.5, lw=lw)
+ax[1, 1].plot(iv_sub_comp[:,0]/1e3, iv_sub_comp[:,1], color='r', linestyle='--',marker='^',markevery=10, label='Sub, 1.94',alpha=0.5, lw=lw)
 ax[1, 1].plot(gadopt_displacement_bulk10[:,0]/1e3, gadopt_displacement_bulk10[:,1], color='k', linestyle='--', marker='o', markevery=10, label='10', lw=lw, alpha=0.5)
 ax[1, 1].plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color='k', linestyle='--', marker='x', markevery=10, label='100', lw=lw, alpha=0.5)
 ax[1, 1].plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color=default_colour, linestyle='-', label='1000',alpha=1, lw=lw)
@@ -226,7 +235,8 @@ x1, x2, y1, y2 = 87, 93, -79, -62  # subregion of the original image
 axins = ax[1,1].inset_axes(
     [0.14, 0.11, 0.3, 0.3],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
-axins.plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1pt94[:,1], color='k', linestyle='--',marker='^',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=0.5, lw=lw_zoom)
+axins.plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1pt94[:,1], color='k', linestyle='-',marker='^',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=0.5, lw=lw_zoom)
+axins.plot(iv_sub_comp[:,0]/1e3, iv_sub_comp[:,1], color='r', linestyle='--',marker='^',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=1, lw=lw_zoom)
 axins.plot(gadopt_displacement_bulk10[:,0]/1e3, gadopt_displacement_bulk10[:,1], color='k', linestyle='--',marker='o',markevery=10, label=r'$\kappa / \mu$ = 10',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color='k', linestyle='--', markevery=10, marker='x', label=r'$\kappa / \mu$ = 100', lw=lw_zoom, alpha=0.5)
 axins.plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color=default_colour, linestyle='-', label=r'$\kappa / \mu$ = 1000',alpha=1, lw=lw_zoom)
@@ -248,6 +258,6 @@ h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 
-figname = "Figure_4_incompressible_weerdesteijn_long_res_27.05.25"
+figname = "Figure_4_incompressible_weerdesteijn_long_res_24.06.25_checkivsub"
 fig.savefig(f'{figname}.png')
 
