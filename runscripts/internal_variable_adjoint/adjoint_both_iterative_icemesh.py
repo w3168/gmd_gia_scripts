@@ -105,7 +105,7 @@ def replay_tape(): #alpha_T, alpha_u, alpha_d, alpha_s):
 
     return Jval
 
-def visc_taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
+def taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
     """
     Perform a Taylor test to verify the correctness of the gradient for the inverse problem.
 
@@ -862,5 +862,5 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
 
 #replay_tape()
-visc_taylor_test()
-#inverse()
+#taylor_test()
+inverse()
