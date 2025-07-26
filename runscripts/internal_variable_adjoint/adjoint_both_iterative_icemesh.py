@@ -40,6 +40,7 @@ parser.add_argument("--visc_damping", default=0.0, type=float, help="viscosity d
 parser.add_argument("--true_ice", action='store_true', help="use actual ice")
 parser.add_argument("--true_visc", action='store_true', help="use actual viscosity")
 parser.add_argument("--opt_its", default=5, type=int, help="Number of optimisation iterations", required=False)
+parser.add_argument("--opt_max_rad", default=1e20, type=float, help="Maximum radius of linmore algorithm", required=False)
 args = parser.parse_args()
 
 name = f"adjoint-cylinder-2d-internalvariable-ctype{args.controls}-{args.optional_name}"
@@ -57,6 +58,7 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
 
     minimisation_parameters["Status Test"]["Iteration Limit"] = args.opt_its
 #    minimisation_parameters["Step"]["Trust Region"]["Initial Radius"] = 1e4
+    minimisation_parameters["Step"]["Trust Region"]["Maximum Radius"] = args.opt_max_rad
 
     optimiser = LinMoreOptimiser(
         minimisation_problem,
@@ -326,6 +328,9 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
         high_viscosity_craton_x, high_viscosity_craton_y = 0, 6.2e6/D
         high_viscosity_craton = bivariate_gaussian(X[0], X[1], high_viscosity_craton_x, high_viscosity_craton_y, 1.5e6/D, 0.5e6/D, 0.2)
         heterogenous_viscosity_field.interpolate(high_visc*high_viscosity_craton + heterogenous_viscosity_field * (1-high_viscosity_craton))
+        
+        # reset lithospheric viscosity
+        heterogenous_viscosity_field.interpolate(conditional(vc(X)>radius_values_tilde[1], viscosity, heterogenous_viscosity_field))
 
         return heterogenous_viscosity_field
 

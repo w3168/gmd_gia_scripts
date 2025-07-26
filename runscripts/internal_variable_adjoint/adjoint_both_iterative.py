@@ -293,6 +293,9 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
         high_viscosity_craton_x, high_viscosity_craton_y = 0, 6.2e6/D
         high_viscosity_craton = bivariate_gaussian(X[0], X[1], high_viscosity_craton_x, high_viscosity_craton_y, 1.5e6/D, 0.5e6/D, 0.2)
         heterogenous_viscosity_field.interpolate(high_visc*high_viscosity_craton + heterogenous_viscosity_field * (1-high_viscosity_craton))
+    
+        # reset lithospheric viscosity
+        heterogenous_viscosity_field.interpolate(conditional(vc(X)>radius_values_tilde[1], viscosity, heterogenous_viscosity_field))
 
         return heterogenous_viscosity_field
 
