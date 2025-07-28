@@ -29,6 +29,7 @@ for s in steps:
     # Read the PVD file
 #    visc_file = f"/data/viscoelastic/internal_variable_adjoint/adjoint/setonix/visc_only/adjoint-cylinder-2d-internalvariable-ctypeviscosity-visconly_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_checkmisfit3_sol/adjoint-cylinder-2d-internalvariable-ctypeviscosity-visconly_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_checkmisfit3_sol_{s}.pvtu"
     visc_file = f"/data/viscoelastic/internal_variable_adjoint/adjoint/adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_sol/adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_sol_{s}.pvtu"
+#    visc_file = f"/data/viscoelastic/internal_variable_adjoint/adjoint/setonix/visc_only/adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_sol/adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_sol_{s}.pvtu"
 
     reader = pv.get_reader(visc_file)
     data = reader.read()  # MultiBlock mesh with only 1 block
@@ -60,7 +61,7 @@ for s in steps:
                                      (0.0, 0.0, 0.0),
                                      (0.0, 1.0, 0.0)]
 
-    plotter.screenshot(f"visc_plots/visc3d_step_nodampingsmoothing_lithvisc_{s}.png")
+    plotter.screenshot(f"visc_plots/visc3d_noreg_lithvisccheck_step{s}.png")
    
 
     # Plot misfit
@@ -98,13 +99,14 @@ for s in steps:
                                      (0.0, 0.0, 0.0),
                                      (0.0, 1.0, 0.0)]
 
-    plotter.screenshot(f"visc_misfit/visc3d_relative_misfit_loguovert_cs1_step_nodampingsmoothlithvisc_{s}.png")
+    plotter.screenshot(f"visc_misfit/visc3d_noreg_lithvisccheck_misfit_step{s}.png")
    
 
     # Plot adjoints
     # Read the PVD file
     #visc_file = f"/data/viscoelastic/internal_variable_adjoint/adjoint/setonix/visc_only/adjoint-cylinder-2d-internalvariable-ctypeviscosity-visconly_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_checkmisfit3_adjvisc/adjoint-cylinder-2d-internalvariable-ctypeviscosity-visconly_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_checkmisfit3_adjvisc_{s}.pvtu"
     visc_file = f"/data/viscoelastic/internal_variable_adjoint/adjoint/adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_adjvisc/adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_adjvisc_{s}.pvtu"
+#    visc_file = f"/data/viscoelastic/internal_variable_adjoint/adjoint/setonix/visc_only/adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_adjvisc/adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_adjvisc_{s}.pvtu"
 
     reader = pv.get_reader(visc_file)
     data = reader.read()  # MultiBlock mesh with only 1 block
@@ -132,4 +134,4 @@ for s in steps:
                                      (0.0, 0.0, 0.0),
                                      (0.0, 1.0, 0.0)]
 
-    plotter.screenshot(f"visc_adj/visc3d_nodampingsmoothlithvisc_adj_step{s}.png")
+    plotter.screenshot(f"visc_adj/visc3d_noreg_lithvisccheck_adj_step{s}.png")

@@ -14,8 +14,8 @@ fs_lab = 10
 ms = 0.75
 lw = 0.75
 
-obj = np.loadtxt('adjoint-cylinder-2d-internalvariable-ctypeviscosity-visconly_icesmooth0.0_icedamp0.0_viscsmooth1e-6_viscdamp1e-5_checkmisfit3_300its_functional.txt')
-ax.semilogy(obj[:201], color='k', linestyle='-', linewidth=lw)
+obj = np.loadtxt('adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_functional.txt')
+ax.semilogy(obj[:101], color='k', linestyle='-', linewidth=lw)
 
 # Plot short, 1D burgers
 ax.set_xlabel('Iteration number', fontsize=fs_lab)
@@ -24,6 +24,6 @@ ax.grid(True, linestyle='dotted')
 ax.tick_params(axis='both', which='major', labelsize=fs)
 
 
-figname = "Figure_11_visc_objfunc_inversion_19.06.25"
+figname = "Figure_11_visc_objfunc_inversion_lim100_28.07.25"
 fig.savefig(f'{figname}.png')
 
