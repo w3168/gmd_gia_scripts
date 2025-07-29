@@ -27,7 +27,12 @@ target_ice_halo = np.array(ice_df_1d[f'surface_ice_target'])
 target_ice_unsorted_1d = target_ice_halo[condition_1d]
 target_ice = target_ice_unsorted_1d[index_1d]
 
-# 1d visc ice
+# 10 iterations ice
+ice_halo_1d_10 = np.array(ice_df_1d[f'surface_ice_step10'])
+ice_unsorted_1d_10 = ice_halo_1d_10[condition_1d]
+ice_1d_10 = ice_unsorted_1d_10[index_1d]
+
+# 100 iterations ice
 ice_halo_1d = np.array(ice_df_1d[f'surface_ice_step100'])
 ice_unsorted_1d = ice_halo_1d[condition_1d]
 ice_1d = ice_unsorted_1d[index_1d]
@@ -39,7 +44,8 @@ fs = 9
 fs_lab = 10
 ms = 0.75
 lw = 0.75
-ax[0,0].plot(theta_1d, ice_1d, color='b', linestyle='-', linewidth=lw+0.5,alpha=0.4, label='Control')
+ax[0,0].plot(theta_1d, ice_1d_10, color='g', linestyle='-', linewidth=lw+0.5,alpha=0.3, label='Step 10')
+ax[0,0].plot(theta_1d, ice_1d, color='b', linestyle='-', linewidth=lw+0.5,alpha=0.4, label='Step 100')
 ax[0,0].plot(theta_1d, target_ice, color='k', linestyle='--', linewidth=lw, label='Target')
 
 plt.xticks(fontsize=fs)
@@ -75,11 +81,14 @@ ax[0,1].annotate(
 #ax[1].legend(loc='upper right', fontsize=fs-0.75, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 
 # plot viscosity at iteration 100
-
-# viscosity
-visc = plt.imread(f'visc_plots/both_visc_noreg_rerunlithvisc_step100.png')
-ax[1,0].imshow(visc)
+visc_10 = plt.imread(f'visc_plots/both_visc_noreg_rerunlithvisc_step10.png')
+ax[1,0].imshow(visc_10)
 ax[1,0].axis('off')
+
+# plot viscosity at iteration 100
+visc = plt.imread(f'visc_plots/both_visc_noreg_rerunlithvisc_step100.png')
+ax[1,1].imshow(visc)
+ax[1,1].axis('off')
 
 # Add colour bars
 # visc cbar
@@ -94,19 +103,6 @@ ax[1,0].annotate(
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 
-# plot viscosity misfit at iteration 100
-visc_misfit = plt.imread(f'visc_misfit/both_visc_noreg_rerunlithvisc_misfit_step100.png')
-ax[1,1].imshow(visc_misfit)
-ax[1,1].axis('off')
-
-# visc misfit cbar
-visc_misfit_cmap = plt.get_cmap("coolwarm", 25)
-visc_misfit_cbar = ScalarMappable(norm=colors.Normalize(vmin=-1, vmax=1), cmap=visc_misfit_cmap)
-#visc_misfit_cbar = ScalarMappable(norm=colors.LogNorm(vmin=1e19, vmax=1e25), cmap=visc_misfit_cmap)
-fig.colorbar(visc_misfit_cbar,
-             ax=ax[1,1], orientation='horizontal', label='log(Viscosity / Target viscosity)',shrink=0.7)
-
-
 ax[1,1].annotate(
         "d",
         xy=(0.87, 1), xycoords='axes fraction',
@@ -115,6 +111,6 @@ ax[1,1].annotate(
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 
 
-figname = "Figure_12_both_ice_visc_obj_inversion_28.07.25"
+figname = "Figure_12_both_ice_visc_obj_inversion_step10v100_29.07.25"
 fig.savefig(f'{figname}.png')
 
