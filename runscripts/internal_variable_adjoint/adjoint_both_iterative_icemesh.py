@@ -107,7 +107,7 @@ def replay_tape(): #alpha_T, alpha_u, alpha_d, alpha_s):
 
     return Jval
 
-def taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
+def check_taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
     """
     Perform a Taylor test to verify the correctness of the gradient for the inverse problem.
 
@@ -742,7 +742,8 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
             
             # Write out values of control and final forward model results
-            updated_ice_thickness.assign(control_ice_thickness.block_variable.checkpoint)
+            if args.controls == "ice" or args.controls =="both":
+                updated_ice_thickness.assign(control_ice_thickness.block_variable.checkpoint)
 
             
             # Write out values of control and final forward model results
@@ -867,5 +868,5 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
 
 #replay_tape()
-#taylor_test()
+#check_taylor_test()
 inverse()
