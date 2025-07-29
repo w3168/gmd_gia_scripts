@@ -143,6 +143,25 @@ def check_taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
 
     return minconv
 
+def check_speed(): 
+    """
+    Time forward and derivative calculation using petsc stages.
+
+    Need to set in terminal
+    >>> export PETSC_OPTIONS="-log_view"
+
+    """
+
+    forward_stage = PETSc.Log.Stage("forward")
+    adjoint_stage = PETSc.Log.Stage("adjoint")
+    with forward_stage:
+        inverse_problem = generate_inverse_problem() #alpha_T, alpha_u, alpha_d, alpha_s)
+   
+    with adjoint_stage:
+        deriv = inverse_problem["reduced_functional"].derivative()
+
+    return deriv 
+
 
 def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-1):
     """
@@ -869,4 +888,5 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
 #replay_tape()
 #check_taylor_test()
-inverse()
+#inverse()
+check_speed()
