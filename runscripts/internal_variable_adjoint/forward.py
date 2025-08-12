@@ -399,11 +399,13 @@ objective_checkpoint_file.save_mesh(mesh)
 # At each step we call `solve` to calculate the incremental displacement and pressure fields. This
 # will update the displacement at the surface and stress values accounting for the time dependent
 # Maxwell consitutive equation.
+forward_stage = PETSc.Log.Stage("forward")
 
 for timestep in range(1, max_timesteps+1):
     # update time first so that ice load begins
     time.assign(time+dt)
-    coupled_solver.solve()
+    with forward_stage:
+        coupled_solver.solve()
     velocity.interpolate((z.subfunctions[0] - disp_old)/dt)
     objective_checkpoint_file.save_function(z.subfunctions[0], name="Displacement", idx=timestep)
     objective_checkpoint_file.save_function(velocity, name="Velocity", idx=timestep)

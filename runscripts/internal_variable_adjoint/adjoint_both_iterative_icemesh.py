@@ -154,13 +154,18 @@ def check_speed():
 
     forward_stage = PETSc.Log.Stage("forward")
     adjoint_stage = PETSc.Log.Stage("adjoint")
+    inverse_problem = generate_inverse_problem() #alpha_T, alpha_u, alpha_d, alpha_s)    
+    
+    forward_1 = inverse_problem["reduced_functional"](inverse_problem["control"][0])
+    deriv1 = inverse_problem["reduced_functional"].derivative()
+    
+    # Time second forward and derivative in case some caching perfomed...
     with forward_stage:
-        inverse_problem = generate_inverse_problem() #alpha_T, alpha_u, alpha_d, alpha_s)
-   
+        forward_2 = inverse_problem["reduced_functional"](inverse_problem["control"][0])
     with adjoint_stage:
-        deriv = inverse_problem["reduced_functional"].derivative()
+        deriv_2 = inverse_problem["reduced_functional"].derivative()
 
-    return deriv 
+    return deriv_2 
 
 
 def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-1):
