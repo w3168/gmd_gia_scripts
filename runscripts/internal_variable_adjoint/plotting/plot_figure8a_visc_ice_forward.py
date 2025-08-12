@@ -23,7 +23,7 @@ ax[0].axis('off')
 
 ax[0].annotate(
             f"1D viscosity",
-            xy=(-0.02, 1.005), xycoords='axes fraction',
+            xy=(-0.01, 1.005), xycoords='axes fraction',
             xytext=(+0.4, -0.4), textcoords='offset fontsize',
             fontsize=fs, verticalalignment='top',
             bbox=dict(facecolor='white', edgecolor='black', pad=3.8))
