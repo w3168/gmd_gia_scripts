@@ -11,12 +11,13 @@ height = round(height_inches*dpi)
 
 # Read the PVD file
 visc_1d_file = "forward-cylinder-2d-internalvariable-dispvel--1dviscTrue-visc/forward-cylinder-2d-internalvariable-dispvel--1dviscTrue-visc_0.pvtu"
-visc_3d_file = "forward-cylinder-2d-internalvariable-dispvel--1dviscFalse-visc/forward-cylinder-2d-internalvariable-dispvel--1dviscFalse-visc_0.pvtu"
+visc_3d_file = "forward-cylinder-2d-internalvariable-dispvel-lithvisc-1dviscFalse-visc/forward-cylinder-2d-internalvariable-dispvel-lithvisc-1dviscFalse-visc_0.pvtu"
 
 ice_file = 'discfile_0.vtu'
 
 radius = 2.2
 zoom =4.25
+lw = 5
 reader_1d = pv.get_reader(visc_1d_file)
 reader_3d = pv.get_reader(visc_3d_file)
 data_1d = reader_1d.read()  # MultiBlock mesh with only 1 block
@@ -44,7 +45,7 @@ transformed_surf = clipped_surf.transform(transform_matrix)
 ice_cmap = plt.get_cmap("Blues", 25)
 ice_lw = 28
 
-# Plot viscosity
+
 data_1d['viscosity'] *= 1e21
 data_3d['viscosity'] *= 1e21
 
@@ -52,6 +53,10 @@ data_3d['viscosity'] *= 1e21
 boring_cmap = plt.get_cmap("inferno_r", 25)
 # Create a plotter object
 plotter = pv.Plotter(window_size=(width, height),  border=False, notebook=False, off_screen=True)
+# add outline of domain
+plotter.add_mesh(surf, color='black',line_width=lw, lighting=False,show_scalar_bar=False)
+
+# Plot viscosity
 # Add the warped displacement field to the frame
 plotter.add_mesh(
     data_1d,
@@ -76,6 +81,11 @@ plotter.camera_position = [(0, 0, radius*zoom),
 plotter.screenshot("visc1d.png")
 
 plotter = pv.Plotter(window_size=(width, height),  border=False, notebook=False, off_screen=True)
+
+# add outline of domain
+plotter.add_mesh(surf, color='black',line_width=lw, lighting=False,show_scalar_bar=False)
+
+# add viscosity
 plotter.add_mesh(
     data_3d,
     component=None,
