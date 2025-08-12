@@ -57,8 +57,8 @@ fs = 9
 fs_lab = 10
 ms = 0.75
 lw = 0.75
-ax[0].plot(theta_1d, ice_1d, color='r', linestyle='-', marker='o', markevery=4, markersize=ms, linewidth=lw, label='1D Viscosity')
-ax[0].plot(theta_3d, ice_3d, color='b', linestyle='-', marker='o', markevery=4, markersize=ms, linewidth=lw, label='3D Viscosity')
+ax[0].plot(theta_1d, ice_1d, color='r', linestyle='-', linewidth=lw+0.5,alpha=0.4,  label='1D Viscosity')
+ax[0].plot(theta_3d, ice_3d, color='b', linestyle='-', linewidth=lw+0.5,alpha=0.4, label='3D viscosity')
 ax[0].plot(theta_1d, target_ice, color='k', linestyle='--', linewidth=lw, label='Target')
 
 plt.xticks(fontsize=fs)
@@ -82,12 +82,11 @@ ax[0].legend(loc='upper right', fontsize=fs-0.75, framealpha=1, facecolor='white
 obj_1d = np.loadtxt('adjoint-cylinder-2d-internalvariable-ctypeice-1dvisc_iceonly_icesmooth0.0_icedamp0.0_viscsmooth0.0_viscdamp0.0_check_functional.txt')
 obj_3d = np.loadtxt('adjoint-cylinder-2d-internalvariable-ctypeice-3dvisc_iceonly_icesmooth0.0_icedamp0.0_viscsmooth0.0_viscdamp0.0_check_functional.txt')
 
-ax[1].semilogy(obj_1d[:50], color='r', linestyle='-', linewidth=lw, label='1D Viscosity')
-ax[1].semilogy(obj_3d, color='b', linestyle='-', linewidth=lw, label='3D Viscosity')
+ax[1].semilogy(obj_1d[:50], color='r', linestyle='-', alpha=0.4, linewidth=lw, label='1D Viscosity')
+ax[1].semilogy(obj_3d, color='b', linestyle='-', alpha=0.4, linewidth=lw, label='3D Viscosity')
 
-# Plot short, 1D burgers
 ax[1].set_xlabel('Iteration number', fontsize=fs_lab)
-ax[1].set_ylabel('Normalised objective function', fontsize=fs_lab)
+ax[1].set_ylabel('Objective function', fontsize=fs_lab)
 ax[1].grid(True, linestyle='dotted')
 ax[1].tick_params(axis='both', which='major', labelsize=fs)
 ax[1].annotate(
