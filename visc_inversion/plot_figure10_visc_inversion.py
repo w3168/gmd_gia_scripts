@@ -10,7 +10,7 @@ from matplotlib.cm import ScalarMappable
 fig, ax = plt.subplots(4, 3, figsize=(8,11), dpi=300, layout="constrained")
 
 # fonts and linewidths etc
-fs = 9
+fs = 8.5
 fs_lab = 10
 ms = 0.75
 lw = 0.75
@@ -32,22 +32,22 @@ for i in range(len(steps)):
     
     
     if i == 0:
-        vpos = 1
+        vpos = 1.01
     elif i ==3:
-        vpos = 1.05
+        vpos = 1.04
     else:
         vpos=1.03
 
     ax[i,0].annotate(
-            f"Step {steps[i]}",
-            xy=(-0.03, vpos), xycoords='axes fraction',
+            f"Iteration {steps[i]}",
+            xy=(-0.07, vpos), xycoords='axes fraction',
             xytext=(+0.4, -0.4), textcoords='offset fontsize',
             fontsize=fs, verticalalignment='top',
             bbox=dict(facecolor='white', edgecolor='black', pad=3.8))
 
     
     # adjoint viscosity
-    visc_adj = plt.imread(f'visc_adj/visc3d_noreg_lithvisccheck_adj_step{steps[i]}.png')
+    visc_adj = plt.imread(f'visc_adj/visc3d_noreg_lithvisccheck_mplnorm_adj_step{steps[i]}.png')
     ax[i,2].imshow(visc_adj)
     ax[i,2].axis('off') 
 
@@ -70,9 +70,11 @@ fig.colorbar(visc_misfit_cbar,
 # adj visc cbar
 visc_adj_cmap = plt.get_cmap("coolwarm", 25)
 
-visc_adj_cbar = ScalarMappable(norm=colors.Normalize(vmin=-0.01, vmax=0.01), cmap=visc_adj_cmap)
-fig.colorbar(visc_adj_cbar,
-             ax=ax[3,2], orientation='horizontal', label='Adjoint viscosity ', shrink=0.8)
-figname = "Figure_10_visc_inversion_28.06.25_noreg_lithvisc"
+visc_adj_cbar = ScalarMappable(norm=colors.SymLogNorm(linthresh=1e-4,vmin=-0.5,vmax=0.5, clip=True), cmap=visc_adj_cmap)
+visc_adj_cbar2 = fig.colorbar(visc_adj_cbar,
+             ax=ax[3,2], orientation='horizontal', label='Adjoint viscosity ', shrink=0.9, ticks=[-1e-1, -1e-3, 0, 1e-3, 1e-1])
+
+#visc_adj_cbar2.ax.tick_params(labelsize=9)
+figname = "Figure_10_visc_inversion_12.08.25_noreg_lithvisc_symlog"
 fig.savefig(f'{figname}.png')
 

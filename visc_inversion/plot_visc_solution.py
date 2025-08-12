@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib import colors
 import numpy as np
 import pandas as pd
 import pyvista as pv
@@ -24,6 +25,7 @@ surf = data_disc.extract_feature_edges(boundary_edges=True, non_manifold_edges=F
 sphere = pv.Sphere(radius=0.8*radius)
 clipped_surf = surf.clip_surface(sphere, invert=False)
 lw = 5
+
 
 for s in steps:
     # Read the PVD file
@@ -119,6 +121,11 @@ for s in steps:
     # add outline of domain
     plotter.add_mesh(surf, color='black',line_width=lw, lighting=False,show_scalar_bar=False)
     
+    # Use matplotlib sym log norm to get a symmetric log scale. linear between -1e-4 and 1e-4
+    # which is close to minimum of abs value at 100 iterations
+    norm = colors.SymLogNorm(linthresh=1e-4,vmin=-0.5,vmax=0.5, clip=True)
+    data['adjoint_control viscosity'] = norm(data['adjoint_control viscosity']) 
+
     # add adjoint viscosity plot
     plotter.add_mesh(
         data,
@@ -127,11 +134,11 @@ for s in steps:
         lighting=False,
         show_edges=False,
         cmap=boring_cmap,
-        clim=[-0.01, 0.01],
+        clim=[0, 1],
         show_scalar_bar=False,
     )
     plotter.camera_position = [(0, 0, radius*zoom),
                                      (0.0, 0.0, 0.0),
                                      (0.0, 1.0, 0.0)]
 
-    plotter.screenshot(f"visc_adj/visc3d_noreg_lithvisccheck_adj_step{s}.png")
+    plotter.screenshot(f"visc_adj/visc3d_noreg_lithvisccheck_mplnorm_adj_step{s}.png")
