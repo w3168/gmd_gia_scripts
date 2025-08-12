@@ -15,15 +15,16 @@ ms = 0.75
 lw = 0.75
 
 obj = np.loadtxt('adjoint-cylinder-2d-internalvariable-ctypeviscosity-lithvisc_functional.txt')
+obj = obj / obj[0]
 ax.semilogy(obj[:101], color='k', linestyle='-', linewidth=lw)
 
 # Plot short, 1D burgers
 ax.set_xlabel('Iteration number', fontsize=fs_lab)
-ax.set_ylabel('Normalised objective function', fontsize=fs_lab)
+ax.set_ylabel('Objective function', fontsize=fs_lab)
 ax.grid(True, linestyle='dotted')
 ax.tick_params(axis='both', which='major', labelsize=fs)
 
 
-figname = "Figure_11_visc_objfunc_inversion_lim100_28.07.25"
+figname = "Figure_11_visc_objfunc_inversion_lim100_12.08.25"
 fig.savefig(f'{figname}.png')
 
