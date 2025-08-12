@@ -94,14 +94,14 @@ for i in range(1, 201):
     diff_time_rad_max.append(diff_rad_max)
     diff_time_tang_max.append(diff_tang_max)
 
-    # calcualte velocities
+    # calcualte velocities (and convert to mm/yr)
     dt = 50
-    vel_normal_1d = (disp_normal_1d - disp_normal_1d_old) / dt
-    vel_tangent_1d = (disp_tangent_1d - disp_tangent_1d_old) / dt
+    vel_normal_1d = 1000*(disp_normal_1d - disp_normal_1d_old) / dt
+    vel_tangent_1d = 1000*(disp_tangent_1d - disp_tangent_1d_old) / dt
     vel_mag_1d = np.sqrt(vel_normal_1d**2 + vel_tangent_1d**2)
     
-    vel_normal_3d = (disp_normal_3d - disp_normal_3d_old) / dt
-    vel_tangent_3d = (disp_tangent_3d - disp_tangent_3d_old) / dt
+    vel_normal_3d = 1000*(disp_normal_3d - disp_normal_3d_old) / dt
+    vel_tangent_3d = 1000*(disp_tangent_3d - disp_tangent_3d_old) / dt
     vel_mag_3d = np.sqrt(vel_normal_3d**2 + vel_tangent_3d**2)
     
     diff_tang_vel = vel_tangent_3d - vel_tangent_1d
@@ -173,10 +173,10 @@ for i in range(1, 201):
         ax[1,1].plot(theta_1d, vel_normal_1d, color='r', linestyle='-', linewidth=lw)
         ax[1,1].plot(theta_1d, vel_normal_3d, color='k', linestyle='-', linewidth=lw)
 #        ax[1,1].set_xlabel(r'Theta ($^\circ$)', fontsize=fs)
-        ax[1,1].set_ylabel(r'Radial velocity (m / yr)', fontsize=fs_lab)
+        ax[1,1].set_ylabel(r'Radial velocity (mm / yr)', fontsize=fs_lab)
         ax[1,1].grid(True, linestyle='dotted')
         ax[1,1].tick_params(axis='both', which='major', labelsize=fs)
-        ax[1,1].set_ylim([-0.04, 0.015])
+        ax[1,1].set_ylim([-40, 15])
         ax[1,1].annotate(
                 "d",
                 xy=(0.87, 1), xycoords='axes fraction',
@@ -194,9 +194,9 @@ for i in range(1, 201):
         ax[2,1].plot(theta_1d, vel_tangent_1d, color='r', linestyle='-', linewidth=lw)
         ax[2,1].plot(theta_1d, vel_tangent_3d, color='k', linestyle='-', linewidth=0.75)
         ax[2,1].set_xlabel(r'Theta ($^\circ$)', fontsize=fs_lab)
-        ax[2,1].set_ylabel(r'Tangential velocity (m / yr)', fontsize=fs_lab)
+        ax[2,1].set_ylabel(r'Tangential velocity (mm / yr)', fontsize=fs_lab)
         ax[2,1].grid(True, linestyle='dotted')
-        ax[2,1].set_ylim([-0.04, 0.04])
+        ax[2,1].set_ylim([-40, 40])
         ax[2,1].sharex(ax[1,1])
         plt.setp(ax[1,1].get_xticklabels(), visible=False)
         ax[2,1].tick_params(axis='both', which='major', labelsize=fs)
@@ -243,10 +243,10 @@ ax[0,0].legend(loc='lower right', fontsize=fs_lab, framealpha=1, facecolor='whit
 
 ax[0,1].plot(time, diff_time_rad_vel, color='k', linestyle='-', linewidth=lw, marker='o', markevery=20, markersize=ms)
 ax[0,1].plot(time, diff_time_tang_vel, color='k', linestyle='-', linewidth=lw, marker='x', markevery=20, markersize=ms)
-ax[0,1].plot([3, 3], [0, 0.002], linestyle='dashed', color='k', linewidth=lw)
-ax[0,1].set_ylim([0, 0.0015])
+ax[0,1].plot([3, 3], [0, 2], linestyle='dashed', color='k', linewidth=lw)
+ax[0,1].set_ylim([0, 1.5])
 ax[0,1].set_xlabel(r'Time (kyr)', fontsize=fs_lab)
-ax[0,1].set_ylabel('Velocity misfit (m / yr)', fontsize=fs_lab)
+ax[0,1].set_ylabel('Velocity misfit (mm / yr)', fontsize=fs_lab)
 ax[0,1].tick_params(axis='both', which='major', labelsize=fs)
 ax[0,1].grid(True, linestyle='dotted')
 ax[0,1].annotate(
@@ -263,7 +263,7 @@ ax[0,1].annotate(
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 #ax[1].set_ylim([-1, 1])
-plt.savefig(f'17.06.25_1dvs3dvisc_dispvel_misfit_snapshot.png')
+plt.savefig(f'12.08.25_1dvs3dvisc_dispvel_misfit_snapshot_units.png')
 plt.close()
 
 
