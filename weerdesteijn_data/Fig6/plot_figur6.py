@@ -34,6 +34,14 @@ gadopt_displacement_comp_burgers = np.loadtxt(f"{long_burgers}displacement-weerd
 gadopt_displacement_comp_burgers_0pt5 = np.loadtxt(f"{long_burgers}displacement-weerdesteijn-3d-internalvariable-burgers--refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1.94-compbuoyTrue-viscratio0.5-nondim.dat")
 gadopt_displacement_comp_burgers_0pt1 = np.loadtxt(f"{long_burgers}displacement-weerdesteijn-3d-internalvariable-burgers--refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1.94-compbuoyTrue-viscratio0.1-nondim.dat")
 
+# Power law, n=3, transition stress 0.2MPa and 1 MPa.
+long_power = "power_law/long/"
+power_pt2_dt50 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt50.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt100 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt100.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt250 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt250.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt500 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt500.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+
+
 times_dt10 = np.arange(0, 210, 10)
 times_dt5 = np.arange(5, 205, 5)
 
@@ -74,6 +82,14 @@ ax[1].plot(incomp[:,0]/1e3, incomp[:,1], color=colour_incomp, linewidth=lw, line
 ax[1].plot(comp[:,0]/1e3, comp[:,1], color=colour_comp, linewidth=lw, linestyle='-', label=r'Maxwell (compressible)')
 ax[1].plot(comp_burgers_viscratio0pt5[:,0]/1e3, comp_burgers_viscratio0pt5[:,1], color=colour_burgers_2, linewidth=lw, linestyle='-', label=r'Burgers (comp., $\eta_1 / \eta_2 = 2$)')
 ax[1].plot(comp_burgers_viscratio0pt1[:,0]/1e3, comp_burgers_viscratio0pt1[:,1], color=colour_burgers_10, linewidth=lw, linestyle='-', label=r'Burgers (comp., $\eta_1 / \eta_2 = 10$)')
+
+# long, power law
+ax[1].plot(power_pt2_dt50[:,0]/1e3, power_pt2_dt50[:,1], linewidth=lw, linestyle='--', label=r'power dt 50 yr')
+ax[1].plot(power_pt2_dt100[:,0]/1e3, power_pt2_dt100[:,1], linewidth=lw, linestyle='--', label=r'power dt 100 yr')
+ax[1].plot(power_pt2_dt250[:,0]/1e3, power_pt2_dt250[:,1], linewidth=lw, linestyle='--', label=r'power dt 250 yr')
+ax[1].plot(power_pt2_dt500[:,0]/1e3, power_pt2_dt500[:,1], linewidth=lw, linestyle='--', label=r'power dt 500 yr')
+
+
 ax[1].set_xlabel('Time (kyr)', fontsize=fs_lab)
 #ax[1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1].grid(True, linestyle='dotted')
@@ -85,13 +101,13 @@ ax[1].annotate(
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-ax[1].annotate(
-        r"Long, 1D viscosity",
-        xy=(0.5, 1), xycoords='axes fraction',
-        xytext=(1, -1), textcoords='offset fontsize',
-        fontsize=fs_lab, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+#ax[1].annotate(
+#        r"Long, 1D viscosity",
+#        xy=(0.5, 1), xycoords='axes fraction',
+#        xytext=(1, -1), textcoords='offset fontsize',
+#        fontsize=fs_lab, verticalalignment='top',
+#        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 #plt.show()
-figname = "Figure_6_compressible_burgers_27.05.25"
+figname = "Figure_6_compressible_burgers_17.08.25_powerlaw_0.2Mpa"
 fig.savefig(f'{figname}.png')
 
