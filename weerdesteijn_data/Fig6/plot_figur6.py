@@ -36,10 +36,12 @@ gadopt_displacement_comp_burgers_0pt1 = np.loadtxt(f"{long_burgers}displacement-
 
 # Power law, n=3, transition stress 0.2MPa and 1 MPa.
 long_power = "power_law/long/"
-power_pt2_dt50 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt50.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
-power_pt2_dt100 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt100.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
-power_pt2_dt250 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt250.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
-power_pt2_dt500 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt500.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt50 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes_dt50_dev_thresh1e-16_lag_updm-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt50.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt125 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes_dt125_dev_thresh1e-16_lag_updm-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt125.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt125_nz20 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes_dt125_dev_thresh1e-16_lag_updm-refinedsurfaceTrue-dx5.0km-nz20perlayer-dt125.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt250 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes_dt250_dev_thresh1e-16_lag_updm-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt250.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt500 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes_dt500_dev_thresh1e-16_lag_updm-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt500.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
+power_pt2_dt1000 = np.loadtxt(f"{long_power}displacement-weerdesteijn-3d-internalvariable-power_n3_transstress0.2_snes_dt1000_dev_thresh1e-16_lag_updm-refinedsurfaceTrue-dx5.0km-nz10perlayer-dt1000.0years-bulk1.94-compbuoyTrue-powerlawTrue-nondim.dat")
 
 
 times_dt10 = np.arange(0, 210, 10)
@@ -85,7 +87,8 @@ ax[1].plot(comp_burgers_viscratio0pt1[:,0]/1e3, comp_burgers_viscratio0pt1[:,1],
 
 # long, power law
 ax[1].plot(power_pt2_dt50[:,0]/1e3, power_pt2_dt50[:,1], linewidth=lw, linestyle='--', label=r'power dt 50 yr')
-ax[1].plot(power_pt2_dt100[:,0]/1e3, power_pt2_dt100[:,1], linewidth=lw, linestyle='--', label=r'power dt 100 yr')
+ax[1].plot(power_pt2_dt125_nz20[:,0]/1e3, power_pt2_dt125_nz20[:,1], linewidth=lw, linestyle='--', label=r'power dt 125 yr, nz =20')
+ax[1].plot(power_pt2_dt125[:,0]/1e3, power_pt2_dt125[:,1], linewidth=lw, linestyle='--', label=r'power dt 125 yr')
 ax[1].plot(power_pt2_dt250[:,0]/1e3, power_pt2_dt250[:,1], linewidth=lw, linestyle='--', label=r'power dt 250 yr')
 ax[1].plot(power_pt2_dt500[:,0]/1e3, power_pt2_dt500[:,1], linewidth=lw, linestyle='--', label=r'power dt 500 yr')
 
@@ -107,7 +110,7 @@ ax[1].annotate(
 #        xytext=(1, -1), textcoords='offset fontsize',
 #        fontsize=fs_lab, verticalalignment='top',
 #        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-#plt.show()
-figname = "Figure_6_compressible_burgers_17.08.25_powerlaw_0.2Mpa"
-fig.savefig(f'{figname}.png')
+plt.show()
+figname = "Figure_6_compressible_burgers_19.08.25_powerlaw_0.2Mpa_updm"
+#fig.savefig(f'{figname}.png')
 
