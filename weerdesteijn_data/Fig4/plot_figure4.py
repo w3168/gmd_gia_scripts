@@ -12,8 +12,10 @@ default_colour = colours[1]
 
 # fonts and linewidths etc
 fs = 9
+fs_axis = 10
 fs_ticks_zoom = 7
 fs_lab = 10
+fs_lab_axis = 11
 ms = 5
 lw = 0.75
 lw_zoom = 1
@@ -56,9 +58,9 @@ ax[0, 0].plot(gadopt_displacement_dx5[:,0]/1e3, gadopt_displacement_dx5[:,1], co
 ax[0, 0].plot(gadopt_displacement_dx10[:,0]/1e3, gadopt_displacement_dx10[:,1], color='k', linestyle='--',marker='x',markevery=10, label='10 km',alpha=0.5, lw=lw)
 ax[0, 0].plot(gadopt_displacement_dx20[:,0]/1e3, gadopt_displacement_dx20[:,1], color='k', linestyle='--', marker='o', markevery=10, label='20 km',alpha=0.5, lw=lw)
 #ax[0, 0].set_xlabel('Time (ka)', fontsize=fs_lab)
-ax[0, 0].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
+ax[0, 0].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab_axis)
 ax[0, 0].grid(True, linestyle='dotted')
-ax[0, 0].tick_params(axis='both', which='major', labelsize=fs)
+ax[0, 0].tick_params(axis='both', which='major', labelsize=fs_axis)
 ax[0, 0].xaxis.tick_top()
 ax[0,0].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 ax[0, 0].set_ylim((-80, 5))  # sharing y axis so need to account for k/mu = 2
@@ -157,21 +159,21 @@ ax[1, 0].plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,
 ax[1, 0].plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='2 kyr',alpha=0.5, lw=lw)
 ax[1, 0].plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label=r'5 kyr',alpha=0.5, lw=lw)
 ax[1, 0].plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='-', marker='^', markevery=1, label='10 kyr',alpha=0.5, lw=lw)
-ax[1, 0].plot(fgmres_dt10kyr[:,0]/1e3, fgmres_dt10kyr[:,1], color='orange', linestyle='--', marker='^', markevery=1, label='fgmres, 10 kyr',alpha=0.5, lw=lw)
-ax[1, 0].set_xlabel('Time (kyr)', fontsize=fs_lab)
-ax[1, 0].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
+#ax[1, 0].plot(fgmres_dt10kyr[:,0]/1e3, fgmres_dt10kyr[:,1], color='orange', linestyle='--', marker='^', markevery=1, label='fgmres, 10 kyr',alpha=0.5, lw=lw)
+ax[1, 0].set_xlabel('Time (kyr)', fontsize=fs_lab_axis)
+ax[1, 0].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab_axis)
 ax[1, 0].grid(True, linestyle='dotted')
 ax[1, 0].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
-ax[1, 0].tick_params(axis='both', which='major', labelsize=fs)
+ax[1, 0].tick_params(axis='both', which='major', labelsize=fs_axis)
 ax[1,0].annotate(
         "c",
-        xy=(0.55, 1), xycoords='axes fraction',
+        xy=(0.595, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 ax[1,0].annotate(
-        r"Timestep length",
-        xy=(0.62, 1), xycoords='axes fraction',
+        r"Timestep size",
+        xy=(0.665, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
@@ -185,8 +187,8 @@ axins.plot(gadopt_displacement_dt1000[:,0]/1e3, gadopt_displacement_dt1000[:,1],
 axins.plot(gadopt_displacement_dt2000[:,0]/1e3, gadopt_displacement_dt2000[:,1], color='k', linestyle='--',marker='x',markevery=5, label='dt = 2 kyr',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_dt5000[:,0]/1e3, gadopt_displacement_dt5000[:,1], color='k', linestyle='--', marker='o', markevery=2, label='dt = 5 kyr',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_dt10000[:,0]/1e3, gadopt_displacement_dt10000[:,1], color='k', linestyle='-', marker='^', markevery=1, label='dt = 10 kyr',alpha=0.5, lw=lw_zoom)
-axins.plot(iv_sub_dt10kyr[:,0]/1e3, iv_sub_dt10kyr[:,1], color='r', linestyle='--', marker='^', markevery=1, label='Sub, dt = 10 kyr',alpha=0.5, lw=lw_zoom)
-axins.plot(fgmres_dt10kyr[:,0]/1e3, fgmres_dt10kyr[:,1], color='orange', linestyle='--', marker='^', markevery=1, label='fgmres, dt = 10 kyr',alpha=0.5, lw=lw_zoom)
+#axins.plot(iv_sub_dt10kyr[:,0]/1e3, iv_sub_dt10kyr[:,1], color='r', linestyle='--', marker='^', markevery=1, label='Sub, dt = 10 kyr',alpha=0.5, lw=lw_zoom)
+#axins.plot(fgmres_dt10kyr[:,0]/1e3, fgmres_dt10kyr[:,1], color='orange', linestyle='--', marker='^', markevery=1, label='fgmres, dt = 10 kyr',alpha=0.5, lw=lw_zoom)
 
 axins.grid(True, linestyle='dotted')
 for pos in ['bottom', 'left']:
@@ -206,14 +208,14 @@ ax[1,0].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec=
 
 # Plot bulk
 ax[1, 1].plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1pt94[:,1], color='k', linestyle='-',marker='^',markevery=10, label='1.94',alpha=0.5, lw=lw)
-ax[1, 1].plot(iv_sub_comp[:,0]/1e3, iv_sub_comp[:,1], color='r', linestyle='--',marker='^',markevery=10, label='Sub, 1.94',alpha=0.5, lw=lw)
+#ax[1, 1].plot(iv_sub_comp[:,0]/1e3, iv_sub_comp[:,1], color='r', linestyle='--',marker='^',markevery=10, label='Sub, 1.94',alpha=0.5, lw=lw)
 ax[1, 1].plot(gadopt_displacement_bulk10[:,0]/1e3, gadopt_displacement_bulk10[:,1], color='k', linestyle='--', marker='o', markevery=10, label='10', lw=lw, alpha=0.5)
 ax[1, 1].plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color='k', linestyle='--', marker='x', markevery=10, label='100', lw=lw, alpha=0.5)
 ax[1, 1].plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color=default_colour, linestyle='-', label='1000',alpha=1, lw=lw)
-ax[1, 1].set_xlabel('Time (kyr)', fontsize=fs_lab)
+ax[1, 1].set_xlabel('Time (kyr)', fontsize=fs_lab_axis)
 #ax[1, 1].set_ylabel('Maximum vertical displacement (m)', fontsize=fs_lab)
 ax[1, 1].grid(True, linestyle='dotted')
-ax[1, 1].tick_params(axis='both', which='major', labelsize=fs)
+ax[1, 1].tick_params(axis='both', which='major', labelsize=fs_lab)
 ax[1, 1].yaxis.tick_right()
 ax[1, 1].set_ylim((-80, 5))  # sharing y axis so need to account for k/mu = 2
 ax[1, 1].legend(loc='upper left', bbox_to_anchor=(-0.005, 0.75), fontsize=fs, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
@@ -236,7 +238,7 @@ axins = ax[1,1].inset_axes(
     [0.14, 0.11, 0.3, 0.3],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
 axins.plot(gadopt_displacement_bulk1pt94[:,0]/1e3, gadopt_displacement_bulk1pt94[:,1], color='k', linestyle='-',marker='^',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=0.5, lw=lw_zoom)
-axins.plot(iv_sub_comp[:,0]/1e3, iv_sub_comp[:,1], color='r', linestyle='--',marker='^',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=1, lw=lw_zoom)
+#axins.plot(iv_sub_comp[:,0]/1e3, iv_sub_comp[:,1], color='r', linestyle='--',marker='^',markevery=10, label=r'$\kappa / \mu$ = 2',alpha=1, lw=lw_zoom)
 axins.plot(gadopt_displacement_bulk10[:,0]/1e3, gadopt_displacement_bulk10[:,1], color='k', linestyle='--',marker='o',markevery=10, label=r'$\kappa / \mu$ = 10',alpha=0.5, lw=lw_zoom)
 axins.plot(gadopt_displacement_bulk100[:,0]/1e3, gadopt_displacement_bulk100[:,1], color='k', linestyle='--', markevery=10, marker='x', label=r'$\kappa / \mu$ = 100', lw=lw_zoom, alpha=0.5)
 axins.plot(gadopt_displacement_bulk1000[:,0]/1e3, gadopt_displacement_bulk1000[:,1], color=default_colour, linestyle='-', label=r'$\kappa / \mu$ = 1000',alpha=1, lw=lw_zoom)
@@ -258,6 +260,6 @@ h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
 
-figname = "Figure_4_incompressible_weerdesteijn_long_res_24.06.25_checkivsub"
+figname = "Figure_4_incompressible_weerdesteijn_long_res_20.08.25_font"
 fig.savefig(f'{figname}.png')
 

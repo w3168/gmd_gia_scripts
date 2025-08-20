@@ -14,9 +14,9 @@ aspect_colour = colours[3]
 taboo_colour = colours[4]
 
 # fonts and linewidths etc
-fs = 9
-fs_ticks_zoom = 7
-fs_lab = 10
+fs = 10
+fs_ticks_zoom = 8
+fs_lab = 11
 ms = 5
 lw = 0.75
 lw_zoom = 1
@@ -72,13 +72,13 @@ ax[0, 0].xaxis.tick_top()
 ax[0,0].legend(fontsize=fs_lab, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 ax[0,0].annotate(
         "a",
-        xy=(0.43, 1), xycoords='axes fraction',
+        xy=(0.4, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 ax[0,0].annotate(
         "Short, 1D viscosity",
-        xy=(0.515, 1), xycoords='axes fraction',
+        xy=(0.485, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
@@ -86,7 +86,7 @@ ax[0,0].annotate(
 # Add inset
 x1, x2, y1, y2 = 95, 105, -0.67, -0.61  # subregion of the original image
 axins = ax[0,0].inset_axes(
-    [0.575, 0.45, 0.34, 0.355],
+    [0.6, 0.475, 0.34, 0.355],
     xlim=(x1, x2), ylim=(y1, y2),) #yticklabels=[])
 
 axins.plot(abaqus_displacement_short[:,0],abaqus_displacement_short[:,1], color=abaqus_colour, linestyle='dotted', label='Abaqus', lw=lw_zoom)
@@ -126,13 +126,13 @@ ax[0, 1].xaxis.tick_top()
 #ax[0, 1].legend(fontsize)
 ax[0,1].annotate(
         "b",
-        xy=(0.44, 1), xycoords='axes fraction',
+        xy=(0.41, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 ax[0,1].annotate(
         "Long, 1D viscosity",
-        xy=(0.525, 1), xycoords='axes fraction',
+        xy=(0.495, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
@@ -180,13 +180,13 @@ ax[1, 0].tick_params(axis='both', which='major', labelsize=fs)
 #ax[1, 0].annotate('c)', (-9.1, 0.12), fontsize=fs_lab, annotation_clip=False)
 ax[1,0].annotate(
         "c",
-        xy=(0.43, 1), xycoords='axes fraction',
+        xy=(0.4, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 ax[1,0].annotate(
         "Short, 3D viscosity",
-        xy=(0.515, 1), xycoords='axes fraction',
+        xy=(0.485, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
@@ -194,7 +194,7 @@ ax[1,0].annotate(
 # Add inset
 x1, x2, y1, y2 = 95, 105, -1.08, -0.935  # subregion of the original image
 axins = ax[1,0].inset_axes(
-    [0.575, 0.45, 0.34, 0.355],
+    [0.6, 0.475, 0.34, 0.355],
     xlim=(x1, x2), ylim=(y1, y2)) #, xticklabels=[], yticklabels=[])
 
 axins.plot(abaqus_displacement_short_lowvisc[:,0],abaqus_displacement_short_lowvisc[:,1], color=abaqus_colour, linestyle='dotted', label='Abaqus', lw=lw_zoom)
@@ -227,13 +227,13 @@ ax[1, 1].tick_params(axis='both', which='major', labelsize=fs)
 #ax[1, 1].annotate('d)', (-5, 6), fontsize=fs_lab, annotation_clip=False)
 ax[1,1].annotate(
         "d",
-        xy=(0.44, 1), xycoords='axes fraction',
+        xy=(0.41, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 ax[1,1].annotate(
         "Long, 3D viscosity",
-        xy=(0.525, 1), xycoords='axes fraction',
+        xy=(0.495, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
@@ -262,7 +262,7 @@ w2 = x2-x1
 h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
-figname = "Figure_3_incompressible_weerdesteijn_12.08.25_kyr_space"
+figname = "Figure_3_incompressible_weerdesteijn_20.08.25_font"
 fig.savefig(f'{figname}.png')
 
 
