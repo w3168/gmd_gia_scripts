@@ -42,6 +42,7 @@ parser.add_argument("--true_visc", action='store_true', help="use actual viscosi
 parser.add_argument("--opt_its", default=5, type=int, help="Number of optimisation iterations", required=False)
 parser.add_argument("--opt_max_rad", default=1e20, type=float, help="Maximum radius of linmore algorithm", required=False)
 parser.add_argument("--burgers", action='store_true', help="Burgers model")
+parser.add_argument("--burg_ratio", default=0.1, type=float, help="eta2 / eta1 burgers ratio", required=False)
 args = parser.parse_args()
 
 name = f"adjoint-cylinder-2d-internalvariable-ctype{args.controls}-{args.optional_name}"
@@ -260,6 +261,9 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     if args.burgers:
         m2 = Function(S, name="internal variable 2")
         m_list.append(m2)
+        burg_ratio = Function(R).assign(args.burg_ratio)
+        if args.controls == "viscosity" or args.controls ==  "both":
+            control3 = Control(burg_ratio)
     # -
 
     # We can output function space information, for example the number of degrees
@@ -501,7 +505,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     # needed for the viscoelastic loading problem.
     if args.burgers:
         shearmod_list = [0.5*shear_modulus, 0.5*shear_modulus]
-        visc_list = [0.5*viscosity, 0.1*0.5*viscosity]
+        visc_list = [0.5*viscosity, burg_ratio*0.5*viscosity]
     else:
         shearmod_list = [shear_modulus]
         visc_list = [viscosity] 
@@ -785,6 +789,8 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
                 # calculate viscosity error cf target
                 self.viscosity_misfit.append(visc_error_L2.block_variable.checkpoint)
                 log("viscosity error", visc_error_L2.block_variable.checkpoint)
+                if args.burgers:
+                    log("burgers ratio", burg_ratio.block_variable.checkpoint)
             
             # write out surface displacement 
             disp_x.interpolate(u.block_variable.checkpoint[0]*D)
@@ -856,13 +862,21 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     viscosity_ub.assign(6)
 
     viscosity_bounds = [viscosity_lb, viscosity_ub]
+    
+    burg_ratio_lb = Function(R).assign(1e-3)
+    burg_ratio_ub = Function(R).assign(100)
+    burg_ratio_bounds = [burg_ratio_lb, burg_ratio_ub]
 
     if args.controls =="ice":
         bounds = ice_bounds
     elif args.controls =="viscosity":
         bounds = viscosity_bounds
+        if args.burgers:
+            bounds = [viscosity_bounds, burg_ratio_bounds]
     else:
         bounds = [viscosity_bounds, ice_bounds]
+        if args.burgers:
+            bounds.append(burg_ratio_bounds)
     inverse_problem = {}
 
     if args.controls =="ice":
@@ -871,9 +885,15 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     elif args.controls =="viscosity":
         clist = [control_viscosity]
         c = [control1]
+        if args.burgers:
+            clist.append(burg_ratio)
+            c.append(control3)
     else:
         clist = [control_viscosity, control_ice_thickness]
         c = [control1, control2]
+        if args.burgers:
+            clist.append(burg_ratio)
+            c.append(control3)
     # Keep track of what the control function is
     inverse_problem["control"] = clist
 
@@ -889,6 +909,3 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 #check_taylor_test()
 inverse()
 #check_speed()
-if args.burgers:
-    m2 = Function(S, name="internal variable 2")
-    m_list.append(m2)
