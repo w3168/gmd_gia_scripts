@@ -27,6 +27,11 @@ target_ice_halo = np.array(ice_df_1d[f'surface_ice_target'])
 target_ice_unsorted_1d = target_ice_halo[condition_1d]
 target_ice = target_ice_unsorted_1d[index_1d]
 
+# 1 iterations ice
+ice_halo_1d_1 = np.array(ice_df_1d[f'surface_ice_step2'])
+ice_unsorted_1d_1 = ice_halo_1d_1[condition_1d]
+ice_1d_1 = ice_unsorted_1d_1[index_1d]
+
 # 10 iterations ice
 ice_halo_1d_10 = np.array(ice_df_1d[f'surface_ice_step10'])
 ice_unsorted_1d_10 = ice_halo_1d_10[condition_1d]
@@ -44,33 +49,34 @@ fs = 9
 fs_lab = 10
 ms = 0.75
 lw = 0.75
-ax[0].plot(theta_1d, ice_1d_10, color='g', linestyle='-', linewidth=lw+0.5,alpha=0.3, label='Iteration 10')
-ax[0].plot(theta_1d, ice_1d, color='b', linestyle='-', linewidth=lw+0.5,alpha=0.4, label='Iteration 100')
-ax[0].plot(theta_1d, target_ice, color='k', linestyle='--', linewidth=lw, label='Target')
+ax[1].plot(theta_1d, ice_1d_1, color='purple', linestyle='-', linewidth=lw+0.5,alpha=0.3, label='Iteration 2')
+ax[1].plot(theta_1d, ice_1d_10, color='g', linestyle='-', linewidth=lw+0.5,alpha=0.3, label='Iteration 10')
+ax[1].plot(theta_1d, ice_1d, color='b', linestyle='-', linewidth=lw+0.5,alpha=0.4, label='Iteration 100')
+ax[1].plot(theta_1d, target_ice, color='k', linestyle='--', linewidth=lw, label='Target')
 
 plt.xticks(fontsize=fs)
 plt.yticks(fontsize=fs)
-ax[0].set_xlabel(r'$\theta$ ($^\circ$)', fontsize=fs_lab)
-ax[0].set_ylabel('Normalised ice thickness', fontsize=fs_lab)
-ax[0].grid(True, linestyle='dotted')
-ax[0].tick_params(axis='both', which='major', labelsize=fs)
+ax[1].set_xlabel(r'$\theta$ ($^\circ$)', fontsize=fs_lab)
+ax[1].set_ylabel('Normalised ice thickness', fontsize=fs_lab)
+ax[1].grid(True, linestyle='dotted')
+ax[1].tick_params(axis='both', which='major', labelsize=fs)
 ax[0].annotate(
         "a",
-        xy=(0.01, 1), xycoords='axes fraction',
+        xy=(0.05, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-ax[0].legend(loc='upper right', fontsize=fs-0.75, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
+ax[1].legend(loc='right', bbox_to_anchor=(0.975, 0.7), fontsize=fs-0.75, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 
 # plot objective function through time
 
 obj = np.loadtxt('adjoint-cylinder-2d-internalvariable-ctypeboth-lithvisc_icemesh_icesmooth0.0_icedamp0.0_viscsmooth0.0_viscdamp0.0_functional.txt')
 
-ax[1].semilogy(obj[:101], color='k', linestyle='-', linewidth=lw, )
-ax[1].set_xlabel('Iteration number', fontsize=fs_lab)
-ax[1].set_ylabel('Objective function', fontsize=fs_lab)
-ax[1].grid(True, linestyle='dotted')
-ax[1].tick_params(axis='both', which='major', labelsize=fs)
+ax[0].semilogy(obj[:101], color='k', linestyle='-', linewidth=lw, )
+ax[0].set_xlabel('Iteration number', fontsize=fs_lab)
+ax[0].set_ylabel('Objective function', fontsize=fs_lab)
+ax[0].grid(True, linestyle='dotted')
+ax[0].tick_params(axis='both', which='major', labelsize=fs)
 ax[1].annotate(
         "b",
         xy=(0.87, 1), xycoords='axes fraction',
@@ -81,6 +87,6 @@ ax[1].annotate(
 
 
 
-figname = "Figure_12_both_ice_visc_obj_inversion_step10v100_12.08.25_justice"
+figname = "Figure_12_both_ice_visc_obj_inversion_step2vs10v100_21.08.25"
 fig.savefig(f'{figname}.png')
 
