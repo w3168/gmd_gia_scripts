@@ -20,10 +20,16 @@ visc_1d = plt.imread('visc1d.png')
 ax[0].imshow(visc_1d)
 ax[0].axis('off')
 
+ax[0].annotate(
+            f"a",
+            xy=(-0.01, 1.005), xycoords='axes fraction',
+            xytext=(+0.4, -0.4), textcoords='offset fontsize',
+            fontsize=fs, verticalalignment='top',
+            bbox=dict(facecolor='white', edgecolor='black', pad=3.8))
 
 ax[0].annotate(
-            f"1D viscosity",
-            xy=(-0.01, 1.005), xycoords='axes fraction',
+            f"Axisym.",
+            xy=(0.065, 1.005), xycoords='axes fraction',
             xytext=(+0.4, -0.4), textcoords='offset fontsize',
             fontsize=fs, verticalalignment='top',
             bbox=dict(facecolor='white', edgecolor='black', pad=3.8))
@@ -31,9 +37,17 @@ ax[0].annotate(
 visc_3d = plt.imread('visc3d.png')
 ax[1].imshow(visc_3d)
 ax[1].axis('off')
+
 ax[1].annotate(
-            f"3D viscosity",
-            xy=(-0.02, 1.005), xycoords='axes fraction',
+            f"b",
+            xy=(0.05, 1.005), xycoords='axes fraction',
+            xytext=(+0.4, -0.4), textcoords='offset fontsize',
+            fontsize=fs, verticalalignment='top',
+            bbox=dict(facecolor='white', edgecolor='black', pad=3.8))
+
+ax[1].annotate(
+            f"LVV",
+            xy=(0.13, 1.005), xycoords='axes fraction',
             xytext=(+0.4, -0.4), textcoords='offset fontsize',
             fontsize=fs, verticalalignment='top',
             bbox=dict(facecolor='white', edgecolor='black', pad=3.8))
@@ -56,6 +70,6 @@ ice_cbar2 = fig.colorbar(ice_cbar,
 
 ice_cbar2.ax.tick_params(labelsize=fs)
 ice_cbar2.set_label(label='Ice thickness (m)', size=fs_lab)
-figname = "Figure_8a_visc_ice_forward_12.08.25"
+figname = "Figure_8a_visc_ice_forward_21.08.25"
 fig.savefig(f'{figname}.png')
 

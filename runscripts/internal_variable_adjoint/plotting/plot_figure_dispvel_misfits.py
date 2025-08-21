@@ -125,15 +125,37 @@ for i in range(1, 201):
     # start plotting
     if i == 60:
         # normal displacement
-        ax[1,0].plot(theta_1d, disp_normal_1d, color='r', linestyle='-', linewidth=lw, label='1D viscosity')
-        ax[1,0].plot(theta_1d, disp_normal_3d, color='k', linestyle='-', linewidth=lw, label='3D viscosity')
+        ax[0,0].plot(theta_1d, disp_normal_1d, color='r', linestyle='-', linewidth=lw, label='Axisym.')
+        ax[0,0].plot(theta_1d, disp_normal_3d, color='k', linestyle='-', linewidth=lw, label='LVV')
         #ax[0,0].set_xlabel(r'Theta ($^\circ$)', fontsize=fs)
-        ax[1,0].set_ylabel('Radial displacement (m)', fontsize=fs_lab)
+        ax[0,0].set_ylabel('Radial displacement (m)', fontsize=fs_lab)
+        ax[0,0].grid(True, linestyle='dotted')
+        ax[0,0].tick_params(axis='both', which='major', labelsize=fs)
+        ax[0,0].set_ylim([-400, 120])
+        ax[0,0].sharex(ax[1, 0])
+        plt.setp(ax[0,0].get_xticklabels(), visible=False)
+        ax[0,0].annotate(
+                "a",
+                xy=(0.01, 1), xycoords='axes fraction',
+                xytext=(1, -1), textcoords='offset fontsize',
+                fontsize=fs_lab, verticalalignment='top',
+                bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+        ax[0,0].annotate(
+                "t = 3 kyr",
+                xy=(0.73, 0.155), xycoords='axes fraction',
+                xytext=(1, -1), textcoords='offset fontsize',
+                fontsize=fs_lab, verticalalignment='top',
+                bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+        ax[0,0].legend(bbox_to_anchor=(0.66, 0.325), loc='upper left', borderaxespad=0., fontsize=fs_lab, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
+        
+        # tangential displacement
+        ax[1,0].plot(theta_1d, disp_tangent_1d, color='r', linestyle='-', linewidth=lw)
+        ax[1,0].plot(theta_1d, disp_tangent_3d, color='k', linestyle='-', linewidth=lw)
+        ax[1,0].set_xlabel(r'Theta ($^\circ$)', fontsize=fs_lab)
+        ax[1,0].set_ylabel('Tangential displacement (m)', fontsize=fs_lab)
         ax[1,0].grid(True, linestyle='dotted')
         ax[1,0].tick_params(axis='both', which='major', labelsize=fs)
-        ax[1,0].set_ylim([-400, 120])
-        ax[1,0].sharex(ax[2, 0])
-        plt.setp(ax[1,0].get_xticklabels(), visible=False)
+        ax[1,0].set_ylim([-400, 400])
         ax[1,0].annotate(
                 "c",
                 xy=(0.01, 1), xycoords='axes fraction',
@@ -146,44 +168,22 @@ for i in range(1, 201):
                 xytext=(1, -1), textcoords='offset fontsize',
                 fontsize=fs_lab, verticalalignment='top',
                 bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-        ax[1,0].legend(bbox_to_anchor=(0.568, 0.325), loc='upper left', borderaxespad=0., fontsize=fs_lab, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
-        
-        # tangential displacement
-        ax[2,0].plot(theta_1d, disp_tangent_1d, color='r', linestyle='-', linewidth=lw)
-        ax[2,0].plot(theta_1d, disp_tangent_3d, color='k', linestyle='-', linewidth=lw)
-        ax[2,0].set_xlabel(r'Theta ($^\circ$)', fontsize=fs_lab)
-        ax[2,0].set_ylabel('Tangential displacement (m)', fontsize=fs_lab)
-        ax[2,0].grid(True, linestyle='dotted')
-        ax[2,0].tick_params(axis='both', which='major', labelsize=fs)
-        ax[2,0].set_ylim([-400, 400])
-        ax[2,0].annotate(
-                "e",
-                xy=(0.01, 1), xycoords='axes fraction',
-                xytext=(1, -1), textcoords='offset fontsize',
-                fontsize=fs_lab, verticalalignment='top',
-                bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-        ax[2,0].annotate(
-                "t = 3 kyr",
-                xy=(0.73, 0.155), xycoords='axes fraction',
-                xytext=(1, -1), textcoords='offset fontsize',
-                fontsize=fs_lab, verticalalignment='top',
-                bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
         
         # normal velocity
-        ax[1,1].plot(theta_1d, vel_normal_1d, color='r', linestyle='-', linewidth=lw)
-        ax[1,1].plot(theta_1d, vel_normal_3d, color='k', linestyle='-', linewidth=lw)
-#        ax[1,1].set_xlabel(r'Theta ($^\circ$)', fontsize=fs)
-        ax[1,1].set_ylabel(r'Radial velocity (mm / yr)', fontsize=fs_lab)
-        ax[1,1].grid(True, linestyle='dotted')
-        ax[1,1].tick_params(axis='both', which='major', labelsize=fs)
-        ax[1,1].set_ylim([-40, 15])
-        ax[1,1].annotate(
-                "d",
+        ax[0,1].plot(theta_1d, vel_normal_1d, color='r', linestyle='-', linewidth=lw)
+        ax[0,1].plot(theta_1d, vel_normal_3d, color='k', linestyle='-', linewidth=lw)
+#        ax[0,1].set_xlabel(r'Theta ($^\circ$)', fontsize=fs)
+        ax[0,1].set_ylabel(r'Radial velocity (mm / yr)', fontsize=fs_lab)
+        ax[0,1].grid(True, linestyle='dotted')
+        ax[0,1].tick_params(axis='both', which='major', labelsize=fs)
+        ax[0,1].set_ylim([-40, 15])
+        ax[0,1].annotate(
+                "b",
                 xy=(0.87, 1), xycoords='axes fraction',
                 xytext=(1, -1), textcoords='offset fontsize',
                 fontsize=fs_lab, verticalalignment='top',
                 bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-        ax[1,1].annotate(
+        ax[0,1].annotate(
                 "t = 3 kyr",
                 xy=(0.73, 0.155), xycoords='axes fraction',
                 xytext=(1, -1), textcoords='offset fontsize',
@@ -191,22 +191,22 @@ for i in range(1, 201):
                 bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
         
         # tangential velocity
-        ax[2,1].plot(theta_1d, vel_tangent_1d, color='r', linestyle='-', linewidth=lw)
-        ax[2,1].plot(theta_1d, vel_tangent_3d, color='k', linestyle='-', linewidth=0.75)
-        ax[2,1].set_xlabel(r'Theta ($^\circ$)', fontsize=fs_lab)
-        ax[2,1].set_ylabel(r'Tangential velocity (mm / yr)', fontsize=fs_lab)
-        ax[2,1].grid(True, linestyle='dotted')
-        ax[2,1].set_ylim([-40, 40])
-        ax[2,1].sharex(ax[1,1])
-        plt.setp(ax[1,1].get_xticklabels(), visible=False)
-        ax[2,1].tick_params(axis='both', which='major', labelsize=fs)
-        ax[2,1].annotate(
-                "f",
+        ax[1,1].plot(theta_1d, vel_tangent_1d, color='r', linestyle='-', linewidth=lw)
+        ax[1,1].plot(theta_1d, vel_tangent_3d, color='k', linestyle='-', linewidth=0.75)
+        ax[1,1].set_xlabel(r'Theta ($^\circ$)', fontsize=fs_lab)
+        ax[1,1].set_ylabel(r'Tangential velocity (mm / yr)', fontsize=fs_lab)
+        ax[1,1].grid(True, linestyle='dotted')
+        ax[1,1].set_ylim([-40, 40])
+        ax[1,1].sharex(ax[0,1])
+        plt.setp(ax[0,1].get_xticklabels(), visible=False)
+        ax[1,1].tick_params(axis='both', which='major', labelsize=fs)
+        ax[1,1].annotate(
+                "d",
                 xy=(0.87, 1), xycoords='axes fraction',
                 xytext=(1, -1), textcoords='offset fontsize',
                 fontsize=fs_lab, verticalalignment='top',
                 bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-        ax[2,1].annotate(
+        ax[1,1].annotate(
                 "t = 3 kyr",
                 xy=(0.733, 0.155), xycoords='axes fraction',
                 xytext=(1, -1), textcoords='offset fontsize',
@@ -219,51 +219,51 @@ for i in range(1, 201):
 time = np.linspace(50, 10000, 200)/1000
 
 
-ax[0,0].plot(time, diff_time_rad, color='k', linestyle='-', marker='o', markevery=20, markersize=ms, linewidth=lw, label='Radial')
-ax[0,0].plot(time, diff_time_tang, color='k', linestyle='-', marker='x', markevery=20, markersize=ms, linewidth=lw, label='Tangential')
-ax[0,0].plot([3, 3], [0, 2], linestyle='dashed', color='k', linewidth=lw)
-ax[0,0].set_ylim([0, 1.1])
-ax[0,0].set_xlabel(r'Time (kyr)', fontsize=fs_lab)
-ax[0,0].set_ylabel('Displacement misfit (m)', fontsize=fs_lab)
-ax[0,0].tick_params(axis='both', which='major', labelsize=fs)
-ax[0,0].grid(True, linestyle='dotted')
-ax[0,0].annotate(
-        "a",
+ax[2,0].plot(time, diff_time_rad, color='k', linestyle='-', marker='o', markevery=20, markersize=ms, linewidth=lw, label='Radial')
+ax[2,0].plot(time, diff_time_tang, color='k', linestyle='-', marker='x', markevery=20, markersize=ms, linewidth=lw, label='Tangential')
+ax[2,0].plot([3, 3], [0, 2], linestyle='dashed', color='k', linewidth=lw)
+ax[2,0].set_ylim([0, 1.1])
+ax[2,0].set_xlabel(r'Time (kyr)', fontsize=fs_lab)
+ax[2,0].set_ylabel('RMS difference in displacement (m)', fontsize=fs_lab)
+ax[2,0].tick_params(axis='both', which='major', labelsize=fs)
+ax[2,0].grid(True, linestyle='dotted')
+ax[2,0].annotate(
+        "e",
         xy=(0.01, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-ax[0,0].annotate(
+ax[2,0].annotate(
         "t = 3 kyr",
         xy=(0.325, 0.7), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-ax[0,0].legend(loc='lower right', fontsize=fs_lab, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
+ax[2,0].legend(loc='lower right', fontsize=fs_lab, framealpha=1, facecolor='white', edgecolor='black', fancybox=False).get_frame().set_linewidth(lw)
 
-ax[0,1].plot(time, diff_time_rad_vel, color='k', linestyle='-', linewidth=lw, marker='o', markevery=20, markersize=ms)
-ax[0,1].plot(time, diff_time_tang_vel, color='k', linestyle='-', linewidth=lw, marker='x', markevery=20, markersize=ms)
-ax[0,1].plot([3, 3], [0, 2], linestyle='dashed', color='k', linewidth=lw)
-ax[0,1].set_ylim([0, 1.5])
-ax[0,1].set_xlabel(r'Time (kyr)', fontsize=fs_lab)
-ax[0,1].set_ylabel('Velocity misfit (mm / yr)', fontsize=fs_lab)
-ax[0,1].tick_params(axis='both', which='major', labelsize=fs)
-ax[0,1].grid(True, linestyle='dotted')
-ax[0,1].annotate(
-        "b",
+ax[2,1].plot(time, diff_time_rad_vel, color='k', linestyle='-', linewidth=lw, marker='o', markevery=20, markersize=ms)
+ax[2,1].plot(time, diff_time_tang_vel, color='k', linestyle='-', linewidth=lw, marker='x', markevery=20, markersize=ms)
+ax[2,1].plot([3, 3], [0, 2], linestyle='dashed', color='k', linewidth=lw)
+ax[2,1].set_ylim([0, 1.5])
+ax[2,1].set_xlabel(r'Time (kyr)', fontsize=fs_lab)
+ax[2,1].set_ylabel('RMS difference in velocity (mm / yr)', fontsize=fs_lab)
+ax[2,1].tick_params(axis='both', which='major', labelsize=fs)
+ax[2,1].grid(True, linestyle='dotted')
+ax[2,1].annotate(
+        "f",
         xy=(0.87, 1), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 
-ax[0,1].annotate(
+ax[2,1].annotate(
         "t = 3 kyr",
         xy=(0.325, 0.7), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 #ax[1].set_ylim([-1, 1])
-plt.savefig(f'12.08.25_1dvs3dvisc_dispvel_misfit_snapshot_units.png')
+plt.savefig(f'21.08.25_1dvs3dvisc_dispvel_misfit_snapshot_units_swap.png')
 plt.close()
 
 
