@@ -22,7 +22,7 @@ parser.add_argument("--optional_name", default="", type=str, help="Optional stri
 parser.add_argument("--output_path", default="/data/viscoelastic/internal_variable_adjoint/forward/", type=str, help="Optional output path", required=False)
 args = parser.parse_args()
 
-name = f"forward-cylinder-2d-internalvariable-dispvel-{args.optional_name}-1dvisc{args.radial_visc}-burgers{args.burgers}"
+name = f"forward-cylinder-2d-internalvariable-dispvel-{args.optional_name}-1dvisc{args.radial_visc}-burgers{args.burgers}_um1e23_lith1e40_ramp_check"
 
 # +
 # Set up geometry:
@@ -122,7 +122,7 @@ X = SpatialCoordinate(mesh)
 # +
 density_values = [3037, 3438, 3871, 4978]
 shear_modulus_values = [0.50605e11, 0.70363e11, 1.05490e11, 2.28340e11]
-viscosity_values = [1e25, 1e21, 1e21, 2e21]
+viscosity_values = [1e40, 1e23, 1e23, 2e21]
 
 density_scale = 4500
 shear_modulus_scale = 1e11
@@ -265,7 +265,13 @@ P1 = FunctionSpace(mesh, "CG", 1)
 discfunc = Function(P1).interpolate(D*(Hice1*disc1+Hice2*disc2))
 discfile = VTKFile(f"{args.output_path}discfile.pvd").write(discfunc)
 
-ice_load = Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
+t1_load = 90e3 * year_in_seconds / characteristic_maxwell_time
+t2_load = 100e3 * year_in_seconds / characteristic_maxwell_time
+ramp_after_t1 = conditional(
+    time < t2_load, 1 - (time - t1_load) / (t2_load - t1_load), 0
+)
+ramp = conditional(time < t1_load, time / t1_load, ramp_after_t1)
+ice_load = ramp * Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
 
 # We can now define the boundary conditions to be used in this simulation.  Let's set the bottom and
 # side boundaries to be free slip with no normal flow $\textbf{u} \cdot \textbf{n} =0$. By passing
@@ -359,20 +365,21 @@ if MPI.COMM_WORLD.rank == 0:
     surface_y_concat = np.concatenate(surface_y_all)
     displacement_df['surface_y'] = surface_y_concat
 
+velocity = Function(u, name="velocity")
+disp_old = Function(u, name="old_disp").assign(u)
+
 if OUTPUT:
     log("hello visco output")
     visc_file = VTKFile(f"{args.output_path}{name}-visc.pvd")
     visc_file.write(viscosity)
     output_file = VTKFile(f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.pvd")
-    output_file.write(u, *m_list, vertical_displacement)
+    output_file.write(u, *m_list, vertical_displacement, velocity)
 
 plog = ParameterLog(args.output_path+"params.log", mesh)
 plog.log_str(
     "timestep time dt u_rms u_rms_surf ux_max disp_min disp_max"
 )
 
-velocity = Function(u, name="velocity")
-disp_old = Function(u, name="old_disp").assign(u)
 
 checkpoint_filename = f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulktoshear{args.bulk_shear_ratio}-nondim-chk.h5"
 
@@ -444,7 +451,7 @@ for timestep in range(1, max_timesteps+1):
         displacement_df.to_csv(surface_displacement_filename)
 
         if OUTPUT:
-            output_file.write(u, *m_list, vertical_displacement)
+            output_file.write(u, *m_list, vertical_displacement, velocity)
 
         with CheckpointFile(checkpoint_filename, "w") as checkpoint:
             checkpoint.save_function(z, name="Stokes")
