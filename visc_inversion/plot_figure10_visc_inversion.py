@@ -72,9 +72,9 @@ visc_adj_cmap = plt.get_cmap("coolwarm", 25)
 
 visc_adj_cbar = ScalarMappable(norm=colors.SymLogNorm(linthresh=1e-4,vmin=-0.5,vmax=0.5, clip=True), cmap=visc_adj_cmap)
 visc_adj_cbar2 = fig.colorbar(visc_adj_cbar,
-             ax=ax[3,2], orientation='horizontal', label='Adjoint viscosity ', shrink=0.9, ticks=[-1e-1, -1e-3, 0, 1e-3, 1e-1])
+             ax=ax[3,2], orientation='horizontal', label='Viscosity sensitivity kernel', shrink=0.9, ticks=[-1e-1, -1e-3, 0, 1e-3, 1e-1])
 
 #visc_adj_cbar2.ax.tick_params(labelsize=9)
-figname = "Figure_10_visc_inversion_12.08.25_noreg_lithvisc_symlog"
+figname = "Figure_10_visc_inversion_21.08.25_noreg_lithvisc_symlog"
 fig.savefig(f'{figname}.png')
 
