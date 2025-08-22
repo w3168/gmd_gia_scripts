@@ -40,6 +40,7 @@ parser.add_argument("--visc_damping", default=0.0, type=float, help="viscosity d
 parser.add_argument("--true_ice", action='store_true', help="use actual ice")
 parser.add_argument("--true_visc", action='store_true', help="use actual viscosity")
 parser.add_argument("--opt_its", default=5, type=int, help="Number of optimisation iterations", required=False)
+parser.add_argument("--opt_max_rad", default=1e20, type=float, help="Maximum radius of linmore algorithm", required=False)
 args = parser.parse_args()
 
 name = f"adjoint-cylinder-2d-internalvariable-ctype{args.controls}-{args.optional_name}"
@@ -57,11 +58,12 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
 
     minimisation_parameters["Status Test"]["Iteration Limit"] = args.opt_its
 #    minimisation_parameters["Step"]["Trust Region"]["Initial Radius"] = 1e4
+    minimisation_parameters["Step"]["Trust Region"]["Maximum Radius"] = args.opt_max_rad
 
     optimiser = LinMoreOptimiser(
         minimisation_problem,
         minimisation_parameters,
-        checkpoint_dir=f"{args.output_path}{name}optimisation_checkpoint",
+        #checkpoint_dir=f"{args.output_path}{name}optimisation_checkpoint",
     )
 
     
@@ -77,8 +79,7 @@ def inverse(): #alpha_T=1e0, alpha_u=1e-1, alpha_d=1e-2, alpha_s=1e-1):
     # to use them
     continue_annotation()
 
-
-def visc_taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
+def replay_tape(): #alpha_T, alpha_u, alpha_d, alpha_s):
     """
     Perform a Taylor test to verify the correctness of the gradient for the inverse problem.
 
@@ -91,12 +92,42 @@ def visc_taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
         minconv (float): The minimum convergence rate from the Taylor test.
     """
 
+
+
     # For solving the inverse problem we the reduced functional, any callback functions,
     # and the initial guess for the control variable
     inverse_problem = generate_inverse_problem() #alpha_T, alpha_u, alpha_d, alpha_s)
+    
 
+    Jval = inverse_problem["reduced_functional"](inverse_problem["control"])
+    log(Jval)
+    # If we're performing mulitple successive tests we want
+    # to ensure the annotations are switched back on for the next code to use them
+    continue_annotation()
+
+    return Jval
+
+def check_taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
+    """
+    Perform a Taylor test to verify the correctness of the gradient for the inverse problem.
+
+    This function calls a main function to populate the tape for the inverse problem
+    with specified regularization parameters, generates a random perturbation for the control variable,
+    and performs a Taylor test to ensure the gradient is correct. Finally, it ensures that annotations
+    are switched back on for any subsequent tests.
+
+    Returns:
+        minconv (float): The minimum convergence rate from the Taylor test.
+    """
+
+
+
+    # For solving the inverse problem we the reduced functional, any callback functions,
+    # and the initial guess for the control variable
+    inverse_problem = generate_inverse_problem() #alpha_T, alpha_u, alpha_d, alpha_s)
+    
     # generate perturbation for the control variable
-    h = Function(inverse_problem["control"].function_space(), name="perturbation")
+    h = Function(inverse_problem["control"][0].function_space(), name="perturbation")
     h.dat.data[:] = np.random.random(h.dat.data.shape)
 
     # Perform a taylor test to ensure the gradient is correct
@@ -111,6 +142,30 @@ def visc_taylor_test(): #alpha_T, alpha_u, alpha_d, alpha_s):
     continue_annotation()
 
     return minconv
+
+def check_speed(): 
+    """
+    Time forward and derivative calculation using petsc stages.
+
+    Need to set in terminal
+    >>> export PETSC_OPTIONS="-log_view"
+
+    """
+
+    forward_stage = PETSc.Log.Stage("forward")
+    adjoint_stage = PETSc.Log.Stage("adjoint")
+    inverse_problem = generate_inverse_problem() #alpha_T, alpha_u, alpha_d, alpha_s)    
+    
+    forward_1 = inverse_problem["reduced_functional"](inverse_problem["control"][0])
+    deriv1 = inverse_problem["reduced_functional"].derivative()
+    
+    # Time second forward and derivative in case some caching perfomed...
+    with forward_stage:
+        forward_2 = inverse_problem["reduced_functional"](inverse_problem["control"][0])
+    with adjoint_stage:
+        deriv_2 = inverse_problem["reduced_functional"].derivative()
+
+    return deriv_2 
 
 
 def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-1):
@@ -154,6 +209,10 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     checkpoint_file = "displacement-objective-forward-cylinder-2d-internalvariable-dispvel-lithvisc-1dviscFalse-ncells360.0-nz20perlayer-dt50.0years-bulk1.94-nondim.h5"
     with CheckpointFile(checkpoint_file, 'r') as afile:
         mesh = afile.load_mesh(name='surface_mesh_extruded')
+        ncells=360
+        # surface ice mesh needs to be first order for interpolation to work
+        surface_mesh = CircleManifoldMesh(ncells, radius=radius_values_tilde[0], degree=1, name='surface_mesh')
+        # Load surface mesh for ice control
 
     mesh.cartesian = False
     boundary = get_boundary_ids(mesh)
@@ -293,10 +352,8 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
         high_viscosity_craton_x, high_viscosity_craton_y = 0, 6.2e6/D
         high_viscosity_craton = bivariate_gaussian(X[0], X[1], high_viscosity_craton_x, high_viscosity_craton_y, 1.5e6/D, 0.5e6/D, 0.2)
         heterogenous_viscosity_field.interpolate(high_visc*high_viscosity_craton + heterogenous_viscosity_field * (1-high_viscosity_craton))
-    
+        
         # reset lithospheric viscosity
-        heterogenous_viscosity_field.interpolate(conditional(vc(X)>radius_values_tilde[1], viscosity, heterogenous_viscosity_field))
-
         heterogenous_viscosity_field.interpolate(conditional(vc(X)>radius_values_tilde[1], viscosity, heterogenous_viscosity_field))
 
         return heterogenous_viscosity_field
@@ -313,7 +370,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
         control_viscosity = Function(P1, name="control viscosity")
         original_viscosity = Function(P1, name="control viscosity")
 
-    if args.controls == "viscosity" or "both":
+    if args.controls == "viscosity" or args.controls ==  "both":
         control1 = Control(control_viscosity)
         adj_visc_file = File(f"{args.output_path}{name}_adjvisc.pvd")
         tape.add_block(DiagnosticBlock(adj_visc_file, control_viscosity))
@@ -394,23 +451,25 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     if args.ice_checkpoint:
         print("hello ice checkpoint")
         with CheckpointFile(args.ice_checkpoint, 'r') as afile:
+            # Might not work? if wrong mesh...
             control_ice_thickness = afile.load_function(mesh, name="control normalised ice thickness")
             original_ice_thickness = afile.load_function(mesh, name="control normalised ice thickness")
     else:
+        P1_surf = FunctionSpace(surface_mesh, "CG", 1)
+        control_ice_thickness_surf = Function(P1_surf, name="control normalised ice thickness surf")
         control_ice_thickness = Function(P1, name="control normalised ice thickness")
         original_ice_thickness = Function(P1, name="control normalised ice thickness")
 
-    if args.controls == "ice" or "both":
-        control2 = Control(control_ice_thickness)
+    if args.controls == "ice" or args.controls ==  "both":
+        control2 = Control(control_ice_thickness_surf)
 
     # the ice thickness that will be actually used in simulation
-    normalised_ice_thickness = Function(P1, name="normalised ice thickness")
     if args.true_ice:
-        normalised_ice_thickness.assign(target_normalised_ice_thickness) 
+        control_ice_thickness.assign(target_normalised_ice_thickness) 
     else:
-        normalised_ice_thickness.project(control_ice_thickness, bcs=[InteriorBC(P1, 0, boundary.top)])
+        control_ice_thickness.interpolate(control_ice_thickness_surf, allow_missing_dofs=True)
     
-    ice_load = Vi * rho_ice * Hice1 * normalised_ice_thickness 
+    ice_load = Vi * rho_ice * Hice1 * control_ice_thickness 
     
 #    ice_load = Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
 
@@ -621,7 +680,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     pause_annotation()
     
     # storing adjoint results
-    updated_ice_thickness = Function(normalised_ice_thickness, name="updated ice thickness")
+    updated_ice_thickness = Function(control_ice_thickness, name="updated ice thickness")
     updated_viscosity = Function(target_viscosity, name="updated viscosity")
     updated_log_viscosity = Function(control_viscosity, name="updated control viscosity")
     updated_solution_file = VTKFile(f"{args.output_path}{name}_sol.pvd")
@@ -665,7 +724,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     # surface ice outputs
     surface_ice_filename = f"{args.output_path}{name}_surface_ice.csv"
     f_ice = Function(P1_vec).interpolate(as_vector([X[0], X[1]]))
-    bc_ice = DirichletBC(normalised_ice_thickness.function_space(), 0, boundary.top)
+    bc_ice = DirichletBC(control_ice_thickness.function_space(), 0, boundary.top)
 
     surface_x_ice = f_ice.sub(0).dat.data_ro_with_halos[bc_ice.nodes]
     surface_x_all_ice = f_ice.sub(0).comm.gather(surface_x_ice)
@@ -707,7 +766,8 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
 
             
             # Write out values of control and final forward model results
-            updated_ice_thickness.assign(control_ice_thickness.block_variable.checkpoint)
+            if args.controls == "ice" or args.controls =="both":
+                updated_ice_thickness.assign(control_ice_thickness.block_variable.checkpoint)
 
             
             # Write out values of control and final forward model results
@@ -789,8 +849,8 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
             self.counter += 1
         
     eval_cb = eval_cb_class()
-    ice_thickness_lb = Function(normalised_ice_thickness.function_space(), name="Lower bound ice thickness")
-    ice_thickness_ub = Function(normalised_ice_thickness.function_space(), name="Upper bound ice thickness")
+    ice_thickness_lb = Function(control_ice_thickness_surf.function_space(), name="Lower bound ice thickness")
+    ice_thickness_ub = Function(control_ice_thickness_surf.function_space(), name="Upper bound ice thickness")
     ice_thickness_lb.assign(0.0)
     ice_thickness_ub.assign(5)
 
@@ -812,7 +872,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     inverse_problem = {}
 
     if args.controls =="ice":
-        clist = [control_ice_thickness]
+        clist = [control_ice_thickness_surf]
         c = [control2]
     elif args.controls =="viscosity":
         clist = [control_viscosity]
@@ -831,6 +891,7 @@ def generate_inverse_problem(): # alpha_T=1.0, alpha_u=-1, alpha_d=-1, alpha_s=-
     return inverse_problem
 
 
-
-#visc_taylor_test()
-inverse()
+#replay_tape()
+#check_taylor_test()
+#inverse()
+check_speed()

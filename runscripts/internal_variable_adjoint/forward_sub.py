@@ -16,12 +16,14 @@ parser.add_argument("--dt_years", default=100, type=float, help="Timestep in yea
 parser.add_argument("--Tend", default=10e3, type=float, help="Simulation end time in years", required=False)
 parser.add_argument("--bulk_shear_ratio", default=1.94, type=float, help="Ratio of Bulk modulus / Shear modulus", required=False)
 parser.add_argument("--radial_visc", action='store_true', help="Use 1D viscosity profile")
+parser.add_argument("--burgers", action='store_true', help="Use Burgers rheology")
+parser.add_argument("--ramp_ice", action='store_true', help="Ramp ice up")
 parser.add_argument("--write_output", action='store_true', help="Write out Paraview VTK files")
 parser.add_argument("--optional_name", default="", type=str, help="Optional string to add to simulation name for outputs", required=False)
 parser.add_argument("--output_path", default="/data/viscoelastic/internal_variable_adjoint/forward/", type=str, help="Optional output path", required=False)
 args = parser.parse_args()
 
-name = f"forward-cylinder-2d-internalvariable-dispvel-{args.optional_name}-1dvisc{args.radial_visc}"
+name = f"forward-cylinder-2d-internalvariable-dispvel-{args.optional_name}-1dvisc{args.radial_visc}-burgers{args.burgers}_um1e23_lith1e40_ramp_check"
 
 # +
 # Set up geometry:
@@ -90,10 +92,12 @@ Z = MixedFunctionSpace([V, S])  # Mixed function space.
 # +
 z = Function(Z)  # A field over the mixed function space Z.
 # Function to store the solutions:
-u, m = split(z)  # Returns symbolic UFL expression for u and m
-# Next rename for output:
-z.subfunctions[0].rename("Displacement")
-z.subfunctions[1].rename("Internal variable")
+u = Function(V)  # a field over the mixed function space Z.
+m = Function(S, name="internal variable")
+m_list = [m]
+if args.burgers:
+    m2 = Function(S, name="internal variable 2")
+    m_list.append(m2)
 # -
 
 # We can output function space information, for example the number of degrees
@@ -119,7 +123,7 @@ X = SpatialCoordinate(mesh)
 # +
 density_values = [3037, 3438, 3871, 4978]
 shear_modulus_values = [0.50605e11, 0.70363e11, 1.05490e11, 2.28340e11]
-viscosity_values = [1e25, 1e21, 1e21, 2e21]
+viscosity_values = [1e40, 1e23, 1e23, 2e21]
 
 density_scale = 4500
 shear_modulus_scale = 1e11
@@ -192,8 +196,6 @@ def setup_heterogenous_viscosity(viscosity):
     
     heterogenous_viscosity_field.interpolate(conditional(vc(X)>radius_values_tilde[1], viscosity, heterogenous_viscosity_field))
 
-    heterogenous_viscosity_field.interpolate(conditional(vc(X)>radius_values_tilde[1], viscosity, heterogenous_viscosity_field))
-
     return heterogenous_viscosity_field
 
 if args.radial_visc:
@@ -264,7 +266,16 @@ P1 = FunctionSpace(mesh, "CG", 1)
 discfunc = Function(P1).interpolate(D*(Hice1*disc1+Hice2*disc2))
 discfile = VTKFile(f"{args.output_path}discfile.pvd").write(discfunc)
 
-ice_load = Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
+if args.ramp_ice:
+    t1_load = 90e3 * year_in_seconds / characteristic_maxwell_time
+    t2_load = 100e3 * year_in_seconds / characteristic_maxwell_time
+    ramp_after_t1 = conditional(
+        time < t2_load, 1 - (time - t1_load) / (t2_load - t1_load), 0
+    )
+    ramp = conditional(time < t1_load, time / t1_load, ramp_after_t1)
+else:
+    ramp = Constant(1)
+ice_load = ramp * Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
 
 # We can now define the boundary conditions to be used in this simulation.  Let's set the bottom and
 # side boundaries to be free slip with no normal flow $\textbf{u} \cdot \textbf{n} =0$. By passing
@@ -283,11 +294,16 @@ stokes_bcs = {
 gd = GeodynamicalDiagnostics(z, density, boundary.bottom, boundary.top)
 # -
 
-
+if args.burgers:
+    shearmod_list = [0.5*shear_modulus, 0.5*shear_modulus]
+    visc_list = [0.5*viscosity, 0.1*0.5*viscosity]
+else:
+    shearmod_list = [shear_modulus]
+    visc_list = [viscosity] 
 # We also need to specify a G-ADOPT approximation which sets up the various parameters and fields
 # needed for the viscoelastic loading problem.
 
-approximation = CompressibleInternalVariableApproximation(bulk_modulus=bulk_modulus, density=density, shear_modulus=shear_modulus, viscosity=viscosity, Vi=Vi, bulk_shear_ratio=args.bulk_shear_ratio)
+approximation = CompressibleInternalVariableApproximation(bulk_modulus=bulk_modulus, density=density, shear_modulus=shearmod_list, viscosity=visc_list, Vi=Vi, bulk_shear_ratio=args.bulk_shear_ratio)
 
 # We finally come to solving the variational problem, with solver
 # objects for the Stokes system created. We pass in the solution fields `z` and various fields
@@ -303,43 +319,28 @@ direct_stokes_solver_parameters = {
 }
 
 iterative_parameters = {"mat_type": "matfree",
-                        "snes_type": "ksponly",
-                        "ksp_type": "gmres",
-                        "ksp_rtol": 1e-7,
-                        "ksp_converged_reason": None,
-                        "ksp_monitor": None,
-                        "pc_type": "fieldsplit",
-                        "pc_fieldsplit_type": "symmetric_multiplicative",
+                            "snes_type": "ksponly",
+                            "ksp_type": "gmres",
+                            "ksp_rtol": 1e-5,
+                            "ksp_converged_reason": None,
+    #                        "ksp_monitor": None,
+                            "pc_type": "python",
+                            "pc_python_type": "firedrake.AssembledPC",
+                            "assembled_pc_type": "gamg",
+                            "assembled_mg_levels_pc_type": "sor",
+                            "assembled_pc_gamg_threshold": 0.01,
+                            "assembled_pc_gamg_square_graph": 100,
+                            "assembled_pc_gamg_coarse_eq_limit": 1000,
+                            "assembled_pc_gamg_mis_k_minimum_degree_ordering": True,
+                            }
 
-                        "fieldsplit_0_ksp_converged_reason": None,
-                        "fieldsplit_0_ksp_monitor": None,
-                        "fieldsplit_0_ksp_type": "gmres",
-                        "fieldsplit_0_pc_type": "python",
-#                        "fieldsplit_0_pc_python_type": "gadopt.SPDAssembledPC",
-                        "fieldsplit_0_pc_python_type": "firedrake.AssembledPC",
-                        "fieldsplit_0_assembled_pc_type": "gamg",
-                        "fieldsplit_0_assembled_mg_levels_pc_type": "sor",
-                        "fieldsplit_0_ksp_rtol": 1e-5,
-                        "fieldsplit_0_assembled_pc_gamg_threshold": 0.01,
-                        "fieldsplit_0_assembled_pc_gamg_square_graph": 100,
-                        "fieldsplit_0_assembled_pc_gamg_coarse_eq_limit": 1000,
-                        "fieldsplit_0_assembled_pc_gamg_mis_k_minimum_degree_ordering": True,
-
-                        "fieldsplit_1_ksp_converged_reason": None,
-                        "fieldsplit_1_ksp_monitor": None,
-                        "fieldsplit_1_ksp_type": "cg",
-                        "fieldsplit_1_pc_type": "python",
-                        "fieldsplit_1_pc_python_type": "firedrake.AssembledPC",
-                        "fieldsplit_1_assembled_pc_type": "sor",
-                        "fieldsplit_1_ksp_rtol": 1e-5,
-                        }
 
 Z_nullspace = create_stokes_nullspace(Z, closed=False, rotational=True)
 Z_near_nullspace = create_stokes_nullspace(Z, closed=True, rotational=True, translations=[0, 1])
 
-coupled_solver = InternalVariableSolver(z, approximation, coupled_dt=dt, bcs=stokes_bcs,
-                                       solver_parameters=direct_stokes_solver_parameters,
-#                                        solver_parameters=iterative_parameters,
+coupled_solver = InternalVariableSolver(u, approximation, dt=dt, m_list=m_list, bcs=stokes_bcs,
+#                                       solver_parameters=direct_stokes_solver_parameters,
+                                        solver_parameters=iterative_parameters,
                                        nullspace=Z_nullspace, transpose_nullspace=Z_nullspace,
                                        near_nullspace=Z_near_nullspace)
 
@@ -368,20 +369,21 @@ if MPI.COMM_WORLD.rank == 0:
     surface_y_concat = np.concatenate(surface_y_all)
     displacement_df['surface_y'] = surface_y_concat
 
+velocity = Function(u, name="velocity")
+disp_old = Function(u, name="old_disp").assign(u)
+
 if OUTPUT:
     log("hello visco output")
     visc_file = VTKFile(f"{args.output_path}{name}-visc.pvd")
     visc_file.write(viscosity)
     output_file = VTKFile(f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulk{args.bulk_shear_ratio}-nondim.pvd")
-    output_file.write(*z.subfunctions, vertical_displacement)
+    output_file.write(u, *m_list, vertical_displacement, velocity)
 
 plog = ParameterLog(args.output_path+"params.log", mesh)
 plog.log_str(
     "timestep time dt u_rms u_rms_surf ux_max disp_min disp_max"
 )
 
-velocity = Function(z.subfunctions[0], name="velocity")
-disp_old = Function(z.subfunctions[0], name="old_disp").assign(z.subfunctions[0])
 
 checkpoint_filename = f"{args.output_path}{name}-ncells{args.ncells}-nz{nz}-dt{dt_years}years-bulktoshear{args.bulk_shear_ratio}-nondim-chk.h5"
 
@@ -408,15 +410,15 @@ for timestep in range(1, max_timesteps+1):
     time.assign(time+dt)
     with forward_stage:
         coupled_solver.solve()
-    velocity.interpolate((z.subfunctions[0] - disp_old)/dt)
-    objective_checkpoint_file.save_function(z.subfunctions[0], name="Displacement", idx=timestep)
+    velocity.interpolate((u - disp_old)/dt)
+    objective_checkpoint_file.save_function(u, name="Displacement", idx=timestep)
     objective_checkpoint_file.save_function(velocity, name="Velocity", idx=timestep)
-    disp_old.assign(z.subfunctions[0]) 
+    disp_old.assign(u)
 
     # Log diagnostics:
     # Compute diagnostics:
     # output dimensional vertical displacement
-    vertical_displacement.interpolate(vc(z.subfunctions[0])*D)
+    vertical_displacement.interpolate(vc(u)*D)
     displacement_z_min = vertical_displacement.dat.data_ro_with_halos[bc_displacement.nodes].min(initial=0)
     displacement_min = vertical_displacement.comm.allreduce(displacement_z_min, MPI.MIN)  # Minimum displacement at surface (should be top left corner with greatest (-ve) deflection due to ice loading
     log("Greatest (-ve) displacement", displacement_min)
@@ -425,10 +427,10 @@ for timestep in range(1, max_timesteps+1):
     log("Greatest (+ve) displacement", displacement_max)
     displacement_min_array.append([float(characteristic_maxwell_time*time/year_in_seconds), displacement_min])
 
-    disp_x.interpolate(z.subfunctions[0][0]*D)
+    disp_x.interpolate(u[0]*D)
     surface_disp_x = disp_x.dat.data_ro_with_halos[bc_displacement.nodes]
     surface_disp_x_all = disp_x.comm.gather(surface_disp_x)
-    disp_y.interpolate(z.subfunctions[0][1]*D)
+    disp_y.interpolate(u[1]*D)
     surface_disp_y = disp_y.dat.data_ro_with_halos[bc_displacement.nodes]
     surface_disp_y_all = disp_y.comm.gather(surface_disp_y)
 
@@ -453,7 +455,7 @@ for timestep in range(1, max_timesteps+1):
         displacement_df.to_csv(surface_displacement_filename)
 
         if OUTPUT:
-            output_file.write(*z.subfunctions, vertical_displacement)
+            output_file.write(u, *m_list, vertical_displacement, velocity)
 
         with CheckpointFile(checkpoint_filename, "w") as checkpoint:
             checkpoint.save_function(z, name="Stokes")
