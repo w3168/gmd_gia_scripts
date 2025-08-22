@@ -17,6 +17,7 @@ parser.add_argument("--Tend", default=10e3, type=float, help="Simulation end tim
 parser.add_argument("--bulk_shear_ratio", default=1.94, type=float, help="Ratio of Bulk modulus / Shear modulus", required=False)
 parser.add_argument("--radial_visc", action='store_true', help="Use 1D viscosity profile")
 parser.add_argument("--burgers", action='store_true', help="Use Burgers rheology")
+parser.add_argument("--ramp_ice", action='store_true', help="Ramp ice up")
 parser.add_argument("--write_output", action='store_true', help="Write out Paraview VTK files")
 parser.add_argument("--optional_name", default="", type=str, help="Optional string to add to simulation name for outputs", required=False)
 parser.add_argument("--output_path", default="/data/viscoelastic/internal_variable_adjoint/forward/", type=str, help="Optional output path", required=False)
@@ -265,12 +266,15 @@ P1 = FunctionSpace(mesh, "CG", 1)
 discfunc = Function(P1).interpolate(D*(Hice1*disc1+Hice2*disc2))
 discfile = VTKFile(f"{args.output_path}discfile.pvd").write(discfunc)
 
-t1_load = 90e3 * year_in_seconds / characteristic_maxwell_time
-t2_load = 100e3 * year_in_seconds / characteristic_maxwell_time
-ramp_after_t1 = conditional(
-    time < t2_load, 1 - (time - t1_load) / (t2_load - t1_load), 0
-)
-ramp = conditional(time < t1_load, time / t1_load, ramp_after_t1)
+if args.ramp_ice:
+    t1_load = 90e3 * year_in_seconds / characteristic_maxwell_time
+    t2_load = 100e3 * year_in_seconds / characteristic_maxwell_time
+    ramp_after_t1 = conditional(
+        time < t2_load, 1 - (time - t1_load) / (t2_load - t1_load), 0
+    )
+    ramp = conditional(time < t1_load, time / t1_load, ramp_after_t1)
+else:
+    ramp = Constant(1)
 ice_load = ramp * Vi * rho_ice * (Hice1 * disc1 + Hice2 * disc2)
 
 # We can now define the boundary conditions to be used in this simulation.  Let's set the bottom and
@@ -335,8 +339,8 @@ Z_nullspace = create_stokes_nullspace(Z, closed=False, rotational=True)
 Z_near_nullspace = create_stokes_nullspace(Z, closed=True, rotational=True, translations=[0, 1])
 
 coupled_solver = InternalVariableSolver(u, approximation, dt=dt, m_list=m_list, bcs=stokes_bcs,
-                                       solver_parameters=direct_stokes_solver_parameters,
-#                                        solver_parameters=iterative_parameters,
+#                                       solver_parameters=direct_stokes_solver_parameters,
+                                        solver_parameters=iterative_parameters,
                                        nullspace=Z_nullspace, transpose_nullspace=Z_nullspace,
                                        near_nullspace=Z_near_nullspace)
 
