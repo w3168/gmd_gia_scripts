@@ -61,8 +61,7 @@ ax[0,0].annotate(
         "Target",
         xy=(0.375, 0.575), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
-        fontsize=fs_lab, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+        fontsize=fs, verticalalignment='top',)
 
 ax[0,1].annotate(
         "b",
@@ -75,8 +74,7 @@ ax[0,1].annotate(
         "Iter. 2",
         xy=(0.375, 0.575), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
-        fontsize=fs_lab, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+        fontsize=fs, verticalalignment='top',)
 
 
 ax[1,0].annotate(
@@ -88,10 +86,9 @@ ax[1,0].annotate(
 
 ax[1,0].annotate(
         "Iter. 10",
-        xy=(0.36, 0.575), xycoords='axes fraction', alpha=0.75,
+        xy=(0.36, 0.575), xycoords='axes fraction', 
         xytext=(1, -1), textcoords='offset fontsize',
-        fontsize=fs_lab, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+        fontsize=fs, verticalalignment='top',)
 
 ax[1,1].annotate(
         "d",
@@ -104,8 +101,7 @@ ax[1,1].annotate(
         "Iter. 100",
         xy=(0.35, 0.575), xycoords='axes fraction',
         xytext=(1, -1), textcoords='offset fontsize',
-        fontsize=fs_lab, verticalalignment='top',
-        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+        fontsize=fs, verticalalignment='top',)
 
 plt.savefig('Figure_13_icevisc_rings_target_its2_10vs100_21.08.25.png')
 
