@@ -103,7 +103,7 @@ ax[1].plot(comp_burgers_viscratio0pt1[:,0]/1e3, comp_burgers_viscratio0pt1[:,1],
 
 #long power law coupled
 #ax[1].plot(power_pt2_dt125_coupled[:,0]/1e3, power_pt2_dt125_coupled[:,1], linewidth=lw, linestyle=':', label=r'power dt 125 yr, coupled')
-ax[1].plot(power_pt2_dt250_coupled[:,0]/1e3, power_pt2_dt250_coupled[:,1], linewidth=lw, linestyle=':', label=r'power dt 250 yr, coupled')
+#ax[1].plot(power_pt2_dt250_coupled[:,0]/1e3, power_pt2_dt250_coupled[:,1], linewidth=lw, linestyle=':', label=r'power dt 250 yr, coupled')
 #ax[1].plot(power_pt2_dt500_coupled[:,0]/1e3, power_pt2_dt500_coupled[:,1], linewidth=lw, linestyle=':', label=r'power dt 500 yr, coupled')
 #ax[1].plot(power_pt2_dt1000_coupled[:,0]/1e3, power_pt2_dt1000_coupled[:,1], linewidth=lw, linestyle=':', label=r'power dt 1000 yr, coupled')
 #ax[1].plot(power_pt2_dt2000_coupled[:,0]/1e3, power_pt2_dt2000_coupled[:,1], linewidth=lw, linestyle=':', label=r'power dt 2000 yr, coupled')
@@ -119,13 +119,13 @@ ax[1].annotate(
         xytext=(1, -1), textcoords='offset fontsize',
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-#ax[1].annotate(
-#        r"Long, 1D viscosity",
-#        xy=(0.5, 1), xycoords='axes fraction',
-#        xytext=(1, -1), textcoords='offset fontsize',
-#        fontsize=fs_lab, verticalalignment='top',
-#        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
-plt.show()
-figname = "Figure_6_compressible_burgers_19.08.25_powerlaw_0.2Mpa_updm"
-#fig.savefig(f'{figname}.png')
+ax[1].annotate(
+        r"Long, 1D viscosity",
+        xy=(0.5, 1), xycoords='axes fraction',
+        xytext=(1, -1), textcoords='offset fontsize',
+        fontsize=fs_lab, verticalalignment='top',
+        bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
+#plt.show()
+figname = "Figure_6_compressible_burgers_22.08.25"
+fig.savefig(f'{figname}.png')
 
