@@ -9,7 +9,7 @@ folder_gadopt = "./"
 cmap = colormaps['Set1']
 colours = cmap.colors
 gadopt_colour = colours[1]
-abaqus_colour = colours[2]
+abaqus_colour = colours[0]
 aspect_colour = colours[3]
 taboo_colour = colours[4]
 
@@ -262,7 +262,7 @@ w2 = x2-x1
 h2 = y2-y1
 ax[1,1].add_patch(plt.Rectangle((x1, y1), w2, h2, lw=lw, linestyle='dashed', ec='grey', fill=False))
 
-figname = "Figure_3_incompressible_weerdesteijn_20.08.25_font"
+figname = "Figure_3_incompressible_weerdesteijn_11.09.25_colour"
 fig.savefig(f'{figname}.png')
 
 
