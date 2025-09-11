@@ -63,8 +63,8 @@ ms = 5
 lw = 0.75
 ax[0].plot(incomp_short[:,0], incomp_short[:,1], color=colour_incomp, linewidth=lw, linestyle='-', label=r'Incompressible')
 ax[0].plot(times_dt10, vr1_nz10_dx5_dt10[:21], color=colour_comp, linewidth=lw, linestyle='-', label=r'Compressible')
-ax[0].plot(times_dt10, vr0pt5_nz10_dx5_dt10[:21], color=colour_burgers_2, linewidth=lw,linestyle='-', label=r'Burgers ($\eta_1 / \eta_2 = 2$)')
-ax[0].plot(times_dt10, vr0pt1_nz10_dx5_dt10[:21], color=colour_burgers_10, linewidth=lw, linestyle='-', label=r'Burgers ($\eta_1 / \eta_2 = 10$)')
+ax[0].plot(times_dt10, vr0pt5_nz10_dx5_dt10[:21], color=colour_burgers_2, linewidth=lw,linestyle='dashed', label=r'Burgers ($\eta_1 / \eta_2 = 2$)')
+ax[0].plot(times_dt10, vr0pt1_nz10_dx5_dt10[:21], color=colour_burgers_10, linewidth=lw, linestyle='dashdot', label=r'Burgers ($\eta_1 / \eta_2 = 10$)')
 
 plt.xticks(fontsize=fs)
 plt.yticks(fontsize=fs)
@@ -89,8 +89,8 @@ ax[0].annotate(
 # Plot long, 1D burgers
 ax[1].plot(incomp[:,0]/1e3, incomp[:,1], color=colour_incomp, linewidth=lw, linestyle='-', label=r'Maxwell (incompressible)')
 ax[1].plot(comp[:,0]/1e3, comp[:,1], color=colour_comp, linewidth=lw, linestyle='-', label=r'Maxwell (compressible)')
-ax[1].plot(comp_burgers_viscratio0pt5[:,0]/1e3, comp_burgers_viscratio0pt5[:,1], color=colour_burgers_2, linewidth=lw, linestyle='-', label=r'Burgers (comp., $\eta_1 / \eta_2 = 2$)')
-ax[1].plot(comp_burgers_viscratio0pt1[:,0]/1e3, comp_burgers_viscratio0pt1[:,1], color=colour_burgers_10, linewidth=lw, linestyle='-', label=r'Burgers (comp., $\eta_1 / \eta_2 = 10$)')
+ax[1].plot(comp_burgers_viscratio0pt5[:,0]/1e3, comp_burgers_viscratio0pt5[:,1], color=colour_burgers_2, linewidth=lw, linestyle='dashed', label=r'Burgers (comp., $\eta_1 / \eta_2 = 2$)')
+ax[1].plot(comp_burgers_viscratio0pt1[:,0]/1e3, comp_burgers_viscratio0pt1[:,1], color=colour_burgers_10, linewidth=lw, linestyle='dashdot', label=r'Burgers (comp., $\eta_1 / \eta_2 = 10$)')
 
 # long, power law
 #ax[1].plot(power_pt2_dt50[:,0]/1e3, power_pt2_dt50[:,1], linewidth=lw, linestyle='--', label=r'power dt 50 yr')
@@ -126,6 +126,6 @@ ax[1].annotate(
         fontsize=fs_lab, verticalalignment='top',
         bbox=dict(facecolor='white', edgecolor='black', lw=lw, pad=5))
 #plt.show()
-figname = "Figure_6_compressible_burgers_22.08.25"
+figname = "Figure_5_compressible_burgers_11.09.25_linestyle"
 fig.savefig(f'{figname}.png')
 
